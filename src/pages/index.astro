@@ -1,40 +1,34 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/sections/01-Header.astro';
+import Hero from '../components/sections/02-Hero.astro';
+import About from '../components/sections/03-About.astro';
+import Countdown from '../components/sections/04-Countdown.astro';
+import NoTickets from '../components/sections/05-NoTickets.astro';
+import VipTicket from '../components/sections/06-VipTicket.astro';
+import GetInvolved from '../components/sections/07-GetInvolved.astro';
+import GettingHere from '../components/sections/08-GettingHere.astro';
+import StreetFair from '../components/sections/09-StreetFair.astro';
+import DineDrink from '../components/sections/10-DineDrink.astro';
+import StayHere from '../components/sections/11-StayHere.astro';
+import WhatIsFanZone from '../components/sections/12-WhatIsFanZone.astro';
+import BePartOfAction from '../components/sections/13-BePartOfAction.astro';
+import Footer from '../components/sections/14-Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>FanZone | DTN BUR</title>
-	</head>
-	<body>
-		<main>
-			<img src="/logo/dtnbur_logo.png" alt="DTN BUR logo" />
-		</main>
-	</body>
-</html>
-
-<style>
-	html, body {
-		margin: 0;
-		padding: 0;
-		height: 100%;
-		background-color: #3C3C3C;
-	}
-
-	main {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		min-height: 100vh;
-	}
-
-	img {
-		max-width: 400px;
-		width: 80%;
-	}
-</style>
+<Layout title="FanZone | Downtown Burbank">
+	<Header />
+	<Hero />
+	<About />
+	<Countdown />
+	<NoTickets />
+	<VipTicket />
+	<GetInvolved />
+	<GettingHere />
+	<StreetFair />
+	<DineDrink />
+	<StayHere />
+	<WhatIsFanZone />
+	<BePartOfAction />
+	<Footer />
+</Layout>
