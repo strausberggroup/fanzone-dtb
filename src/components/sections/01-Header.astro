@@ -2,15 +2,581 @@
 
 ---
 
-<header class="header">
-	<nav>Header / Nav</nav>
+<header id="header" class="header" role="banner">
+	<div class="header__inner flex flex-between">
+		<a href="https://dtnbur.com/" class="logo-wrapper flex flex-middle">
+			<img class="header__logo" src="/logo/dtnbur_logo.png" alt="Downtown Burbank" />
+		</a>
+		<div class="header__content-wrapper">
+			<div class="header__content">
+				<div class="header__row top">
+					<ul id="menu-secondary-navigation" class="header__menu">
+						<li class="menu-item"><a href="https://dtnbur.com/broker/">Leasing &amp; Broker Info</a></li>
+						<li class="menu-item"><a href="https://dtnbur.com/area-map/">Area Map</a></li>
+						<li class="menu-item"><a href="https://dtnbur.com/transportation/">Transportation</a></li>
+						<li class="menu-item"><a href="https://dtnbur.com/parking/">Parking &amp; Directions</a></li>
+						<li class="menu-item"><a href="https://dtnbur.com/directory/">Full Directory</a></li>
+					</ul>
+				</div>
+				<div class="header__row bottom flex">
+					<nav class="header__nav menu_wrapper" role="navigation" aria-label="Main Navigation">
+						<ul id="menu-primary-navigation" class="header__menu">
+							<li class="menu-item"><a href="https://dtnbur.com/shop/">Shop</a></li>
+							<li class="menu-item"><a href="https://dtnbur.com/dine/">Dine</a></li>
+							<li class="menu-item"><a href="https://dtnbur.com/explore/">Explore</a></li>
+							<li class="menu-item"><a href="https://dtnbur.com/events/">Events</a></li>
+							<li class="menu-item"><a href="https://dtnbur.com/stay/">Stay</a></li>
+							<li class="menu-item"><a href="https://dtnbur.com/blog/">Blog</a></li>
+						</ul>
+					</nav>
+
+					<div class="searchform__wrapper">
+						<div class="searchform">
+							<form role="search" method="get" action="https://dtnbur.com/">
+								<input type="search" id="s" name="s" value="" placeholder="Search..." />
+								<input type="submit" value="Search" id="searchsubmit" class="button button--teal" />
+							</form>
+						</div>
+						<a href="#" class="searchform__toggle" aria-label="Toggle search">
+							<div class="icon icon--search"></div>
+						</a>
+					</div>
+
+					<div class="weather__current flex flex-middle">
+						<div class="icon-wrapper">
+							<div class="icon icon--partly-cloudy-day"></div>
+						</div>
+						<div class="text-wrapper flex flex-middle">
+							<span class="day">
+								{new Date().toLocaleDateString('en-US', { weekday: 'long' })}
+							</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="nav_overlay" class="nav__mobile-overlay" style="display:none;"></div>
+		<a id="mobile_nav_toggle" class="nav__mobile-toggle" aria-label="Toggle mobile navigation">
+			<span></span>
+			<span></span>
+			<span></span>
+		</a>
+	</div>
 </header>
 
-<style>
-	.header {
-		background-color: rgba(60, 60, 60, 0.9);
-		color: white;
-		padding: 1rem 2rem;
-		text-align: center;
+<script>
+	// Mobile nav toggle
+	const toggle = document.getElementById('mobile_nav_toggle');
+	const overlay = document.getElementById('nav_overlay');
+
+	function openNav() {
+		document.documentElement.classList.add('nav-open');
+		overlay!.style.display = 'block';
 	}
+
+	function closeNav() {
+		document.documentElement.classList.remove('nav-open');
+		overlay!.style.display = 'none';
+	}
+
+	toggle?.addEventListener('click', (e) => {
+		e.preventDefault();
+		if (document.documentElement.classList.contains('nav-open')) {
+			closeNav();
+		} else {
+			openNav();
+		}
+	});
+
+	overlay?.addEventListener('click', closeNav);
+
+	// Search toggle
+	const searchToggle = document.querySelector('.searchform__toggle');
+	const header = document.getElementById('header');
+
+	searchToggle?.addEventListener('click', (e) => {
+		e.preventDefault();
+		header?.classList.toggle('header--active-search');
+		if (header?.classList.contains('header--active-search')) {
+			const searchInput = document.querySelector<HTMLInputElement>('.searchform input[type="search"]');
+			searchInput?.focus();
+		}
+	});
+
+	// Close search on click outside
+	document.addEventListener('click', (e) => {
+		const target = e.target as HTMLElement;
+		if (header?.classList.contains('header--active-search') &&
+			!target.closest('.searchform__wrapper')) {
+			header.classList.remove('header--active-search');
+		}
+	});
+</script>
+
+<style>
+	/* ===== Header (always visible, interior-page style) ===== */
+	html .header {
+		padding: 15px 0;
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		z-index: 95;
+		transform: none;
+		transition: all 0.3s;
+	}
+
+	html .header::before {
+		content: '';
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: rgba(60, 60, 60, 0.9);
+		position: absolute;
+		top: 0;
+		left: 0;
+		transition: inherit;
+	}
+
+	@media (min-width: 961px) {
+		html .header { padding: 10px 0; }
+	}
+
+	/* Inner container */
+	html .header__inner {
+		position: relative;
+		z-index: 96;
+		width: 100%;
+		max-width: 1120px;
+		padding-left: 15px;
+		padding-right: 15px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	@media (min-width: 768px) {
+		html .header__inner {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+	}
+
+	/* Logo */
+	html .header__logo {
+		height: 48px;
+		width: auto;
+		transition: all 0.3s;
+	}
+
+	@media (max-width: 1000px) {
+		html .header__logo { height: calc(36px + 1.2vw); }
+	}
+
+	/* Menus */
+	html .header__menu {
+		display: flex;
+		justify-content: flex-end;
+		align-items: center;
+		position: relative;
+		z-index: 2;
+		list-style: none;
+	}
+
+	html .header__menu li {
+		margin: 0;
+		color: #fff;
+	}
+
+	html .header__menu li.current-menu-item a {
+		font-weight: bold;
+	}
+
+	html .header__menu a {
+		display: inline-block;
+		color: inherit;
+		font-size: 1rem;
+		padding: 0.75em;
+	}
+
+	@media (max-width: 1000px) and (min-width: 961px) {
+		html .header__menu a { font-size: 1.6vw; }
+	}
+
+	/* Secondary nav separators */
+	html .header__menu#menu-secondary-navigation {
+		transform: translateY(2px);
+	}
+
+	@media (min-width: 961px) {
+		html .header__menu#menu-secondary-navigation li::after {
+			content: '|';
+		}
+		html .header__menu#menu-secondary-navigation li:last-of-type::after {
+			display: none;
+		}
+		html .header__menu#menu-secondary-navigation li:last-of-type a {
+			padding-right: 0;
+		}
+		html .header__menu#menu-secondary-navigation a {
+			font-size: 0.75rem;
+			padding: 0.75em 1.5em;
+		}
+	}
+
+	/* Search form */
+	html .header .searchform {
+		transition: opacity 0.3s, width 0s ease 0.3s;
+	}
+
+	html .header .searchform__wrapper {
+		position: relative;
+	}
+
+	@media (min-width: 961px) {
+		html .header .searchform {
+			position: absolute;
+			top: 50%;
+			transform: translateY(-50%);
+			right: calc(100% - 10px);
+			width: 0;
+			overflow: hidden;
+			opacity: 0;
+		}
+	}
+
+	html .header .searchform form {
+		display: flex;
+	}
+
+	html .header .searchform input[type='search'] {
+		align-self: stretch;
+		display: inline-block;
+		flex: 1;
+		padding: 9px 1rem;
+		appearance: none;
+		border: none;
+		border-radius: 0;
+		font-family: inherit;
+	}
+
+	@media (min-width: 421px) {
+		html .header .searchform input[type='search'] {
+			border-top-left-radius: 4px;
+			border-bottom-left-radius: 4px;
+		}
+	}
+
+	@media (max-width: 420px) {
+		html .header .searchform input[type='search'] { padding: 1rem; }
+	}
+
+	html .header .searchform .button {
+		display: inline-block;
+		text-align: center;
+		border: 2px solid #f15b5b;
+		background: #f15b5b;
+		color: #fff;
+		text-transform: uppercase;
+		font-size: 0.75rem;
+		font-weight: bold;
+		padding: 9px 2em;
+		line-height: 1;
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+		border-top-right-radius: 4px;
+		border-bottom-right-radius: 4px;
+		appearance: none;
+		transition: all 0.4s;
+		cursor: pointer;
+		font-family: inherit;
+	}
+
+	@media (max-width: 420px) {
+		html .header .searchform .button {
+			padding-left: 1rem;
+			padding-right: 1rem;
+			border-radius: 0;
+		}
+	}
+
+	html .header .searchform .button:hover {
+		background: #f15b5b;
+		color: #fff;
+		filter: saturate(1.1);
+	}
+
+	html .header .searchform__toggle {
+		margin-left: 0.75rem;
+		margin-right: 1rem;
+		padding: 10px;
+		height: 100%;
+		top: 0;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	@media (max-width: 1500px) {
+		html .header .searchform__toggle {
+			margin-left: 1vw;
+			margin-right: 1.4vw;
+		}
+	}
+
+	@media (max-width: 960px) {
+		html .header .searchform__toggle { display: none; }
+	}
+
+	/* Search active state */
+	html .header--active-search .searchform__toggle .icon::before,
+	html .header--active-search .searchform__toggle .icon::after {
+		width: 20px;
+		top: 50%;
+		left: calc(50% - 10px);
+		border-radius: 0;
+	}
+
+	html .header--active-search .searchform__toggle .icon::before {
+		height: 0;
+		border-top-width: 0;
+	}
+
+	html .header--active-search .searchform__toggle .icon::after {
+		border-width: 2px;
+	}
+
+	html .header--active-search #menu-primary-navigation {
+		opacity: 0;
+		height: 0;
+		overflow: hidden;
+		transition: opacity 0.3s, height 0s ease 0.3s;
+	}
+
+	@media (min-width: 961px) {
+		html .header--active-search .searchform {
+			opacity: 1;
+			width: 400px;
+			z-index: 9;
+			transition: width 0.3s, opacity 0.3s ease 0.2s;
+		}
+	}
+
+	/* Search icon */
+	.icon--search {
+		position: relative;
+		font-size: 8px;
+		width: 3em;
+		height: 3em;
+	}
+
+	.icon--search::before,
+	.icon--search::after {
+		content: '';
+		display: block;
+		position: absolute;
+		border: 0.2em solid #fff;
+		transition: all 0.3s;
+	}
+
+	.icon--search::before {
+		width: 80%;
+		height: 80%;
+		border-radius: 100%;
+		top: 0;
+		left: 0;
+		transform: rotate(-45deg);
+	}
+
+	.icon--search::after {
+		width: 40%;
+		border-width: 0.3em;
+		border-top: none;
+		border-left: none;
+		border-right: none;
+		border-top-right-radius: 1em;
+		border-bottom-right-radius: 1em;
+		left: 57.5%;
+		top: 72.5%;
+		transform: rotate(45deg);
+	}
+
+	/* Weather */
+	.weather__current .icon {
+		width: 36px;
+		height: 36px;
+		background-image: url('/images/weather-icons.png');
+		background-repeat: no-repeat;
+		background-size: calc(36px * 4);
+		background-position: 0 0;
+	}
+
+	.weather__current .icon--partly-cloudy-day {
+		background-position-y: calc(36px * -2);
+	}
+
+	.weather__current .text-wrapper {
+		color: #fff;
+		font-size: 0.875rem;
+		font-weight: bold;
+		text-transform: uppercase;
+		margin-left: 0.5em;
+	}
+
+	.weather__current .text-wrapper span {
+		margin-left: 0.25em;
+	}
+
+	/* Mobile hamburger */
+	html .header .nav__mobile-toggle {
+		width: 45px;
+		padding: 10px;
+		z-index: 99;
+		margin-right: -10px;
+		cursor: pointer;
+		position: relative;
+		height: 45px;
+	}
+
+	html .header .nav__mobile-toggle span {
+		display: block;
+		height: 3px;
+		width: 25px;
+		border-radius: 10px;
+		background: #fff;
+		position: absolute;
+		top: calc(50% - 2px);
+		transition: all 0.2s;
+	}
+
+	html .header .nav__mobile-toggle span:first-of-type {
+		transform: translateY(-10px);
+	}
+
+	html .header .nav__mobile-toggle span:last-of-type {
+		transform: translateY(10px);
+	}
+
+	@media (min-width: 961px) {
+		html .header .nav__mobile-toggle { display: none; }
+	}
+
+	/* Mobile overlay */
+	html .header #nav_overlay {
+		z-index: 97;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(255, 255, 255, 0.7);
+	}
+
+	/* Mobile nav panel */
+	@media (max-width: 960px) {
+		html .header__content-wrapper {
+			position: fixed;
+			width: 100%;
+			max-width: 420px;
+			background: #3c3c3c;
+			right: 0;
+			top: 0;
+			height: 100vh;
+			transform: translateX(100%);
+			z-index: 98;
+			overflow: auto;
+			transition: all 0.4s;
+		}
+
+		html .header__content {
+			padding: 24px 0 60px;
+			display: flex;
+			flex-direction: column-reverse;
+			justify-content: flex-end;
+		}
+
+		html .header__row.bottom {
+			flex-direction: column-reverse;
+		}
+
+		html .header__menu {
+			display: block;
+		}
+
+		html .header__menu a {
+			display: block;
+		}
+
+		html .header__menu a:hover {
+			background: rgba(255, 255, 255, 0.1);
+		}
+
+		html .header__menu:not(#menu-secondary-navigation) {
+			margin-bottom: 20px;
+		}
+
+		html .header__menu:not(#menu-secondary-navigation) a {
+			font-size: 22px;
+		}
+
+		html .weather__current,
+		html .searchform__wrapper,
+		html .header__menu a {
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+
+		html .searchform__wrapper {
+			margin: 20px 0;
+		}
+
+		html .searchform {
+			opacity: 1 !important;
+			width: auto !important;
+			position: static !important;
+			transform: none !important;
+		}
+	}
+
+	@media (max-width: 960px) and (max-width: 420px) {
+		html .weather__current,
+		html .searchform__wrapper,
+		html .header__menu a {
+			padding-left: 20px;
+			padding-right: 20px;
+		}
+	}
+
+	/* Nav open state */
+	:global(html.nav-open) .header__content-wrapper {
+		transform: none !important;
+	}
+
+	:global(html.nav-open) .header__logo {
+		transform: translateY(-100px);
+		opacity: 0;
+	}
+
+	:global(html.nav-open) .header .nav__mobile-toggle span:first-of-type {
+		transform: rotate(45deg);
+	}
+
+	:global(html.nav-open) .header .nav__mobile-toggle span:nth-of-type(2) {
+		display: none;
+	}
+
+	:global(html.nav-open) .header .nav__mobile-toggle span:last-of-type {
+		transform: rotate(-45deg);
+	}
+
+	/* Flex utilities used in header */
+	.flex { display: flex; }
+	.flex-between { justify-content: space-between; }
+	.flex-middle { align-items: center; }
+	.logo-wrapper { text-decoration: none; }
 </style>
