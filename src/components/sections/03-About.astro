@@ -3,15 +3,143 @@
 ---
 
 <section class="about">
-	<h2>Celebrate the Los Angeles World Cup 26</h2>
-	<h3>Downtown Burbank Fan Zone</h3>
-	<p>About section + Newsletter signup</p>
+	<div class="about__inner">
+		<h1 class="about__heading">
+			<span class="about__eyebrow">Celebrate the Los Angeles World Cup 26</span>
+			<span class="about__title">Downtown Burbank Fan Zone</span>
+		</h1>
+
+		<div class="about__body">
+			<p>This summer, the excitement of the world's game comes to the heart of Burbank.</p>
+
+			<p>Downtown Burbank will host a Los Angeles World Cup 26 Fan Zone — a special registered experience featuring live match viewing and entertainment in a high-energy setting. The Fan Zone and festivities will take place along <strong>San Fernando Blvd. and surrounding streets in Downtown Burbank (from Magnolia Blvd. to Angeleno Ave.).</strong></p>
+
+			<p>Alongside the Fan Zone, Downtown Burbank will come alive with a <strong>FREE international street fair</strong>, global flavors, cultural experiences, and special VIP offerings.</p>
+		</div>
+
+		<div class="about__newsletter">
+			<h4 class="about__newsletter-heading">Sign Up for Our Newsletter for Updates</h4>
+			<form class="about__form" method="post" action="https://dtnbur.com/#gf_6" target="_blank">
+				<input type="email" name="input_2" placeholder="Your Email" required class="about__input" />
+				<button type="submit" class="about__button">Sign Up</button>
+			</form>
+		</div>
+	</div>
 </section>
 
 <style>
 	.about {
-		background-color: #FDF9F6;
-		padding: 4rem 2rem;
+		background-color: var(--color-cream);
+		padding: 5rem 2rem;
 		text-align: center;
+	}
+
+	.about__inner {
+		max-width: 1250px;
+		margin: 0 auto;
+	}
+
+	.about__heading {
+		color: var(--color-coral);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin-bottom: 1.5em;
+	}
+
+	.about__eyebrow {
+		display: block;
+		font-size: clamp(1.5rem, 3vw, 35px);
+		font-weight: 700;
+		margin-bottom: 0.1em;
+	}
+
+	.about__title {
+		display: block;
+		font-size: clamp(2rem, 5vw, 58px);
+		font-weight: 700;
+	}
+
+	.about__body {
+		max-width: 780px;
+		margin: 0 auto 3rem;
+		font-size: 16px;
+		line-height: 1.7;
+		color: var(--color-dark);
+	}
+
+	.about__body p {
+		margin-bottom: 1.25em;
+	}
+
+	.about__body p:last-child {
+		margin-bottom: 0;
+	}
+
+	.about__newsletter {
+		max-width: 780px;
+		margin: 0 auto;
+		padding-top: 1rem;
+	}
+
+	.about__newsletter-heading {
+		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--color-coral);
+		margin-bottom: 1.25em;
+	}
+
+	.about__form {
+		display: flex;
+		gap: 1rem;
+		max-width: 700px;
+		margin: 0 auto;
+	}
+
+	.about__input {
+		flex: 1;
+		padding: 1rem 1.5rem;
+		border: 2px solid var(--color-coral);
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 1rem;
+		color: var(--color-coral);
+		background: transparent;
+		outline: none;
+		text-align: center;
+	}
+
+	.about__input::placeholder {
+		color: var(--color-coral);
+		opacity: 0.7;
+	}
+
+	.about__input:focus {
+		border-color: var(--color-dark);
+	}
+
+	.about__button {
+		padding: 1rem 2.5rem;
+		background-color: var(--color-coral);
+		color: #fff;
+		border: none;
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 0.875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		cursor: pointer;
+		transition: filter 0.3s;
+	}
+
+	.about__button:hover {
+		filter: brightness(1.1);
+	}
+
+	@media (max-width: 600px) {
+		.about__form {
+			flex-direction: column;
+		}
 	}
 </style>
