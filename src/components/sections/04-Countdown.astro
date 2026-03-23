@@ -3,14 +3,220 @@
 ---
 
 <section class="countdown">
-	<h2>The Countdown to the Fan Zone Begins</h2>
-	<p>Countdown timer</p>
+	<div class="countdown__inner">
+		<h2 class="countdown__heading">The Countdown to the Fan Zone Begins</h2>
+		<div class="countdown__cards" id="countdown">
+			<div class="countdown__card countdown__card--blue">
+				<div class="countdown__flip">
+					<div class="countdown__flip-top"></div>
+					<div class="countdown__flip-bottom"></div>
+					<span class="countdown__number" id="countdown-months">00</span>
+					<div class="countdown__hinge-left"></div>
+					<div class="countdown__hinge-right"></div>
+					<div class="countdown__seam"></div>
+				</div>
+				<span class="countdown__label">Months</span>
+			</div>
+			<div class="countdown__card countdown__card--gold">
+				<div class="countdown__flip">
+					<div class="countdown__flip-top"></div>
+					<div class="countdown__flip-bottom"></div>
+					<span class="countdown__number" id="countdown-days">000</span>
+					<div class="countdown__hinge-left"></div>
+					<div class="countdown__hinge-right"></div>
+					<div class="countdown__seam"></div>
+				</div>
+				<span class="countdown__label">Days</span>
+			</div>
+			<div class="countdown__card countdown__card--red">
+				<div class="countdown__flip">
+					<div class="countdown__flip-top"></div>
+					<div class="countdown__flip-bottom"></div>
+					<span class="countdown__number" id="countdown-hours">0000</span>
+					<div class="countdown__hinge-left"></div>
+					<div class="countdown__hinge-right"></div>
+					<div class="countdown__seam"></div>
+				</div>
+				<span class="countdown__label">Hours</span>
+			</div>
+		</div>
+	</div>
 </section>
+
+<script>
+	const target = new Date('2026-07-18T00:00:00-07:00').getTime();
+
+	function updateCountdown() {
+		const now = Date.now();
+		const diff = target - now;
+
+		if (diff <= 0) {
+			document.getElementById('countdown-months')!.textContent = '00';
+			document.getElementById('countdown-days')!.textContent = '000';
+			document.getElementById('countdown-hours')!.textContent = '0000';
+			return;
+		}
+
+		const totalHours = Math.floor(diff / (1000 * 60 * 60));
+		const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+		// Calculate months and remaining days
+		const nowDate = new Date(now);
+		const targetDate = new Date(target);
+		let months = (targetDate.getFullYear() - nowDate.getFullYear()) * 12
+			+ (targetDate.getMonth() - nowDate.getMonth());
+
+		// Adjust if we haven't reached the same day of month yet
+		const tempDate = new Date(nowDate);
+		tempDate.setMonth(tempDate.getMonth() + months);
+		if (tempDate > targetDate) months--;
+
+		// Remaining days after full months
+		const afterMonths = new Date(nowDate);
+		afterMonths.setMonth(afterMonths.getMonth() + months);
+		const remainingDays = Math.floor((targetDate.getTime() - afterMonths.getTime()) / (1000 * 60 * 60 * 24));
+
+		document.getElementById('countdown-months')!.textContent = String(months).padStart(2, '0');
+		document.getElementById('countdown-days')!.textContent = String(remainingDays).padStart(3, '0');
+		document.getElementById('countdown-hours')!.textContent = String(totalHours).padStart(4, '0');
+	}
+
+	updateCountdown();
+	setInterval(updateCountdown, 60000);
+</script>
 
 <style>
 	.countdown {
-		background-color: #F9EFE8;
-		padding: 4rem 2rem;
+		background-color: var(--color-tan);
+		padding: 4rem 2rem 5rem;
 		text-align: center;
+	}
+
+	.countdown__inner {
+		max-width: 1250px;
+		margin: 0 auto;
+	}
+
+	.countdown__heading {
+		font-size: clamp(1.5rem, 3vw, 2.25rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		color: #5C8ECA;
+		margin-bottom: 2rem;
+		letter-spacing: 0.02em;
+	}
+
+	.countdown__cards {
+		display: flex;
+		justify-content: center;
+		gap: clamp(1.5rem, 4vw, 3rem);
+	}
+
+	.countdown__card {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1rem;
+	}
+
+	.countdown__flip {
+		position: relative;
+		width: clamp(140px, 22vw, 280px);
+		height: clamp(120px, 18vw, 230px);
+		border-radius: 16px;
+		overflow: visible;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.countdown__flip-top,
+	.countdown__flip-bottom {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 50%;
+	}
+
+	.countdown__flip-top {
+		top: 0;
+		border-radius: 16px 16px 0 0;
+	}
+
+	.countdown__flip-bottom {
+		bottom: 0;
+		border-radius: 0 0 16px 16px;
+	}
+
+	.countdown__card--blue .countdown__flip-top { background: #7B8DC7; }
+	.countdown__card--blue .countdown__flip-bottom { background: #6B7DB7; }
+	.countdown__card--gold .countdown__flip-top { background: #D4A843; }
+	.countdown__card--gold .countdown__flip-bottom { background: #C49A38; }
+	.countdown__card--red .countdown__flip-top { background: #D16B5E; }
+	.countdown__card--red .countdown__flip-bottom { background: #C15D50; }
+
+	.countdown__seam {
+		position: absolute;
+		top: 50%;
+		left: 0;
+		right: 0;
+		height: 2px;
+		background: rgba(0, 0, 0, 0.15);
+		z-index: 2;
+	}
+
+	.countdown__hinge-left,
+	.countdown__hinge-right {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 14px;
+		height: 20px;
+		border-radius: 3px;
+		z-index: 3;
+	}
+
+	.countdown__hinge-left { left: -7px; }
+	.countdown__hinge-right { right: -7px; }
+
+	.countdown__card--blue .countdown__hinge-left,
+	.countdown__card--blue .countdown__hinge-right { background: #5A6A9E; }
+	.countdown__card--gold .countdown__hinge-left,
+	.countdown__card--gold .countdown__hinge-right { background: #A8832E; }
+	.countdown__card--red .countdown__hinge-left,
+	.countdown__card--red .countdown__hinge-right { background: #A04A3E; }
+
+	.countdown__number {
+		position: relative;
+		z-index: 1;
+		font-size: clamp(3rem, 7vw, 5.5rem);
+		font-weight: 700;
+		color: #fff;
+		line-height: 1;
+		letter-spacing: 0.05em;
+	}
+
+	.countdown__label {
+		font-size: clamp(0.875rem, 1.5vw, 1.125rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+	}
+
+	.countdown__card--blue .countdown__label { color: #6B7DB7; }
+	.countdown__card--gold .countdown__label { color: #C49A38; }
+	.countdown__card--red .countdown__label { color: #C15D50; }
+
+	@media (max-width: 520px) {
+		.countdown__cards {
+			gap: 1rem;
+		}
+
+		.countdown__flip {
+			border-radius: 10px;
+		}
+
+		.countdown__flip-top { border-radius: 10px 10px 0 0; }
+		.countdown__flip-bottom { border-radius: 0 0 10px 10px; }
 	}
 </style>
