@@ -32,24 +32,27 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 	}
 
 	.no-tickets__inner {
-		max-width: 1250px;
+		max-width: 1150px;
 		margin: 0 auto;
 		display: flex;
-		align-items: center;
+		align-items: start;
+		justify-content: space-between;
 		gap: clamp(2rem, 5vw, 4rem);
 	}
 
 	.no-tickets__content {
-		flex: 1;
+
+		max-width: 500px
 	}
 
 	.no-tickets__heading {
-		font-size: clamp(2rem, 4vw, 3rem);
-		font-weight: 700;
-		text-transform: uppercase;
-		color: var(--color-green);
-		line-height: 1.15;
-		margin-bottom: 0.75em;
+    font-size: clamp(2rem, 4vw, 45px);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--color-green);
+    line-height: normal;
+    margin-bottom: 1rem;
+    max-width: 475px;
 	}
 
 	.no-tickets__intro {
@@ -67,21 +70,25 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 		padding-left: 1.5em;
 	}
 
-	.no-tickets__list li {
+	/* .no-tickets__list li {
 		margin-bottom: 0.25em;
+	} */
+	.no-tickets__list li::marker {
+		font-size: 0.75em;
 	}
 
 	.no-tickets__bold {
-		font-size: 16px;
+		font-size: 17px;
 		font-weight: 700;
-		line-height: 1.6;
+		line-height: 1.1;
 		color: var(--color-dark);
-		margin-bottom: 0.5em;
+		margin-bottom: 1em;
 	}
 
 	.no-tickets__italic {
-		font-size: 16px;
-		line-height: 1.6;
+		font-size: 17px;
+		line-height: 1.1;
+		font-weight: 700;
 		color: var(--color-dark);
 		margin-bottom: 1.25em;
 	}
@@ -104,15 +111,13 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 		filter: brightness(1.1);
 	}
 
-	.no-tickets__image {
-		flex-shrink: 0;
-		width: clamp(300px, 40%, 500px);
-	}
+
 
 	.no-tickets__image img {
 		width: 100%;
 		height: auto;
 		border-radius: 16px;
+		max-width: 495px;
 	}
 
 	@media (max-width: 768px) {

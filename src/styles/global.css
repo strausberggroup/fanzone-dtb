@@ -37,7 +37,8 @@
 
 /* Design Tokens */
 :root {
-	--color-dark: #3C3C3C;
+	/* --color-dark: #3C3C3C; */
+	--color-dark: #333;
 	--color-coral: #FF5252;
 	--color-red: #F15B5B;
 	--color-cream: #FDF9F6;

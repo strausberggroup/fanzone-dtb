@@ -3,7 +3,8 @@ import heroBg from '../../assets/images/02-hero/hero-bg.png';
 import logoImg from '../../assets/images/02-hero/la-wc26-fanzone-dtb.png';
 import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 ---
-
+<div class="buffer">
+</div>
 <section class="hero" style={`background-image: url(${heroBg.src});`}>
 	<div class="hero__inner">
 		<div class="hero__left">
@@ -17,6 +18,10 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 </section>
 
 <style>
+	.buffer {
+		height: 90px;
+		background-color: var(--color-coral);
+	}
 	.hero {
 		background-color: #FF5252;
 		background-size: cover;
@@ -32,13 +37,14 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		align-items: center;
 		justify-content: center;
 		gap: 2rem;
+		padding: 2rem 0 1rem;
 	}
 
 	.hero__left {
 		flex: 1;
 		display: flex;
 		flex-direction: column;
-		align-items: flex-start;
+		align-items: center;
 	}
 
 	.hero__logo {
@@ -64,7 +70,7 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 	.hero__photo {
 		width: 100%;
 		height: auto;
-		border-radius: 16px;
+		border-radius: 30px;
 	}
 
 	/* Responsive */
