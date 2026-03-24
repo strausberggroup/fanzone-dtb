@@ -1,17 +1,104 @@
 ---
-
+import background from '../../assets/images/11-stay-here/background.png';
+import photo from '../../assets/images/11-stay-here/hotel-interior.jpg';
 ---
 
 <section class="stay-here">
-	<h2>Stay Where the Action Is</h2>
-	<p>Hotel options</p>
+	<div class="stay-here__card" style={`background-image: url(${background.src});`}>
+		<div class="stay-here__image">
+			<img src={photo.src} alt="Stylish hotel lobby with modern blue curved sofa and plants" width="900" height="400" />
+		</div>
+
+		<div class="stay-here__content">
+			<h2 class="stay-here__heading">Stay Where the Action Is</h2>
+			<p class="stay-here__text">Stay steps from the celebration at one of Burbank's<br />hotels and make a full weekend of it.</p>
+			<a href="#" class="stay-here__btn">View Hotels &amp; Book Your Stay</a>
+		</div>
+	</div>
 </section>
 
 <style>
 	.stay-here {
-		background-color: #5C8ECA;
+		background-color: var(--color-cream);
 		color: white;
 		padding: 4rem 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.stay-here__card {
+		max-width: 1200px;
+		width: 100%;
+		background-color: #5C8ECA;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+		border-radius: 24px;
+		overflow: hidden;
 		text-align: center;
+	}
+
+	.stay-here__image {
+		padding: 3rem 3rem 0;
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.stay-here__image img {
+		width: 100%;
+		height: auto;
+		border-radius: 12px;
+		display: block;
+	}
+
+	.stay-here__content {
+		padding: 2.5rem 2rem 3.5rem;
+	}
+
+	.stay-here__heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		margin: 0 0 1rem;
+	}
+
+	.stay-here__text {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 400;
+		line-height: 1.6;
+		margin: 0 0 1.5rem;
+		opacity: 0.95;
+	}
+
+	.stay-here__btn {
+		display: inline-block;
+		background-color: var(--color-coral);
+		color: white;
+		font-family: var(--font-family);
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		padding: 0.75rem 2.5rem;
+		border-radius: 4px;
+		text-decoration: none;
+		transition: filter 0.3s;
+	}
+
+	.stay-here__btn:hover {
+		filter: brightness(1.1);
+	}
+
+	@media (max-width: 768px) {
+		.stay-here__image {
+			padding: 1.5rem 1.5rem 0;
+		}
+
+		.stay-here__content {
+			padding: 2rem 1.5rem 2.5rem;
+		}
 	}
 </style>

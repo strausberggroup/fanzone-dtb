@@ -1,17 +1,146 @@
 ---
-
+import background from '../../assets/images/08-getting-here/background.png';
 ---
 
-<section class="getting-here">
-	<h2>Getting Here is Easy</h2>
-	<p>Transportation options</p>
+<section class="getting-here" style={`background-image: url(${background.src});`}>
+	<div class="getting-here__inner">
+		<h2 class="getting-here__heading">Getting Here is Easy</h2>
+
+		<div class="getting-here__cards">
+			<div class="getting-here__card getting-here__card--purple">
+				<div class="getting-here__icon">
+					<img src="/images/08-getting-here/parking.svg" alt="" width="50" height="63" />
+				</div>
+				<p class="getting-here__label">Convenient public parking garages with FREE options</p>
+			</div>
+
+			<div class="getting-here__card getting-here__card--green">
+				<div class="getting-here__icon">
+					<img src="/images/08-getting-here/metro.svg" alt="" width="47" height="64" />
+				</div>
+				<p class="getting-here__label">Metrolink &amp; Amtrak access</p>
+			</div>
+
+			<div class="getting-here__card getting-here__card--pink">
+				<div class="getting-here__icon">
+					<img src="/images/08-getting-here/bus.svg" alt="" width="63" height="65" />
+				</div>
+				<p class="getting-here__label">Public transportation routes</p>
+			</div>
+
+			<div class="getting-here__card getting-here__card--blue">
+				<div class="getting-here__icon">
+					<img src="/images/08-getting-here/car.svg" alt="" width="68" height="51" />
+				</div>
+				<p class="getting-here__label">Easy rideshare drop-off</p>
+			</div>
+		</div>
+
+		<a href="#" class="getting-here__btn">Learn More</a>
+	</div>
 </section>
 
 <style>
 	.getting-here {
 		background-color: #EDAE47;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		color: white;
-		padding: 4rem 2rem;
+		padding: 4rem 2rem 5rem;
 		text-align: center;
+	}
+
+	.getting-here__inner {
+		max-width: 1250px;
+		margin: 0 auto;
+	}
+
+	.getting-here__heading {
+		font-family: var(--font-family);
+		font-size: clamp(2rem, 4vw, 3rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		margin: 0 0 2.5rem;
+		letter-spacing: 0.02em;
+	}
+
+	.getting-here__cards {
+		display: flex;
+		gap: 1.25rem;
+		margin-bottom: 2.5rem;
+	}
+
+	.getting-here__card {
+		flex: 1;
+		border-radius: 12px;
+		padding: 2.5rem 1.5rem 2rem;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		min-height: 200px;
+	}
+
+	.getting-here__card--purple {
+		background-color: #9B59B6;
+	}
+
+	.getting-here__card--green {
+		background-color: #5DC19B;
+	}
+
+	.getting-here__card--pink {
+		background-color: #EE2A7B;
+	}
+
+	.getting-here__card--blue {
+		background-color: #7BA3CC;
+	}
+
+	.getting-here__icon {
+		margin-bottom: 1.25rem;
+	}
+
+	.getting-here__icon img {
+		width: auto;
+		height: 60px;
+	}
+
+	.getting-here__label {
+		font-family: var(--font-family);
+		font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+		font-weight: 700;
+		line-height: 1.4;
+		margin: 0;
+	}
+
+	.getting-here__btn {
+		display: inline-block;
+		background-color: var(--color-coral);
+		color: white;
+		font-family: var(--font-family);
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		padding: 0.75rem 2rem;
+		border-radius: 4px;
+		text-decoration: none;
+		transition: filter 0.3s;
+	}
+
+	.getting-here__btn:hover {
+		filter: brightness(1.1);
+	}
+
+	@media (max-width: 768px) {
+		.getting-here__cards {
+			flex-direction: column;
+		}
+
+		.getting-here__card {
+			min-height: 150px;
+		}
 	}
 </style>

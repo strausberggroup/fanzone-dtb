@@ -1,0 +1,73 @@
+---
+import photo from '../../assets/images/13-be-part-of-action/group-stroll.jpg';
+---
+
+<section class="our-moment">
+	<div class="our-moment__inner">
+		<div class="our-moment__image">
+			<img src={photo.src} alt="Friends walking and smiling together in Downtown Burbank" width="790" height="440" />
+		</div>
+
+		<h2 class="our-moment__heading">This is Our Moment</h2>
+
+		<p class="our-moment__text">For 39 days, Los Angeles becomes the center of the world's game. And Downtown Burbank becomes one of the best places to experience it July 18 &amp; 19.</p>
+
+		<a href="#footer_form" class="our-moment__link">Sign Up for Our Newsletter for Updates</a>
+	</div>
+</section>
+
+<style>
+	.our-moment {
+		background-color: var(--color-cream);
+		padding: 4rem 2rem;
+		text-align: center;
+	}
+
+	.our-moment__inner {
+		max-width: 920px;
+		margin: 0 auto;
+	}
+
+	.our-moment__image {
+		max-width: 790px;
+		margin: 0 auto 2.5rem;
+	}
+
+	.our-moment__image img {
+		width: 100%;
+		height: auto;
+		border-radius: 16px;
+		display: block;
+	}
+
+	.our-moment__heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--color-dark);
+		margin: 0 0 1rem;
+	}
+
+	.our-moment__text {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 400;
+		line-height: 1.6;
+		color: var(--color-dark);
+		margin: 0 0 1.5rem;
+	}
+
+	.our-moment__link {
+		font-family: var(--font-family);
+		font-size: clamp(1.1rem, 1.8vw, 1.4rem);
+		font-weight: 700;
+		color: #9B59B6;
+		text-decoration: underline;
+		transition: opacity 0.3s;
+	}
+
+	.our-moment__link:hover {
+		opacity: 0.8;
+	}
+</style>

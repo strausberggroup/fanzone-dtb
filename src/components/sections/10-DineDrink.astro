@@ -1,17 +1,123 @@
 ---
-
+import background from '../../assets/images/10-dine-drink/background.png';
+import photo from '../../assets/images/10-dine-drink/friends-laughing-dinner.jpg';
 ---
 
-<section class="dine-drink">
-	<h2>Dine. Drink. Celebrate All Day.</h2>
-	<p>Food and drink options</p>
+<section class="dine-drink" style={`background-image: url(${background.src});`}>
+	<div class="dine-drink__inner">
+		<div class="dine-drink__content">
+			<h2 class="dine-drink__heading">Dine. Drink. Celebrate All Day.</h2>
+
+			<p class="dine-drink__text">The party doesn't stop at the Fan Zone gates.</p>
+
+			<p class="dine-drink__text">Downtown Burbank's restaurants and bars will be serving up match-day specials, global-inspired menus, themed cocktails, and extended viewing celebrations throughout the tournament.</p>
+
+			<ul class="dine-drink__list">
+				<li>Grab tacos before kickoff</li>
+				<li>Celebrate with champagne after a win</li>
+				<li>Keep the party going long after the final whistle</li>
+			</ul>
+
+			<a href="#" class="dine-drink__btn">Explore Our Restaurants</a>
+		</div>
+
+		<div class="dine-drink__image">
+			<img src={photo.src} alt="Friends laughing and enjoying cocktails at a restaurant" width="500" height="500" />
+		</div>
+	</div>
 </section>
 
 <style>
 	.dine-drink {
 		background-color: #5DC19B;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		color: white;
-		padding: 4rem 2rem;
-		text-align: center;
+		padding: 5rem 2rem;
+	}
+
+	.dine-drink__inner {
+		max-width: 1250px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 4rem;
+	}
+
+	.dine-drink__content {
+		flex: 1;
+	}
+
+	.dine-drink__image {
+		flex: 0 0 42%;
+	}
+
+	.dine-drink__image img {
+		width: 100%;
+		height: auto;
+		border-radius: 16px;
+		display: block;
+	}
+
+	.dine-drink__heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 1.15;
+		margin: 0 0 1.5rem;
+	}
+
+	.dine-drink__text {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 400;
+		line-height: 1.6;
+		margin: 0 0 1.25rem;
+	}
+
+	.dine-drink__list {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 400;
+		line-height: 1.8;
+		margin: 0 0 2rem;
+		padding-left: 1.25rem;
+	}
+
+	.dine-drink__list li {
+		margin-bottom: 0.15rem;
+	}
+
+	.dine-drink__btn {
+		display: inline-block;
+		background-color: var(--color-coral);
+		color: white;
+		font-family: var(--font-family);
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		padding: 0.75rem 2rem;
+		border-radius: 4px;
+		text-decoration: none;
+		transition: filter 0.3s;
+	}
+
+	.dine-drink__btn:hover {
+		filter: brightness(1.1);
+	}
+
+	@media (max-width: 768px) {
+		.dine-drink__inner {
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		.dine-drink__image {
+			flex: none;
+			width: 100%;
+		}
 	}
 </style>

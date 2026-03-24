@@ -1,17 +1,112 @@
 ---
-
+import background from '../../assets/images/09-street-fair/background.png';
+import photo from '../../assets/images/09-street-fair/friends-outdooring-dining.jpg';
 ---
 
-<section class="street-fair">
-	<h2>Before or After the Fan Zone, Visit the Free International Street Fair</h2>
-	<p>Street fair details</p>
+<section class="street-fair" style={`background-image: url(${background.src});`}>
+	<div class="street-fair__inner">
+		<div class="street-fair__image">
+			<img src={photo.src} alt="Friends enjoying outdoor dining at the street fair" width="500" height="500" />
+		</div>
+
+		<div class="street-fair__content">
+			<h2 class="street-fair__heading">Before or After the Fan Zone, Visit the Free International Street Fair</h2>
+
+			<p class="street-fair__text">Downtown Burbank comes alive with a vibrant celebration of culture, music, and global flavor just steps from the action.</p>
+
+			<ul class="street-fair__list">
+				<li>Local and globally inspired food vendors</li>
+				<li>Curated gifts and specialty goods</li>
+				<li>Soccer gear and merchandise</li>
+			</ul>
+
+			<p class="street-fair__text">Open to the public, the free event invites visitors to explore, taste, and experience the spirit of the world's game right in the heart of Downtown Burbank.</p>
+
+			<p class="street-fair__vendor-note"><em>Full vendor list coming soon.</em></p>
+		</div>
+	</div>
 </section>
 
 <style>
 	.street-fair {
 		background-color: #EE2A7B;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		color: white;
-		padding: 4rem 2rem;
-		text-align: center;
+		padding: 5rem 2rem;
+	}
+
+	.street-fair__inner {
+		max-width: 1250px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 4rem;
+	}
+
+	.street-fair__image {
+		flex: 0 0 42%;
+	}
+
+	.street-fair__image img {
+		width: 100%;
+		height: auto;
+		border-radius: 16px;
+		display: block;
+	}
+
+	.street-fair__content {
+		flex: 1;
+	}
+
+	.street-fair__heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 1.15;
+		margin: 0 0 1.5rem;
+	}
+
+	.street-fair__text {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 400;
+		line-height: 1.6;
+		margin: 0 0 1.25rem;
+	}
+
+	.street-fair__list {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 400;
+		line-height: 1.8;
+		margin: 0 0 1.25rem;
+		padding-left: 1.25rem;
+	}
+
+	.street-fair__list li {
+		margin-bottom: 0.15rem;
+	}
+
+	.street-fair__vendor-note {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-weight: 700;
+		color: #C8D944;
+		margin: 1rem 0 0;
+	}
+
+	@media (max-width: 768px) {
+		.street-fair__inner {
+			flex-direction: column;
+			gap: 2rem;
+		}
+
+		.street-fair__image {
+			flex: none;
+			width: 100%;
+		}
 	}
 </style>
