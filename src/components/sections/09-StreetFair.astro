@@ -38,10 +38,10 @@ import photo from '../../assets/images/09-street-fair/friends-outdooring-dining.
 	}
 
 	.street-fair__inner {
-		max-width: 1250px;
+		max-width: 1150px;
 		margin: 0 auto;
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 4rem;
 	}
 
@@ -62,32 +62,33 @@ import photo from '../../assets/images/09-street-fair/friends-outdooring-dining.
 
 	.street-fair__heading {
 		font-family: var(--font-family);
-		font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+		font-size: clamp(1.8rem, 3.5vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
-		line-height: 1.15;
+		line-height: 1.1;
 		margin: 0 0 1.5rem;
 	}
 
 	.street-fair__text {
 		font-family: var(--font-family);
-		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-size: 16px;
 		font-weight: 400;
 		line-height: 1.6;
 		margin: 0 0 1.25rem;
+		margin-bottom: 0.75em;
 	}
 
 	.street-fair__list {
 		font-family: var(--font-family);
-		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-size: 16px;
 		font-weight: 400;
 		line-height: 1.8;
 		margin: 0 0 1.25rem;
 		padding-left: 1.25rem;
 	}
 
-	.street-fair__list li {
-		margin-bottom: 0.15rem;
+	.street-fair__list li::marker {
+		font-size: 0.75em;
 	}
 
 	.street-fair__vendor-note {

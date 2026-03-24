@@ -6,7 +6,7 @@ import photo from '../../assets/images/10-dine-drink/friends-laughing-dinner.jpg
 <section class="dine-drink" style={`background-image: url(${background.src});`}>
 	<div class="dine-drink__inner">
 		<div class="dine-drink__content">
-			<h2 class="dine-drink__heading">Dine. Drink. Celebrate All Day.</h2>
+			<h2 class="dine-drink__heading">Dine. Drink. <br>Celebrate All Day.</h2>
 
 			<p class="dine-drink__text">The party doesn't stop at the Fan Zone gates.</p>
 
@@ -18,7 +18,7 @@ import photo from '../../assets/images/10-dine-drink/friends-laughing-dinner.jpg
 				<li>Keep the party going long after the final whistle</li>
 			</ul>
 
-			<a href="#" class="dine-drink__btn">Explore Our Restaurants</a>
+			<a href="https://dtnbur.com/dine/" class="dine-drink__btn">Explore Our Restaurants</a>
 		</div>
 
 		<div class="dine-drink__image">
@@ -62,32 +62,35 @@ import photo from '../../assets/images/10-dine-drink/friends-laughing-dinner.jpg
 
 	.dine-drink__heading {
 		font-family: var(--font-family);
-		font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+		font-size: clamp(1.8rem, 3.5vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		line-height: 1.15;
 		margin: 0 0 1.5rem;
+		color: var(--color-dark);
 	}
 
 	.dine-drink__text {
 		font-family: var(--font-family);
-		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-size: 16px;
 		font-weight: 400;
 		line-height: 1.6;
-		margin: 0 0 1.25rem;
+		margin: 0 0 0.75em;
+		color: var(--color-dark);
 	}
 
 	.dine-drink__list {
 		font-family: var(--font-family);
-		font-size: clamp(0.95rem, 1.3vw, 1.05rem);
+		font-size: 16px;
 		font-weight: 400;
 		line-height: 1.8;
 		margin: 0 0 2rem;
 		padding-left: 1.25rem;
+		color: var(--color-dark);
 	}
 
-	.dine-drink__list li {
-		margin-bottom: 0.15rem;
+	.dine-drink__list li::marker {
+		font-size: 0.75em;
 	}
 
 	.dine-drink__btn {

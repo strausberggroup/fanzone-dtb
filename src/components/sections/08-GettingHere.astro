@@ -14,11 +14,11 @@ import background from '../../assets/images/08-getting-here/background.png';
 				<p class="getting-here__label">Convenient public parking garages with FREE options</p>
 			</div>
 
-			<div class="getting-here__card getting-here__card--green">
+			<div class="getting-here__card getting-here__card--coral">
 				<div class="getting-here__icon">
 					<img src="/images/08-getting-here/metro.svg" alt="" width="47" height="64" />
 				</div>
-				<p class="getting-here__label">Metrolink &amp; Amtrak access</p>
+				<p class="getting-here__label">Metrolink &amp;<br> Amtrak access</p>
 			</div>
 
 			<div class="getting-here__card getting-here__card--pink">
@@ -58,7 +58,7 @@ import background from '../../assets/images/08-getting-here/background.png';
 
 	.getting-here__heading {
 		font-family: var(--font-family);
-		font-size: clamp(2rem, 4vw, 3rem);
+		font-size: clamp(1.8rem, 3.5vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		margin: 0 0 2.5rem;
@@ -74,7 +74,7 @@ import background from '../../assets/images/08-getting-here/background.png';
 	.getting-here__card {
 		flex: 1;
 		border-radius: 12px;
-		padding: 2.5rem 1.5rem 2rem;
+		padding: 2.5rem 2rem 2rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -86,8 +86,8 @@ import background from '../../assets/images/08-getting-here/background.png';
 		background-color: #9B59B6;
 	}
 
-	.getting-here__card--green {
-		background-color: #5DC19B;
+	.getting-here__card--coral {
+		background-color: var(--color-coral);
 	}
 
 	.getting-here__card--pink {

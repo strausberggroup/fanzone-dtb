@@ -42,35 +42,32 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 	}
 
 	.vip__inner {
-		max-width: 1250px;
+		max-width: 1150px;
 		margin: 0 auto;
 		display: flex;
-		align-items: center;
+		align-items: start;
+		/* justify-content: space-between; */
 		gap: clamp(2rem, 5vw, 4rem);
 	}
 
 	.vip__image {
 		flex-shrink: 0;
-		width: clamp(300px, 40%, 500px);
 	}
 
 	.vip__image img {
 		width: 100%;
 		height: auto;
 		border-radius: 16px;
-	}
-
-	.vip__content {
-		flex: 1;
+		max-width: 450px;
 	}
 
 	.vip__heading {
-		font-size: clamp(2rem, 4vw, 3rem);
+		font-size: clamp(2rem, 4vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		color: var(--color-blue);
-		line-height: 1.15;
-		margin-bottom: 1.25em;
+		line-height: normal;
+		margin-bottom: 1rem;
 	}
 
 	.vip__list {
@@ -86,7 +83,6 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 		font-weight: 700;
 		color: var(--color-dark);
 		padding: 0.6em 0;
-		border-bottom: 1px solid #e0d8d0;
 	}
 
 	.vip__list li:last-child {
