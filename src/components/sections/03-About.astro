@@ -18,11 +18,7 @@
 		</div>
 
 		<div class="about__newsletter">
-			<h4 class="about__newsletter-heading">Sign Up for Our Newsletter for Updates</h4>
-			<form class="about__form" method="post" action="https://dtnbur.com/#gf_6" target="_blank">
-				<input type="email" name="input_2" placeholder="Your Email" required class="about__input" />
-				<button type="submit" class="about__button">Sign Up</button>
-			</form>
+			<a href="#footer_form" class="about__button">Sign Up for updates</a>
 		</div>
 	</div>
 </section>
@@ -62,7 +58,7 @@
 
 	.about__body {
 		max-width: 780px;
-		margin: 0 auto 3rem;
+		margin: 0 auto 0.75rem;
 		font-size: 17px;
 		line-height: 1.7;
 		color: var(--color-dark);
@@ -82,44 +78,8 @@
 		padding-top: 1rem;
 	}
 
-	.about__newsletter-heading {
-		font-size: clamp(1.25rem, 2.5vw, 1.75rem);
-		font-weight: 700;
-		text-transform: uppercase;
-		color: var(--color-coral);
-		margin-bottom: 0.5em;
-	}
-
-	.about__form {
-		display: flex;
-		gap: 1rem;
-		max-width: 700px;
-		margin: 0 auto;
-	}
-
-	.about__input {
-		flex: 1;
-		padding: 1rem 1.5rem;
-		border: 2px solid var(--color-coral);
-		border-radius: 8px;
-		font-family: var(--font-family);
-		font-size: 1rem;
-		color: var(--color-coral);
-		background: transparent;
-		outline: none;
-		text-align: center;
-	}
-
-	.about__input::placeholder {
-		color: var(--color-coral);
-		opacity: 0.7;
-	}
-
-	.about__input:focus {
-		border-color: var(--color-dark);
-	}
-
 	.about__button {
+		display: inline-block;
 		padding: 1rem 2.5rem;
 		background-color: var(--color-coral);
 		color: #fff;
@@ -130,17 +90,12 @@
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.05em;
+		text-decoration: none;
 		cursor: pointer;
 		transition: filter 0.3s;
 	}
 
 	.about__button:hover {
 		filter: brightness(1.1);
-	}
-
-	@media (max-width: 600px) {
-		.about__form {
-			flex-direction: column;
-		}
 	}
 </style>
