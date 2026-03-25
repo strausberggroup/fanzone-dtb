@@ -47,7 +47,7 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 	}
 
 	.no-tickets__heading {
-    font-size: clamp(2rem, 4vw, 45px);
+    font-size: clamp(1.75rem, 4vw, 45px);
     font-weight: 700;
     text-transform: uppercase;
     color: var(--color-coral);
@@ -112,7 +112,10 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 		filter: brightness(1.1);
 	}
 
-
+		.no-tickets__image {
+			width: 100%;
+			max-width: 500px;
+		}
 
 	.no-tickets__image img {
 		width: 100%;
@@ -120,6 +123,8 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 		border-radius: 16px;
 		max-width: 495px;
 	}
+
+
 
 	@media (max-width: 768px) {
 		.no-tickets {
@@ -130,9 +135,14 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 			}
 		}
 
-		.no-tickets__image {
-			width: 100%;
-			max-width: 500px;
+		@media (max-width: 480px) {
+			.no-tickets__heading {
+				max-width: 310px;
+				line-height: 1.1;
+			}
 		}
-	}
+
+
+
+
 </style>
