@@ -28,7 +28,7 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		const DOT_COLOR = '#f63d59';
 		const RING_COLOR = '#fb9765';
 		const DOT_RADIUS = 10;
-		const RING_THICKNESS = 5;
+		const RING_THICKNESS = 6;
 		const SPACING = 60; // dot center-to-center (20px dot + 40px gap)
 
 		let cols = 0;
@@ -50,6 +50,35 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 			rows = Math.ceil(h / SPACING) + 1;
 		}
 
+		// Pulse system: 2-3 stationary clusters that slowly breathe in and out
+		interface Pulse {
+			cx: number; // center x (0-1 normalized)
+			cy: number; // center y (0-1 normalized)
+			birth: number; // time when pulse started
+			duration: number; // total pulse lifetime in ms
+			reach: number; // how far the effect reaches in pixels
+		}
+
+		const pulses: Pulse[] = [];
+		const PULSE_INTERVAL = 3000; // ms between new pulses
+		const PULSE_DURATION = 4500; // slow breathe in/out
+		const PULSE_REACH = 350; // radius of affected area
+		let lastPulseTime = -PULSE_INTERVAL;
+
+		function spawnPulse(time: number) {
+			pulses.push({
+				cx: 0.1 + Math.random() * 0.8,
+				cy: 0.1 + Math.random() * 0.8,
+				birth: time,
+				duration: PULSE_DURATION + Math.random() * 1500,
+				reach: PULSE_REACH + Math.random() * 100,
+			});
+			// Keep only recent pulses
+			while (pulses.length > 4) {
+				pulses.shift();
+			}
+		}
+
 		function draw(time: number) {
 			const w = canvas.clientWidth;
 			const h = canvas.clientHeight;
@@ -57,13 +86,11 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 			ctx!.fillStyle = BG;
 			ctx!.fillRect(0, 0, w, h);
 
-			// Stadium wave: sweeps left-to-right and wraps around
-			const waveSpeed = 0.08; // pixels per ms
-			const waveWidth = 250; // width of the wave band
-			// Total travel includes the full width plus extra so it wraps smoothly
-			const totalTravel = w + waveWidth;
-			const elapsed = time % (totalTravel / waveSpeed);
-			const waveFront = elapsed * waveSpeed - waveWidth;
+			// Spawn new pulses at intervals
+			if (time - lastPulseTime > PULSE_INTERVAL) {
+				spawnPulse(time);
+				lastPulseTime = time;
+			}
 
 			// Offset to center the grid
 			const offsetX = ((w % SPACING) / 2);
@@ -74,34 +101,49 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 					const x = offsetX + c * SPACING;
 					const y = offsetY + r * SPACING;
 
-					// Horizontal distance from wave front
-					const wavePos = x - waveFront;
-					const inWave = wavePos > 0 && wavePos < waveWidth;
+					// Find max effect from all active pulses
+					let bestAlpha = 0;
+					let bestScale = 1;
 
-					// Smooth envelope within the wave band
-					let ringAlpha = 0;
-					let scale = 1;
-					if (inWave) {
-						// Bell curve within the wave band
-						const t = wavePos / waveWidth; // 0 to 1
-						ringAlpha = Math.sin(t * Math.PI);
-						scale = 1 + 0.3 * ringAlpha;
+					for (const p of pulses) {
+						const age = time - p.birth;
+						if (age < 0 || age > p.duration) continue;
+
+						const pcx = p.cx * w;
+						const pcy = p.cy * h;
+						const dist = Math.sqrt((x - pcx) ** 2 + (y - pcy) ** 2);
+
+						if (dist > p.reach) continue;
+
+						// How close to pulse center (1 = at center, 0 = at edge)
+						const proximity = 1 - dist / p.reach;
+
+						// Slow sine breathe: ramps up then back down
+						const progress = age / p.duration;
+						const breathe = Math.sin(progress * Math.PI);
+
+						// Linear proximity (not squared) so more dots are visibly affected
+						const alpha = proximity * breathe;
+						if (alpha > bestAlpha) {
+							bestAlpha = alpha;
+							bestScale = 1 + 0.6 * alpha;
+						}
 					}
 
-					if (inWave && ringAlpha > 0.05) {
-						const dotR = DOT_RADIUS * scale;
-						const ringR = dotR + RING_THICKNESS * ringAlpha;
+					if (bestAlpha > 0.05) {
+						const dotR = DOT_RADIUS * bestScale;
+						const ringR = dotR + RING_THICKNESS * bestAlpha;
 
-						// Draw ring (thick stroke centered on the edge of the dot)
+						// Draw ring
 						ctx!.beginPath();
 						ctx!.arc(x, y, dotR + (ringR - dotR) / 2, 0, Math.PI * 2);
 						ctx!.strokeStyle = RING_COLOR;
-						ctx!.globalAlpha = ringAlpha;
+						ctx!.globalAlpha = bestAlpha;
 						ctx!.lineWidth = ringR - dotR;
 						ctx!.stroke();
 						ctx!.globalAlpha = 1;
 
-						// Draw center dot flush with inner edge of ring
+						// Draw center dot
 						ctx!.beginPath();
 						ctx!.arc(x, y, dotR, 0, Math.PI * 2);
 						ctx!.fillStyle = DOT_COLOR;
@@ -116,12 +158,18 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 				}
 			}
 
+			lastDrawTime = time;
 			animId = requestAnimationFrame(draw);
 		}
 
+		let lastDrawTime = 0;
+
 		// Use ResizeObserver so canvas resizes when section grows (e.g. after images load)
 		const section = canvas.parentElement!;
-		const ro = new ResizeObserver(() => resize());
+		const ro = new ResizeObserver(() => {
+			resize();
+			draw(lastDrawTime);
+		});
 		ro.observe(section);
 
 		resize();
@@ -132,7 +180,17 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 			draw(0);
 			cancelAnimationFrame(animId!);
 		} else {
-			animId = requestAnimationFrame(draw);
+			// Only animate when visible
+			let isVisible = false;
+			const io = new IntersectionObserver(([entry]) => {
+				isVisible = entry.isIntersecting;
+				if (isVisible) {
+					animId = requestAnimationFrame(draw);
+				} else {
+					cancelAnimationFrame(animId);
+				}
+			}, { threshold: 0 });
+			io.observe(section);
 		}
 	}
 

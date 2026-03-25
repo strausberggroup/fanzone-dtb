@@ -1,8 +1,8 @@
 ---
-import background from '../../assets/images/08-getting-here/background.png';
 ---
 
-<section class="getting-here" style={`background-image: url(${background.src});`}>
+<section class="getting-here">
+	<canvas id="getting-here-dots" class="getting-here__canvas"></canvas>
 	<div class="getting-here__inner">
 		<h2 class="getting-here__heading">Getting Here is Easy</h2>
 
@@ -49,17 +49,27 @@ import background from '../../assets/images/08-getting-here/background.png';
 <style>
 	.getting-here {
 		background-color: #EDAE47;
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
 		color: white;
 		padding: 4rem 2rem 5rem;
 		text-align: center;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.getting-here__canvas {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 55%;
+		pointer-events: none;
 	}
 
 	.getting-here__inner {
 		max-width: 1250px;
 		margin: 0 auto;
+		position: relative;
+		z-index: 1;
 	}
 
 	.getting-here__heading {
@@ -166,3 +176,168 @@ import background from '../../assets/images/08-getting-here/background.png';
 		}
 	}
 </style>
+
+<script>
+	function initGettingHereDots() {
+		const canvas = document.getElementById('getting-here-dots') as HTMLCanvasElement;
+		if (!canvas) return;
+		const ctx = canvas.getContext('2d');
+		if (!ctx) return;
+
+		const BG = '#D99A3E';
+		const DOT_COLOR = '#C98E38';
+		const RING_COLOR = '#F2CB6E';
+		const DOT_RADIUS = 10;
+		const RING_THICKNESS = 6;
+		const SPACING = 60;
+
+		let cols = 0;
+		let rows = 0;
+		let animId: number;
+
+		function resize() {
+			const dpr = window.devicePixelRatio || 1;
+			const w = canvas.clientWidth;
+			const h = canvas.clientHeight;
+			canvas.width = w * dpr;
+			canvas.height = h * dpr;
+			ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+			cols = Math.ceil(w / SPACING) + 1;
+			rows = Math.ceil(h / SPACING) + 1;
+		}
+
+		// Pulse system
+		interface Pulse {
+			cx: number;
+			cy: number;
+			birth: number;
+			duration: number;
+			reach: number;
+		}
+
+		const pulses: Pulse[] = [];
+		const PULSE_INTERVAL = 6000;
+		const PULSE_DURATION = 8000;
+		const PULSE_REACH = 300;
+		let lastPulseTime = -PULSE_INTERVAL;
+
+		function spawnPulse(time: number) {
+			pulses.push({
+				cx: 0.1 + Math.random() * 0.8,
+				cy: 0.1 + Math.random() * 0.8,
+				birth: time,
+				duration: PULSE_DURATION + Math.random() * 1500,
+				reach: PULSE_REACH + Math.random() * 100,
+			});
+			while (pulses.length > 4) {
+				pulses.shift();
+			}
+		}
+
+		function draw(time: number) {
+			const w = canvas.clientWidth;
+			const h = canvas.clientHeight;
+
+			ctx!.fillStyle = BG;
+			ctx!.fillRect(0, 0, w, h);
+
+			if (time - lastPulseTime > PULSE_INTERVAL) {
+				spawnPulse(time);
+				lastPulseTime = time;
+			}
+
+			const offsetX = ((w % SPACING) / 2);
+			const offsetY = ((h % SPACING) / 2);
+
+			for (let r = 0; r < rows; r++) {
+				for (let c = 0; c < cols; c++) {
+					const x = offsetX + c * SPACING;
+					const y = offsetY + r * SPACING;
+
+					let bestAlpha = 0;
+					let bestScale = 1;
+
+					for (const p of pulses) {
+						const age = time - p.birth;
+						if (age < 0 || age > p.duration) continue;
+
+						const pcx = p.cx * w;
+						const pcy = p.cy * h;
+						const dist = Math.sqrt((x - pcx) ** 2 + (y - pcy) ** 2);
+
+						if (dist > p.reach) continue;
+
+						const proximity = 1 - dist / p.reach;
+						const progress = age / p.duration;
+						const breathe = Math.sin(progress * Math.PI);
+
+						const alpha = proximity * breathe;
+						if (alpha > bestAlpha) {
+							bestAlpha = alpha;
+							bestScale = 1 + 0.4 * alpha;
+						}
+					}
+
+					if (bestAlpha > 0.05) {
+						const dotR = DOT_RADIUS * bestScale;
+						const ringR = dotR + RING_THICKNESS * bestAlpha;
+
+						ctx!.beginPath();
+						ctx!.arc(x, y, dotR + (ringR - dotR) / 2, 0, Math.PI * 2);
+						ctx!.strokeStyle = RING_COLOR;
+						ctx!.globalAlpha = bestAlpha;
+						ctx!.lineWidth = ringR - dotR;
+						ctx!.stroke();
+						ctx!.globalAlpha = 1;
+
+						ctx!.beginPath();
+						ctx!.arc(x, y, dotR, 0, Math.PI * 2);
+						ctx!.fillStyle = DOT_COLOR;
+						ctx!.fill();
+					} else {
+						ctx!.beginPath();
+						ctx!.arc(x, y, DOT_RADIUS, 0, Math.PI * 2);
+						ctx!.fillStyle = DOT_COLOR;
+						ctx!.fill();
+					}
+				}
+			}
+
+			lastDrawTime = time;
+			animId = requestAnimationFrame(draw);
+		}
+
+		let lastDrawTime = 0;
+		const ro = new ResizeObserver(() => {
+			resize();
+			draw(lastDrawTime);
+		});
+		ro.observe(canvas);
+
+		resize();
+
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReducedMotion) {
+			draw(0);
+			cancelAnimationFrame(animId!);
+		} else {
+			let isVisible = false;
+			const io = new IntersectionObserver(([entry]) => {
+				isVisible = entry.isIntersecting;
+				if (isVisible) {
+					animId = requestAnimationFrame(draw);
+				} else {
+					cancelAnimationFrame(animId);
+				}
+			}, { threshold: 0 });
+			io.observe(canvas.closest('.getting-here')!);
+		}
+	}
+
+	document.addEventListener('astro:page-load', initGettingHereDots);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initGettingHereDots);
+	} else {
+		initGettingHereDots();
+	}
+</script>

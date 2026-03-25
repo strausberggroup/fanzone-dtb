@@ -45,14 +45,14 @@
 
 	.about__eyebrow {
 		display: block;
-		font-size: clamp(1.5rem, 3vw, 35px);
+		font-size: clamp(1.125rem, 3vw, 35px);
 		font-weight: 700;
 		margin-bottom: 0.1em;
 	}
 
 	.about__title {
 		display: block;
-		font-size: clamp(2rem, 5vw, 58px);
+		font-size: clamp(1.75rem, 5vw, 58px);
 		font-weight: 700;
 	}
 
@@ -97,5 +97,11 @@
 
 	.about__button:hover {
 		filter: brightness(1.1);
+	}
+	@media (max-width: 768px) {
+		.about__eyebrow {
+			margin-bottom: 0.5em;
+		}
+		.about__heading
 	}
 </style>
