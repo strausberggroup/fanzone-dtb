@@ -1,0 +1,179 @@
+---
+
+---
+
+<div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Cookie consent" aria-hidden="true">
+	<div class="cookie-banner__inner">
+		<p class="cookie-banner__text">
+			We use cookies to analyze site traffic and improve your experience. See our
+			<a href="https://dtnbur.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>.
+		</p>
+		<div class="cookie-banner__actions">
+			<button id="cookie-decline" class="cookie-banner__btn cookie-banner__btn--decline" type="button">Decline</button>
+			<button id="cookie-accept" class="cookie-banner__btn cookie-banner__btn--accept" type="button">Accept</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	const COOKIE_KEY = 'dtb_cookie_consent';
+	const GA_ID = 'G-D37KTR9KE3';
+
+	function getConsent(): string | null {
+		return localStorage.getItem(COOKIE_KEY);
+	}
+
+	function setConsent(value: 'accepted' | 'declined') {
+		localStorage.setItem(COOKIE_KEY, value);
+		// Also set a cookie scoped to .dtnbur.com so the main site can read it
+		const expires = new Date(Date.now() + 365 * 24 * 60 * 60 * 1000).toUTCString();
+		document.cookie = `${COOKIE_KEY}=${value}; expires=${expires}; path=/; domain=.dtnbur.com; SameSite=Lax`;
+	}
+
+	function loadGA4() {
+		if (document.querySelector(`script[src*="googletagmanager.com/gtag"]`)) return;
+
+		const script = document.createElement('script');
+		script.async = true;
+		script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+		document.head.appendChild(script);
+
+		script.onload = () => {
+			(window as any).dataLayer = (window as any).dataLayer || [];
+			function gtag(...args: any[]) {
+				(window as any).dataLayer.push(arguments);
+			}
+			gtag('js', new Date());
+			gtag('config', GA_ID);
+		};
+	}
+
+	function hideBanner() {
+		const banner = document.getElementById('cookie-banner');
+		if (banner) {
+			banner.classList.remove('cookie-banner--visible');
+			banner.setAttribute('aria-hidden', 'true');
+		}
+	}
+
+	function showBanner() {
+		const banner = document.getElementById('cookie-banner');
+		if (banner) {
+			banner.classList.add('cookie-banner--visible');
+			banner.setAttribute('aria-hidden', 'false');
+		}
+	}
+
+	// Init
+	const consent = getConsent();
+
+	if (consent === 'accepted') {
+		loadGA4();
+	} else if (!consent) {
+		// Small delay so it slides in after page load
+		setTimeout(showBanner, 500);
+	}
+
+	document.getElementById('cookie-accept')?.addEventListener('click', () => {
+		setConsent('accepted');
+		hideBanner();
+		loadGA4();
+	});
+
+	document.getElementById('cookie-decline')?.addEventListener('click', () => {
+		setConsent('declined');
+		hideBanner();
+	});
+</script>
+
+<style>
+	.cookie-banner {
+		position: fixed;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		z-index: 9999;
+		background: var(--color-dark, #333);
+		color: #fff;
+		transform: translateY(100%);
+		transition: transform 0.4s ease;
+		font-family: var(--font-family, 'Gotham', system-ui, sans-serif);
+	}
+
+	.cookie-banner--visible {
+		transform: translateY(0);
+	}
+
+	.cookie-banner__inner {
+		max-width: 1120px;
+		margin: 0 auto;
+		padding: 20px 30px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 24px;
+	}
+
+	@media (max-width: 600px) {
+		.cookie-banner__inner {
+			flex-direction: column;
+			text-align: center;
+			padding: 20px 20px;
+			gap: 16px;
+		}
+	}
+
+	.cookie-banner__text {
+		font-size: 0.875rem;
+		line-height: 1.5;
+		margin: 0;
+		flex: 1;
+	}
+
+	.cookie-banner__text a {
+		color: var(--color-gold, #EDAE47);
+		text-decoration: underline;
+	}
+
+	.cookie-banner__text a:hover {
+		color: #fff;
+	}
+
+	.cookie-banner__actions {
+		display: flex;
+		gap: 12px;
+		flex-shrink: 0;
+	}
+
+	.cookie-banner__btn {
+		font-family: inherit;
+		font-size: 0.875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		padding: 10px 24px;
+		border: none;
+		border-radius: 4px;
+		cursor: pointer;
+		transition: filter 0.3s, opacity 0.3s;
+		letter-spacing: 0.02em;
+	}
+
+	.cookie-banner__btn--accept {
+		background: var(--color-red, #F15B5B);
+		color: #fff;
+	}
+
+	.cookie-banner__btn--accept:hover {
+		filter: brightness(1.1);
+	}
+
+	.cookie-banner__btn--decline {
+		background: transparent;
+		color: #fff;
+		border: 1px solid rgba(255, 255, 255, 0.4);
+	}
+
+	.cookie-banner__btn--decline:hover {
+		border-color: #fff;
+	}
+</style>
