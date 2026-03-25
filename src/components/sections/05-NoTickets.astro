@@ -17,7 +17,7 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 			</ul>
 			<p class="no-tickets__bold">The Downtown Burbank Fan Zone is a ticketed event, and all attendees must register online.</p>
 			<p class="no-tickets__italic"><em>Registration opens soon and capacity is limited.</em></p>
-			<a href="#footer_form" class="no-tickets__button">Sign Up for Newsletter to Be Notified</a>
+			<a href="#footer_form" class="no-tickets__button">Sign Up to Be Notified</a>
 		</div>
 		<div class="no-tickets__image">
 			<img src={photo.src} alt="Fans celebrating at a FIFA World Cup Fan Zone" width="570" />
@@ -136,18 +136,26 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 			.no-tickets__bold,
 			.no-tickets__italic,
 			.no-tickets__list {
-				font-size: 15px;
+				font-size: 14px;
 			}
-		.no-tickets__image {
-		
-			max-width: unset;
-		}
+			.no-tickets__image {
+				max-width: unset;
+			}
+				.no-tickets__button {
+					font-size: 13px;
+				}
+
 		}
 
 		@media (max-width: 480px) {
 			.no-tickets__heading {
 				max-width: 310px;
 				line-height: 1.1;
+			}
+			.no-tickets__image img {
+				aspect-ratio: 3/2;
+				object-fit: cover;
+
 			}
 		}
 

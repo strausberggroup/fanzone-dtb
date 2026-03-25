@@ -100,6 +100,9 @@ import photo from '../../assets/images/09-street-fair/friends-outdooring-dining.
 	}
 
 	@media (max-width: 768px) {
+		.street-fair {
+			padding: 3rem 2rem 3rem;
+		}
 		.street-fair__inner {
 			flex-direction: column;
 			gap: 2rem;
@@ -111,15 +114,20 @@ import photo from '../../assets/images/09-street-fair/friends-outdooring-dining.
 			flex: none;
 			width: 100%;
 		}
+		.street-fair__image img {
+			aspect-ratio: 3/2;
+			object-fit: cover;
+				
+		}
 
 
 		.street-fair__text,
 		.street-fair__vendor-note,
 		.street-fair__list {
-			font-size: 15px;
+			font-size: 14px;
 		}
 		.street-fair__text {
-			margin-bottom: 1rem;
+			margin-bottom: 0.75rem;
 			line-height: 1.5;
 		}
 
