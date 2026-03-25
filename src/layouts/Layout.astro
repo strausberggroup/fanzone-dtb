@@ -25,6 +25,12 @@ const { title } = Astro.props;
 	<body>
 		<slot />
 		<!-- <CookieBanner /> -->
+		<script>
+			// Strip hash from URL so shared links don't jump to anchors
+			if (window.location.hash) {
+				history.replaceState(null, '', window.location.pathname + window.location.search);
+			}
+		</script>
 	</body>
 </html>
 

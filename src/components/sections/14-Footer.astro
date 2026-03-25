@@ -2,6 +2,11 @@
 
 ---
 
+<!-- Back-to-previous-position arrow -->
+<button id="back-arrow" class="back-arrow" aria-label="Return to previous section" type="button">
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 <!-- Newsletter Signup -->
 <div id="footer_form" class="footer__form background--cover padding-y-m"
 	style={`background-image: url('/images/newsletter-bg-scaled.jpg');`}>
@@ -545,4 +550,74 @@
 			align-items: center;
 		}
 	}
+
+	/* Back arrow */
+	.back-arrow {
+		position: fixed;
+		bottom: 2rem;
+		right: 2rem;
+		z-index: 100;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		border: none;
+		background: var(--color-coral, #FF5252);
+		color: #fff;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+		opacity: 0;
+		transform: translateY(12px);
+		pointer-events: none;
+		transition: opacity 0.3s ease, transform 0.3s ease;
+	}
+
+	.back-arrow.visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.back-arrow:hover {
+		filter: brightness(1.1);
+	}
 </style>
+
+<script>
+	function initBackArrow() {
+		const btn = document.getElementById('back-arrow');
+		const formSection = document.getElementById('footer_form');
+		if (!btn || !formSection) return;
+
+		let sourceEl: HTMLElement | null = null;
+
+		function show() { btn.classList.add('visible'); }
+		function hide() { btn.classList.remove('visible'); }
+
+		// Track which anchor link brought the user to #footer_form
+		document.querySelectorAll('a[href="#footer_form"]').forEach((link) => {
+			link.addEventListener('click', () => {
+				sourceEl = link as HTMLElement;
+				show();
+			});
+		});
+
+		// Scroll back to the link that brought them here
+		btn.addEventListener('click', () => {
+			hide();
+			if (sourceEl) {
+				sourceEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+				sourceEl = null;
+			}
+		});
+	}
+
+	document.addEventListener('astro:page-load', initBackArrow);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initBackArrow);
+	} else {
+		initBackArrow();
+	}
+</script>
