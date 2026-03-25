@@ -119,8 +119,12 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 			animId = requestAnimationFrame(draw);
 		}
 
+		// Use ResizeObserver so canvas resizes when section grows (e.g. after images load)
+		const section = canvas.parentElement!;
+		const ro = new ResizeObserver(() => resize());
+		ro.observe(section);
+
 		resize();
-		window.addEventListener('resize', resize);
 
 		// Respect reduced motion preference
 		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
