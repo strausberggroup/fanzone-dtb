@@ -42,7 +42,7 @@ import photo from '../../assets/images/13-be-part-of-action/group-stroll.jpg';
 
 	.our-moment__heading {
 		font-family: var(--font-family);
-		font-size: clamp(1.8rem, 3.5vw, 45px);
+		font-size: clamp(1.75rem, 3.5vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		color: var(--color-coral);
@@ -70,5 +70,11 @@ import photo from '../../assets/images/13-be-part-of-action/group-stroll.jpg';
 
 	.our-moment__link:hover {
 		opacity: 0.8;
+	}
+
+	@media (max-width: 768px) {
+		.our-moment__text {
+			font-size: 15px;
+		}
 	}
 </style>

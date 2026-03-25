@@ -71,11 +71,11 @@
 
 	.be-part__heading {
 		font-family: var(--font-family);
-		font-size: clamp(1.8rem, 3.5vw, 45px);
+		font-size: clamp(1.75rem, 3.5vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		color: white;
-		margin: 0 0 0.75rem;
+		margin: 0 0 1rem;
 	}
 
 	.be-part__text {
@@ -83,6 +83,7 @@
 		font-size: clamp(0.95rem, 1.3vw, 1.1rem);
 		font-weight: 400;
 		margin: 0 0 0.75rem;
+		text-wrap: pretty;
 	}
 	.be-part__text a {
 		font-weight: 700;
@@ -99,5 +100,15 @@
 		line-height: 1.5;
 		margin: 0;
 		padding-left: 1.25rem;
+	}
+
+	@media (max-width: 768px) {
+		.be-part {
+			padding: 4rem 2rem 0;
+		}
+		.be-part__text,
+		.be-part__list {
+			font-size: 15px;
+		}
 	}
 </style>

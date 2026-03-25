@@ -46,7 +46,7 @@ import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
 
 	.what-is__heading {
 		font-family: var(--font-family);
-		font-size: clamp(1.6rem, 3vw, 45px);
+		font-size: clamp(1.75rem, 3vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		color: #9B59B6;
@@ -65,6 +65,9 @@ import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
 	}
 
 	@media (max-width: 768px) {
+		.what-is {
+			padding: 4rem 2rem 0;
+		}
 		.what-is__inner {
 			flex-direction: column;
 			gap: 2rem;
@@ -73,6 +76,9 @@ import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
 		.what-is__image {
 			flex: none;
 			width: 100%;
+		}
+		.what-is__text {
+			font-size: 15px;
 		}
 	}
 </style>

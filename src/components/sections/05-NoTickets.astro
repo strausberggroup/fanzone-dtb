@@ -121,7 +121,6 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 		width: 100%;
 		height: auto;
 		border-radius: 16px;
-		max-width: 495px;
 	}
 
 
@@ -133,6 +132,16 @@ import photo from '../../assets/images/05-no-tickets/people-walk-outside.jpg';
 			.no-tickets__inner {
 				flex-direction: column-reverse;
 			}
+			.no-tickets__intro,
+			.no-tickets__bold,
+			.no-tickets__italic,
+			.no-tickets__list {
+				font-size: 15px;
+			}
+		.no-tickets__image {
+		
+			max-width: unset;
+		}
 		}
 
 		@media (max-width: 480px) {

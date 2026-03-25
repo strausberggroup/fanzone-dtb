@@ -72,11 +72,11 @@ import photo from '../../assets/images/10-dine-drink/friends-laughing-dinner.jpg
 
 	.dine-drink__heading {
 		font-family: var(--font-family);
-		font-size: clamp(1.8rem, 3.5vw, 45px);
+		font-size: clamp(1.75rem, 3.5vw, 45px);
 		font-weight: 700;
 		text-transform: uppercase;
 		line-height: 1.15;
-		margin: 0 0 1.5rem;
+		margin: 0 0 1rem;
 		color: var(--color-dark);
 	}
 
@@ -123,13 +123,24 @@ import photo from '../../assets/images/10-dine-drink/friends-laughing-dinner.jpg
 	}
 
 	@media (max-width: 768px) {
+		.dine-drink {
+			padding: 7rem 2rem 4rem;
+		}
 		.dine-drink__inner {
-			flex-direction: column;
+			flex-direction: column-reverse;
 			gap: 2rem;
 		}
 
 		.dine-drink__image {
 			flex: none;
+			width: 100%;
+		}
+		.dine-drink__text,
+		.dine-drink__list {
+			font-size: 15px;
+		}
+		.dine-drink__canvas {
+			height: 35%;
 			width: 100%;
 		}
 	}

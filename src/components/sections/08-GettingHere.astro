@@ -4,7 +4,7 @@
 <section class="getting-here">
 	<canvas id="getting-here-dots" class="getting-here__canvas"></canvas>
 	<div class="getting-here__inner">
-		<h2 class="getting-here__heading">Getting Here is Easy</h2>
+		<h2 class="getting-here__heading">Getting Here <br>is Easy</h2>
 
 		<div class="getting-here__cards">
 			<div class="getting-here__card getting-here__card--purple">
@@ -80,6 +80,9 @@
 		margin: 0 0 2.5rem;
 		letter-spacing: 0.02em;
 	}
+	.getting-here__heading br {
+		display: none;
+	}
 
 	.getting-here__cards {
 		display: flex;
@@ -125,7 +128,7 @@
 
 	.getting-here__label {
 		font-family: var(--font-family);
-		font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+		font-size: clamp(13px, 1.5vw, 1.1rem);
 		font-weight: 700;
 		line-height: 1.4;
 		margin: 0;
@@ -168,11 +171,23 @@
 
 	@media (max-width: 768px) {
 		.getting-here__cards {
-			flex-direction: column;
+					display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
 		}
 
 		.getting-here__card {
-			min-height: 150px;
+			min-height: unset;
+			padding: 2.5rem 1rem 1rem;
+		}
+		.getting-here__label {
+			font-size: 15px;
+		}
+		.getting-here__icon img {
+			height: 30px;
+		}
+		.getting-here__heading  br{
+			display: inline;
 		}
 	}
 </style>
