@@ -6,33 +6,60 @@
 	<div class="countdown__inner">
 		<h2 class="countdown__heading">The Countdown to the Fan Zone Begins</h2>
 		<div class="countdown__cards" id="countdown">
-			<div class="countdown__card countdown__card--blue">
+			<div class="countdown__card countdown__card--blue" data-unit="months" data-pad="2">
 				<div class="countdown__flip">
-					<div class="countdown__flip-top"></div>
-					<div class="countdown__flip-bottom"></div>
-					<span class="countdown__number" id="countdown-months">00</span>
+					<div class="countdown__panel countdown__panel--top">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__panel countdown__panel--bottom">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__flap countdown__flap--top">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__flap countdown__flap--bottom">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
 					<div class="countdown__hinge-left"></div>
 					<div class="countdown__hinge-right"></div>
 					<div class="countdown__seam"></div>
 				</div>
 				<span class="countdown__label">Months</span>
 			</div>
-			<div class="countdown__card countdown__card--gold">
+			<div class="countdown__card countdown__card--gold" data-unit="days" data-pad="2">
 				<div class="countdown__flip">
-					<div class="countdown__flip-top"></div>
-					<div class="countdown__flip-bottom"></div>
-					<span class="countdown__number" id="countdown-days">000</span>
+					<div class="countdown__panel countdown__panel--top">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__panel countdown__panel--bottom">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__flap countdown__flap--top">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__flap countdown__flap--bottom">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
 					<div class="countdown__hinge-left"></div>
 					<div class="countdown__hinge-right"></div>
 					<div class="countdown__seam"></div>
 				</div>
 				<span class="countdown__label">Days</span>
 			</div>
-			<div class="countdown__card countdown__card--red">
+			<div class="countdown__card countdown__card--red" data-unit="hours" data-pad="2">
 				<div class="countdown__flip">
-					<div class="countdown__flip-top"></div>
-					<div class="countdown__flip-bottom"></div>
-					<span class="countdown__number" id="countdown-hours">0000</span>
+					<div class="countdown__panel countdown__panel--top">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__panel countdown__panel--bottom">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__flap countdown__flap--top">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
+					<div class="countdown__flap countdown__flap--bottom">
+						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
+					</div>
 					<div class="countdown__hinge-left"></div>
 					<div class="countdown__hinge-right"></div>
 					<div class="countdown__seam"></div>
@@ -44,45 +71,95 @@
 </section>
 
 <script>
-	const target = new Date('2026-07-18T00:00:00-07:00').getTime();
+	const target = new Date('2026-07-18T13:00:00-07:00').getTime();
 
-	function updateCountdown() {
+	function getCountdownValues() {
 		const now = Date.now();
 		const diff = target - now;
+		if (diff <= 0) return { months: 0, days: 0, hours: 0 };
 
-		if (diff <= 0) {
-			document.getElementById('countdown-months')!.textContent = '00';
-			document.getElementById('countdown-days')!.textContent = '000';
-			document.getElementById('countdown-hours')!.textContent = '0000';
-			return;
-		}
-
-		const totalHours = Math.floor(diff / (1000 * 60 * 60));
-		const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-
-		// Calculate months and remaining days
 		const nowDate = new Date(now);
 		const targetDate = new Date(target);
 		let months = (targetDate.getFullYear() - nowDate.getFullYear()) * 12
 			+ (targetDate.getMonth() - nowDate.getMonth());
 
-		// Adjust if we haven't reached the same day of month yet
 		const tempDate = new Date(nowDate);
 		tempDate.setMonth(tempDate.getMonth() + months);
 		if (tempDate > targetDate) months--;
 
-		// Remaining days after full months
 		const afterMonths = new Date(nowDate);
 		afterMonths.setMonth(afterMonths.getMonth() + months);
-		const remainingDays = Math.floor((targetDate.getTime() - afterMonths.getTime()) / (1000 * 60 * 60 * 24));
+		const remainingDays = Math.floor(
+			(targetDate.getTime() - afterMonths.getTime()) / (1000 * 60 * 60 * 24)
+		);
+		const afterMonthsAndDays = new Date(afterMonths);
+		afterMonthsAndDays.setDate(afterMonthsAndDays.getDate() + remainingDays);
+		const remainingHours = Math.floor(
+			(targetDate.getTime() - afterMonthsAndDays.getTime()) / (1000 * 60 * 60)
+		);
 
-		document.getElementById('countdown-months')!.textContent = String(months).padStart(2, '0');
-		document.getElementById('countdown-days')!.textContent = String(remainingDays).padStart(3, '0');
-		document.getElementById('countdown-hours')!.textContent = String(totalHours).padStart(4, '0');
+		return { months, days: remainingDays, hours: remainingHours };
 	}
 
-	updateCountdown();
-	setInterval(updateCountdown, 60000);
+	function flipCard(card: Element, value: number) {
+		const pad = parseInt((card as HTMLElement).dataset.pad!);
+		const str = String(value).padStart(pad, '0');
+		const flip = card.querySelector('.countdown__flip')!;
+
+		// Static panels show the REAL value (panel-top revealed by falling flap)
+		flip.querySelector('.countdown__panel--top .countdown__val')!.textContent = str;
+		// Bottom flap shows the REAL value (folds into place over panel-bottom)
+		flip.querySelector('.countdown__flap--bottom .countdown__val')!.textContent = str;
+		// flap-top and panel-bottom keep showing zeros (old value)
+
+		// Trigger the flip animation
+		flip.classList.add('is-flipping');
+	}
+
+	// Silently update all displayed values (no animation)
+	function updateValues() {
+		const values = getCountdownValues();
+		document.querySelectorAll('.countdown__card').forEach(card => {
+			const unit = (card as HTMLElement).dataset.unit as keyof ReturnType<typeof getCountdownValues>;
+			const pad = parseInt((card as HTMLElement).dataset.pad!);
+			const str = String(values[unit]).padStart(pad, '0');
+			card.querySelectorAll('.countdown__val').forEach(el => {
+				el.textContent = str;
+			});
+		});
+	}
+
+	// Intersection Observer — flip once on scroll into view
+	const section = document.querySelector('.countdown')!;
+	let hasAnimated = false;
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach((entry) => {
+				if (entry.isIntersecting && !hasAnimated) {
+					hasAnimated = true;
+					const values = getCountdownValues();
+					const cards = document.querySelectorAll('.countdown__card');
+
+					cards.forEach((card, i) => {
+						const unit = (card as HTMLElement).dataset.unit as keyof ReturnType<typeof getCountdownValues>;
+						setTimeout(() => flipCard(card, values[unit]), i * 200);
+					});
+
+					observer.disconnect();
+
+					// Start periodic silent updates after animation settles
+					setTimeout(() => {
+						updateValues();
+						setInterval(updateValues, 600);
+					}, 1500);
+				}
+			});
+		},
+		{ threshold: 0.3 }
+	);
+
+	observer.observe(section);
 </script>
 
 <style>
@@ -119,42 +196,103 @@
 		gap: 1rem;
 	}
 
+	/* ── Flip container ── */
 	.countdown__flip {
 		position: relative;
 		width: clamp(140px, 22vw, 280px);
 		height: clamp(120px, 18vw, 230px);
-		border-radius: 16px;
 		overflow: visible;
+		perspective: 600px;
+	}
+
+	/* ── Shared panel / flap base ── */
+	.countdown__panel,
+	.countdown__flap {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 50%;
+		overflow: hidden;
+	}
+
+	.countdown__panel--top,
+	.countdown__flap--top {
+		top: 0;
+		border-radius: 16px 16px 0 0;
+	}
+
+	.countdown__panel--bottom,
+	.countdown__flap--bottom {
+		bottom: 0;
+		border-radius: 0 0 16px 16px;
+	}
+
+	/* ── Value wrap: 200 % tall so the clip halves the number ── */
+	.countdown__val-wrap {
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 200%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 
-	.countdown__flip-top,
-	.countdown__flip-bottom {
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 50%;
-	}
-
-	.countdown__flip-top {
+	.countdown__panel--top .countdown__val-wrap,
+	.countdown__flap--top .countdown__val-wrap {
 		top: 0;
-		border-radius: 16px 16px 0 0;
 	}
 
-	.countdown__flip-bottom {
+	.countdown__panel--bottom .countdown__val-wrap,
+	.countdown__flap--bottom .countdown__val-wrap {
 		bottom: 0;
-		border-radius: 0 0 16px 16px;
 	}
 
-	.countdown__card--blue .countdown__flip-top { background: #7B8DC7; }
-	.countdown__card--blue .countdown__flip-bottom { background: #6B7DB7; }
-	.countdown__card--gold .countdown__flip-top { background: #D4A843; }
-	.countdown__card--gold .countdown__flip-bottom { background: #C49A38; }
-	.countdown__card--red .countdown__flip-top { background: #D16B5E; }
-	.countdown__card--red .countdown__flip-bottom { background: #C15D50; }
+	.countdown__val {
+		font-size: clamp(3.5rem, 9vw, 7rem);
+		font-weight: 700;
+		color: #fff;
+		line-height: 1;
+		letter-spacing: 0.05em;
+	}
 
+	/* ── Z-ordering ── */
+	.countdown__panel--top    { z-index: 1; }
+	.countdown__panel--bottom { z-index: 1; }
+	.countdown__flap--bottom  { z-index: 2; }
+	.countdown__flap--top     { z-index: 3; }
+
+	/* ── Flap 3-D setup ── */
+	.countdown__flap--top {
+		transform-origin: center bottom;
+		backface-visibility: hidden;
+		will-change: transform;
+	}
+
+	.countdown__flap--bottom {
+		transform-origin: center top;
+		transform: rotateX(90deg);
+		backface-visibility: hidden;
+		will-change: transform;
+	}
+
+	/* ── Card colour variants ── */
+	.countdown__card--blue .countdown__panel--top,
+	.countdown__card--blue .countdown__flap--top  { background: #7B8DC7; }
+	.countdown__card--blue .countdown__panel--bottom,
+	.countdown__card--blue .countdown__flap--bottom { background: #6B7DB7; }
+
+	.countdown__card--gold .countdown__panel--top,
+	.countdown__card--gold .countdown__flap--top  { background: #D4A843; }
+	.countdown__card--gold .countdown__panel--bottom,
+	.countdown__card--gold .countdown__flap--bottom { background: #C49A38; }
+
+	.countdown__card--red .countdown__panel--top,
+	.countdown__card--red .countdown__flap--top  { background: #D16B5E; }
+	.countdown__card--red .countdown__panel--bottom,
+	.countdown__card--red .countdown__flap--bottom { background: #C15D50; }
+
+	/* ── Seam & hinges ── */
 	.countdown__seam {
 		position: absolute;
 		top: 50%;
@@ -162,7 +300,7 @@
 		right: 0;
 		height: 2px;
 		background: rgba(0, 0, 0, 0.15);
-		z-index: 2;
+		z-index: 10;
 	}
 
 	.countdown__hinge-left,
@@ -173,10 +311,10 @@
 		width: 14px;
 		height: 20px;
 		border-radius: 3px;
-		z-index: 3;
+		z-index: 11;
 	}
 
-	.countdown__hinge-left { left: -7px; }
+	.countdown__hinge-left  { left: -7px; }
 	.countdown__hinge-right { right: -7px; }
 
 	.countdown__card--blue .countdown__hinge-left,
@@ -184,18 +322,48 @@
 	.countdown__card--gold .countdown__hinge-left,
 	.countdown__card--gold .countdown__hinge-right { background: #A8832E; }
 	.countdown__card--red .countdown__hinge-left,
-	.countdown__card--red .countdown__hinge-right { background: #A04A3E; }
+	.countdown__card--red .countdown__hinge-right  { background: #A04A3E; }
 
-	.countdown__number {
-		position: relative;
-		z-index: 1;
-		font-size: clamp(3rem, 7vw, 5.5rem);
-		font-weight: 700;
-		color: #fff;
-		line-height: 1;
-		letter-spacing: 0.05em;
+	/* ── Flip keyframes ── */
+	@keyframes flipTop {
+		0%   { transform: rotateX(0deg); }
+		100% { transform: rotateX(-90deg); }
 	}
 
+	@keyframes flipBottom {
+		0%   { transform: rotateX(90deg); }
+		100% { transform: rotateX(0deg); }
+	}
+
+	.countdown__flip.is-flipping .countdown__flap--top {
+		animation: flipTop 0.35s cubic-bezier(0.55, 0.05, 0.80, 0.40) forwards;
+	}
+
+	.countdown__flip.is-flipping .countdown__flap--bottom {
+		animation: flipBottom 0.35s cubic-bezier(0.15, 0.70, 0.30, 1.00) 0.3s forwards;
+	}
+
+	/* Subtle shadow on the falling flap */
+	.countdown__flap--top::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: linear-gradient(to bottom, transparent 40%, rgba(0, 0, 0, 0.12));
+		opacity: 0;
+		border-radius: inherit;
+		pointer-events: none;
+	}
+
+	.countdown__flip.is-flipping .countdown__flap--top::after {
+		animation: flapShadow 0.35s ease-in forwards;
+	}
+
+	@keyframes flapShadow {
+		0%   { opacity: 0; }
+		100% { opacity: 1; }
+	}
+
+	/* ── Labels ── */
 	.countdown__label {
 		font-size: clamp(0.875rem, 1.5vw, 1.125rem);
 		font-weight: 700;
@@ -205,8 +373,9 @@
 
 	.countdown__card--blue .countdown__label { color: #6B7DB7; }
 	.countdown__card--gold .countdown__label { color: #C49A38; }
-	.countdown__card--red .countdown__label { color: #C15D50; }
+	.countdown__card--red  .countdown__label { color: #C15D50; }
 
+	/* ── Mobile ── */
 	@media (max-width: 520px) {
 		.countdown__cards {
 			gap: 0.75rem;
@@ -215,15 +384,16 @@
 		.countdown__flip {
 			width: clamp(90px, 15vw, 196px);
 			height: clamp(80px, 13vw, 161px);
-			border-radius: 10px;
 		}
 
-		.countdown__number {
-			font-size: clamp(1.5rem, 4vw, 3.85rem);
+		.countdown__val {
+			font-size: clamp(2rem, 5vw, 4.5rem);
 		}
 
-		.countdown__flip-top { border-radius: 10px 10px 0 0; }
-		.countdown__flip-bottom { border-radius: 0 0 10px 10px; }
+		.countdown__panel--top,
+		.countdown__flap--top  { border-radius: 10px 10px 0 0; }
+		.countdown__panel--bottom,
+		.countdown__flap--bottom { border-radius: 0 0 10px 10px; }
 
 		.countdown__hinge-left,
 		.countdown__hinge-right {
@@ -231,7 +401,7 @@
 			height: 14px;
 		}
 
-		.countdown__hinge-left { left: -5px; }
+		.countdown__hinge-left  { left: -5px; }
 		.countdown__hinge-right { right: -5px; }
 	}
 </style>
