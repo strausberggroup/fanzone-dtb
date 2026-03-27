@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fanzone.dtnbur.com/sitemap-index.xml

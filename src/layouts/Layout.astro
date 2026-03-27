@@ -3,9 +3,12 @@ import CookieBanner from '../components/CookieBanner.astro';
 
 interface Props {
 	title: string;
+	description?: string;
 }
 
-const { title } = Astro.props;
+const { title, description = 'Join Downtown Burbank\'s official FIFA World Cup 2026 Fan Zone — free live match screenings, food, music, cultural programming, and interactive experiences for fans of all ages.' } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/fanzone-social.jpg', Astro.site);
 ---
 
 <html lang="en">
@@ -20,7 +23,28 @@ const { title } = Astro.props;
 		<meta name="msapplication-config" content="/favicons/browserconfig.xml" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
+
+		<!-- SEO -->
 		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonicalURL} />
+
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalURL} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:locale" content="en_US" />
+
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImage} />
+
+		<!-- Theme color -->
+		<meta name="theme-color" content="#1a1a2e" />
 	</head>
 	<body>
 		<slot />
