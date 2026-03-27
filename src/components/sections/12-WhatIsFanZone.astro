@@ -1,5 +1,6 @@
 ---
 import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
+import volunteerPhoto from '../../assets/images/12-what-is-fanzone/world-cup-football.webp';
 ---
 
 <section class="what-is">
@@ -11,6 +12,20 @@ import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
 		<div class="what-is__content">
 			<h2 class="what-is__heading">What is a Fan Zone?</h2>
 			<p class="what-is__text">A <strong>Los Angeles World Cup 26 Fan Zone</strong> is a special event where fans from around the world come together to celebrate the excitement of the World Cup. It's the ultimate place outside the stadiums to watch matches live while enjoying sports-themed activities, music, cultural programming, interactive experiences, and food that reflects the diversity of Los Angeles.</p>
+		</div>
+	</div>
+</section>
+
+<section class="what-is">
+	<div class="what-is__inner what-is__inner--flipped">
+		<div class="what-is__content">
+			<h2 class="what-is__heading what-is__heading--red">Volunteer with FIFA</h2>
+			<p class="what-is__text">Be part of the Downtown Burbank World Cup 2026 Fan Zone and help bring this global celebration to life. Looking to get even more involved? FIFA offers additional volunteer opportunities across the tournament for those wanting a broader, behind-the-scenes experience.</p>
+			<a href="https://inside.fifa.com/tournament-organisation/volunteers" target="_blank" rel="noopener noreferrer" class="what-is__btn">Join the FIFA Volunteer Community</a>
+		</div>
+
+		<div class="what-is__image">
+			<img src={volunteerPhoto.src} alt="FIFA World Cup trophy and soccer ball on a grass field" width="500" height="400" />
 		</div>
 	</div>
 </section>
@@ -61,7 +76,35 @@ import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
 		line-height: 1.7;
 		color: var(--color-dark);
 		margin: 0;
-		font-wrap: pretty;
+		text-wrap: pretty;
+	}
+
+	.what-is__inner--flipped {
+		flex-direction: row;
+	}
+
+	.what-is__heading--red {
+		color: var(--color-coral);
+	}
+
+	.what-is__btn {
+		display: inline-block;
+		margin-top: 1.5rem;
+		padding: 0.75rem 1.75rem;
+		background-color: var(--color-coral);
+		color: #fff;
+		font-family: var(--font-family);
+		font-size: clamp(0.75rem, 1.1vw, 14px);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		text-decoration: none;
+		border-radius: 4px;
+		transition: background-color 0.2s;
+	}
+
+	.what-is__btn:hover {
+		filter: brightness(1.1);
 	}
 
 	@media (max-width: 768px) {
@@ -76,6 +119,9 @@ import photo from '../../assets/images/12-what-is-fanzone/fanzone-info.jpg';
 		.what-is__image {
 			flex: none;
 			width: 100%;
+		}
+		.what-is__inner--flipped {
+			flex-direction: column-reverse;
 		}
 		.what-is__text {
 			font-size: 14px;
