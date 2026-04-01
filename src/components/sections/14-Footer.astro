@@ -16,8 +16,7 @@
 				<h3 class="gform_title">Join Our Newsletter</h3>
 				<p class="gform_description">Sign up for our email newsletter to be the first to know about discounts, deals, and special events.</p>
 			</div>
-			<form action="https://dtnbur.us1.list-manage.com/subscribe/post?u=d39a40a7ee8f8f205b752e8bb&id=c16760089d"
-				method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank" novalidate>
+			<form id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" novalidate>
 				<!-- Mailchimp bot signup prevention -->
 				<div aria-hidden="true" style="position: absolute; left: -5000px;">
 					<input type="text" name="b_d39a40a7ee8f8f205b752e8bb_c16760089d" tabindex="-1" value="" />
@@ -27,9 +26,9 @@
 					<ul class="gform_fields">
 						<!-- Name -->
 						<li class="gfield">
-							<label class="gfield_label" for="mce-FNAME">Name</label>
+							<label class="gfield_label" for="mce-NAME">Name</label>
 							<div class="ginput_container">
-								<input name="FNAME" id="mce-FNAME" type="text" value="" placeholder="Name" />
+								<input name="NAME" id="mce-NAME" type="text" value="" placeholder="Name" />
 							</div>
 						</li>
 						<!-- Email -->
@@ -47,14 +46,15 @@
 							</div>
 						</li>
 						<!-- Zip Code -->
-						<li class="gfield">
+						<!-- <li class="gfield">
 							<label class="gfield_label" for="mce-MMERGE3">Zip Code</label>
 							<div class="ginput_container">
 								<input name="MMERGE3" id="mce-MMERGE3" type="text" value="" placeholder="Zip Code" />
 							</div>
-						</li>
+						</li> -->
 					</ul>
 				</div>
+				<div id="mc-response" class="mc-response" style="display:none;"></div>
 				<div class="gform-footer gform_footer">
 					<input type="submit" name="subscribe" class="gform_button button" value="Sign Up Today" />
 				</div>
@@ -589,7 +589,171 @@
 		align-items: center;
 	}
 
+	/* Newsletter response message */
+	.mc-response {
+		padding: 12px 50px;
+		font-size: 0.9rem;
+		line-height: 1.4;
+		text-align: center;
+	}
+
+	@media (max-width: 1000px) {
+		.mc-response {
+			padding-left: 5vw;
+			padding-right: 5vw;
+		}
+	}
+
+	.mc-response.mc-success {
+		display: flex!important;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 40px 30px;
+		min-height: 280px;
+		text-align: center;
+	}
+
+	.mc-response.mc-success :global(.mc-success-icon) {
+		width: 56px;
+		height: 56px;
+		background: #f15b5b;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-bottom: 20px;
+		animation: mc-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+	}
+
+	.mc-response.mc-success :global(.mc-success-icon svg) {
+		width: 28px;
+		height: 28px;
+	}
+
+	.mc-response.mc-success :global(.mc-success-title) {
+		font-size: 1.4rem;
+		font-weight: bold;
+		color: #1f2431;
+		margin-bottom: 8px;
+	}
+
+	.mc-response.mc-success :global(.mc-success-text) {
+		font-size: 0.95rem;
+		color: #666;
+		max-width: 300px;
+	}
+
+	@keyframes mc-pop {
+		0% { transform: scale(0); opacity: 0; }
+		100% { transform: scale(1); opacity: 1; }
+	}
+
+	.mc-response.mc-error {
+		color: #c62828;
+	}
+
 </style>
+
+<script>
+	function initNewsletterForm() {
+		const form = document.getElementById('mc-embedded-subscribe-form') as HTMLFormElement | null;
+		if (!form) return;
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+
+			const responseEl = document.getElementById('mc-response')!;
+			const submitBtn = form.querySelector('input[type="submit"]') as HTMLInputElement;
+			const originalText = submitBtn.value;
+
+			// Basic email validation
+			const email = (form.querySelector('#mce-EMAIL') as HTMLInputElement).value;
+			if (!email) {
+				responseEl.textContent = 'Please enter your email address.';
+				responseEl.className = 'mc-response mc-error';
+				responseEl.style.display = 'block';
+				return;
+			}
+
+			submitBtn.value = 'Sending...';
+			submitBtn.disabled = true;
+			responseEl.style.display = 'none';
+
+			const formData = new FormData(form);
+			const params = new URLSearchParams(formData as any).toString();
+			const url = 'https://dtnbur.us1.list-manage.com/subscribe/post-json?u=d39a40a7ee8f8f205b752e8bb&id=c16760089d&' + params;
+
+			try {
+				// Mailchimp's post-json endpoint supports JSONP; use it to avoid CORS issues
+				const data = await new Promise<{result: string; msg: string}>((resolve, reject) => {
+					const callbackName = 'mc_callback_' + Date.now();
+					const script = document.createElement('script');
+
+					(window as any)[callbackName] = (data: any) => {
+						delete (window as any)[callbackName];
+						script.remove();
+						resolve(data);
+					};
+
+					script.onerror = () => {
+						delete (window as any)[callbackName];
+						script.remove();
+						reject(new Error('Network error'));
+					};
+
+					// Timeout after 10s
+					setTimeout(() => {
+						if ((window as any)[callbackName]) {
+							delete (window as any)[callbackName];
+							script.remove();
+							reject(new Error('Request timed out'));
+						}
+					}, 10000);
+
+					script.src = url + '&c=' + callbackName;
+					document.body.appendChild(script);
+				});
+
+				if (data.result === 'success') {
+					responseEl.innerHTML = `
+						<div class="mc-success-icon">
+							<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+								<polyline points="20 6 9 17 4 12"/>
+							</svg>
+						</div>
+						<div class="mc-success-title">You're In!</div>
+						<div class="mc-success-text">Thanks for subscribing. Keep an eye on your inbox for the latest from Downtown Burbank.</div>
+					`;
+					responseEl.className = 'mc-response mc-success';
+					// Hide form fields and submit button
+					form.querySelector('.gform_body')!.style.display = 'none';
+					form.querySelector('.gform_footer')!.style.display = 'none';
+					form.reset();
+				} else {
+					// Strip any HTML links Mailchimp adds
+					const cleanMsg = data.msg.replace(/<a\b[^>]*>(.*?)<\/a>/gi, '$1');
+					responseEl.textContent = cleanMsg;
+					responseEl.className = 'mc-response mc-error';
+				}
+			} catch {
+				responseEl.textContent = 'Something went wrong. Please try again.';
+				responseEl.className = 'mc-response mc-error';
+			}
+
+			responseEl.style.display = 'block';
+			submitBtn.value = originalText;
+			submitBtn.disabled = false;
+		});
+	}
+
+	document.addEventListener('astro:page-load', initNewsletterForm);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initNewsletterForm);
+	} else {
+		initNewsletterForm();
+	}
+</script>
 
 <script>
 	function initBackArrow() {
