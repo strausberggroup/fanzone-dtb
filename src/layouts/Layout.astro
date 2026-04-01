@@ -48,7 +48,7 @@ const ogImage = new URL('/images/fanzone-social.jpg', Astro.site);
 	</head>
 	<body>
 		<slot />
-		<!-- <CookieBanner /> -->
+		<CookieBanner />
 		<script>
 			// Strip hash from URL so shared links don't jump to anchors
 			if (window.location.hash) {

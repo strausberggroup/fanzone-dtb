@@ -51,6 +51,7 @@
 	function hideBanner() {
 		const banner = document.getElementById('cookie-banner');
 		if (banner) {
+			(document.activeElement as HTMLElement)?.blur();
 			banner.classList.remove('cookie-banner--visible');
 			banner.setAttribute('aria-hidden', 'true');
 		}
@@ -64,25 +65,39 @@
 		}
 	}
 
-	// Init
+	function removeGA4() {
+		document.querySelectorAll('script[src*="googletagmanager.com/gtag"]').forEach(el => el.remove());
+		(window as any).dataLayer = undefined;
+		// Remove GA cookies
+		document.cookie.split(';').forEach(c => {
+			const name = c.trim().split('=')[0];
+			if (name.startsWith('_ga') || name.startsWith('_gid')) {
+				document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+				document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/; domain=.dtnbur.com`;
+			}
+		});
+	}
+
+	// Init — CCPA opt-out: load GA by default, show banner if no choice made yet
 	const consent = getConsent();
 
-	if (consent === 'accepted') {
+	if (consent !== 'declined') {
 		loadGA4();
-	} else if (!consent) {
-		// Small delay so it slides in after page load
+	}
+
+	if (!consent) {
 		setTimeout(showBanner, 500);
 	}
 
 	document.getElementById('cookie-accept')?.addEventListener('click', () => {
 		setConsent('accepted');
 		hideBanner();
-		loadGA4();
 	});
 
 	document.getElementById('cookie-decline')?.addEventListener('click', () => {
 		setConsent('declined');
 		hideBanner();
+		removeGA4();
 	});
 </script>
 
