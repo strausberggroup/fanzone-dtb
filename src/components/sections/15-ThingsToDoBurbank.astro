@@ -1,0 +1,109 @@
+---
+import wildKong from '../../assets/images/15-things-to-do-burbank/img2.jpg';
+import howlingWolf from '../../assets/images/15-things-to-do-burbank/img1.jpg';
+---
+
+<section class="things-to-do">
+	<div class="things-to-do__inner">
+		<div class="things-to-do__content">
+			<p class="things-to-do__eyebrow">Things to Do While You Are Here</p>
+			<h2 class="things-to-do__heading">Richard Orlinski <br />Art on Display</h2>
+			<p class="things-to-do__text">Experience art on a larger-than-life scale at the Los Angeles World Cup 26 Fan Zone. Internationally renowned artist Richard Orlinski brings his iconic sculptures &ldquo;Wild Kong&rdquo; and &ldquo;Howling Wolf&rdquo; to the event&mdash;bold, striking pieces that add an unforgettable cultural moment to the excitement.</p>
+			<p class="things-to-do__text">Be sure to stop by, snap a photo, and take in these dynamic works while enjoying the festivities.</p>
+		</div>
+
+		<div class="things-to-do__gallery">
+			<img src={wildKong.src} alt="Richard Orlinski's red Wild Kong sculpture on a city sidewalk" width="600" height="800" loading="lazy" />
+			<img src={howlingWolf.src} alt="Richard Orlinski's blue Howling Wolf sculpture framed by palm trees" width="600" height="800" loading="lazy" />
+		</div>
+	</div>
+</section>
+
+<style>
+	.things-to-do {
+		background-color: var(--color-cream);
+		padding: 5rem 2rem;
+	}
+
+	.things-to-do__inner {
+		max-width: 1150px;
+		margin: 0 auto;
+		display: flex;
+		align-items: center;
+		gap: 4rem;
+	}
+
+	.things-to-do__content {
+		flex: 1;
+	}
+
+	.things-to-do__eyebrow {
+		font-family: var(--font-family);
+		font-size: clamp(0.8rem, 1vw, 0.95rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.15em;
+		color: var(--color-purple);
+		margin: 0 0 0.75rem;
+	}
+
+	.things-to-do__heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.75rem, 3.5vw, 45px);
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 1.1;
+		color: var(--color-coral);
+		margin: 0 0 1.25rem;
+	}
+
+	.things-to-do__text {
+		font-family: var(--font-family);
+		font-size: 16px;
+		font-weight: 400;
+		line-height: 1.6;
+		color: var(--color-dark);
+		margin: 0 0 1rem;
+	}
+
+	.things-to-do__text:last-child {
+		margin-bottom: 0;
+	}
+
+	.things-to-do__gallery {
+		flex: 0 0 46%;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1rem;
+	}
+
+	.things-to-do__gallery img {
+		width: 100%;
+		height: 100%;
+		aspect-ratio: 3 / 4;
+		object-fit: cover;
+		border-radius: 16px;
+		display: block;
+	}
+
+	@media (max-width: 768px) {
+		.things-to-do {
+			padding: 3rem 1.5rem;
+		}
+
+		.things-to-do__inner {
+			flex-direction: column-reverse;
+			gap: 2rem;
+		}
+
+		.things-to-do__gallery {
+			flex: none;
+			width: 100%;
+			gap: 0.75rem;
+		}
+
+		.things-to-do__text {
+			font-size: 14px;
+		}
+	}
+</style>
