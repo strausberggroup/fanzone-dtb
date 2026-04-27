@@ -12,7 +12,59 @@ import photo from '../../assets/images/11-stay-here/hotel-interior.jpg';
 		<div class="stay-here__content">
 			<h2 class="stay-here__heading">Stay Where the Action Is</h2>
 			<p class="stay-here__text">Stay steps from the celebration at one of Burbank's<br />hotels and make a full weekend of it.</p>
-			<a href="https://dtnbur.com/stay/?utm_source=fanzone&utm_medium=website&utm_campaign=fanzone-dtb" target="_blank" rel="noopener noreferrer" class="stay-here__btn">View Hotels &amp; Book Your Stay<span class="sr-only"> (opens in new window)</span></a>
+
+			<form
+				class="stay-here__booking"
+				action="https://reservations.visitburbank.com/hotel/list/8215"
+				method="get"
+				target="_blank"
+			>
+				<div class="stay-here__field stay-here__field--date">
+					<label class="sr-only" for="stay-checkin">Check In</label>
+					<input
+						type="date"
+						id="stay-checkin"
+						name="Search[checkInDate]"
+						required
+						aria-label="Check in date"
+					/>
+				</div>
+				<div class="stay-here__field stay-here__field--date">
+					<label class="sr-only" for="stay-checkout">Check Out</label>
+					<input
+						type="date"
+						id="stay-checkout"
+						name="Search[checkOutDate]"
+						required
+						aria-label="Check out date"
+					/>
+				</div>
+				<div class="stay-here__field stay-here__field--select">
+					<label class="sr-only" for="stay-adults">Adults</label>
+					<select id="stay-adults" name="Search[numberOfAdults]" aria-label="Adults">
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+						<option value="4">Four</option>
+					</select>
+				</div>
+				<div class="stay-here__field stay-here__field--select">
+					<label class="sr-only" for="stay-children">Children</label>
+					<select id="stay-children" name="Search[numberOfChildren]" aria-label="Children">
+						<option value="0">None</option>
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+						<option value="4">Four</option>
+						<option value="5">Five</option>
+					</select>
+				</div>
+				<input type="hidden" name="Search[numberOfRooms]" value="1" />
+				<input type="hidden" name="Search[hotelRegion]" value="m3288" />
+				<button type="submit" class="stay-here__submit">
+					Submit<span class="sr-only"> (opens in new window)</span>
+				</button>
+			</form>
 		</div>
 	</div>
 </section>
@@ -83,8 +135,104 @@ import photo from '../../assets/images/11-stay-here/hotel-interior.jpg';
 		opacity: 0.95;
 	}
 
-	.stay-here__btn {
-		display: inline-block;
+	.stay-here__booking {
+		background-color: white;
+		border-radius: 12px;
+		padding: 1.5rem 1.75rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		gap: 1.25rem;
+		max-width: 900px;
+		margin: 1.5rem auto 0;
+		text-align: left;
+		box-shadow: 0 6px 24px rgba(0, 0, 0, 0.08);
+	}
+
+	.stay-here__field {
+		flex: 1 1 140px;
+		min-width: 0;
+		position: relative;
+	}
+
+	.stay-here__field input,
+	.stay-here__field select {
+		width: 100%;
+		font-family: var(--font-family);
+		font-size: 16px;
+		color: #2b2b2b;
+		background: transparent;
+		border: 0;
+		border-bottom: 1px solid #1a1a1a;
+		border-radius: 0;
+		padding: 0.5rem 0;
+		box-sizing: border-box;
+		min-height: 2.25rem;
+	}
+
+	.stay-here__field select {
+		appearance: none;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+	}
+
+	.stay-here__field input[type="date"] {
+		appearance: none;
+		-webkit-appearance: none;
+		display: block;
+		min-height: 2.25rem;
+		line-height: 1.25;
+	}
+
+	.stay-here__field input[type="date"]::-webkit-calendar-picker-indicator {
+		cursor: pointer;
+		opacity: 0.6;
+		filter: invert(0.2);
+	}
+
+	.stay-here__field input[type="date"]::-webkit-calendar-picker-indicator:hover {
+		opacity: 1;
+	}
+
+	.stay-here__field input[type="date"]::-webkit-date-and-time-value {
+		text-align: left;
+	}
+
+	.stay-here__field input::placeholder {
+		color: #b0b0b0;
+		opacity: 1;
+	}
+
+	.stay-here__field input:focus,
+	.stay-here__field select:focus {
+		outline: none;
+		border-bottom-color: var(--color-coral);
+	}
+
+	.stay-here__field--select {
+		flex: 1 1 100px;
+	}
+
+	.stay-here__field--select::after {
+		content: "";
+		position: absolute;
+		right: 0.25rem;
+		top: 50%;
+		width: 10px;
+		height: 10px;
+		border-right: 2px solid #2b2b2b;
+		border-bottom: 2px solid #2b2b2b;
+		transform: translateY(-75%) rotate(45deg);
+		pointer-events: none;
+	}
+
+	.stay-here__field--select select {
+		padding-right: 1.5rem;
+		cursor: pointer;
+	}
+
+	.stay-here__submit {
+		flex: 0 0 auto;
 		background-color: var(--color-coral);
 		color: white;
 		font-family: var(--font-family);
@@ -92,13 +240,15 @@ import photo from '../../assets/images/11-stay-here/hotel-interior.jpg';
 		font-weight: 700;
 		text-transform: uppercase;
 		letter-spacing: 0.1em;
-		padding: 0.75rem 2.5rem;
+		padding: 0.85rem 2rem;
+		border: 0;
 		border-radius: 4px;
-		text-decoration: none;
+		cursor: pointer;
 		transition: filter 0.3s;
+		align-self: flex-end;
 	}
 
-	.stay-here__btn:hover {
+	.stay-here__submit:hover {
 		filter: brightness(1.1);
 	}
 
@@ -127,9 +277,19 @@ import photo from '../../assets/images/11-stay-here/hotel-interior.jpg';
 		.stay-here__text br{
 			display: none;
 		}
-		.stay-here__btn {
+		.stay-here__booking {
+			padding: 1.25rem 1.25rem 1.5rem;
+			gap: 1rem;
+			flex-direction: column;
+			align-items: stretch;
+		}
+		.stay-here__field {
+			flex: 1 1 auto;
+		}
+		.stay-here__submit {
 			font-size: 13px;
-			padding: 0.75rem 1.75rem;
+			padding: 0.85rem 1.75rem;
+			width: 100%;
 		}
 
 	}
