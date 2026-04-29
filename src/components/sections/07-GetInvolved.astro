@@ -1,5 +1,8 @@
 ---
 import photo from '../../assets/images/07-get-involved/people-walking-outside-fair.jpg';
+import cityOfBurbankLogo from '../../assets/images/07-get-involved/city-of-burbank.svg';
+import visitBurbankLogo from '../../assets/images/07-get-involved/visit-burbank.svg';
+import wbStudioTourLogo from '../../assets/images/07-get-involved/WB_StudioTour_Hollywood_LOGO_RGBDigital_horizontal_outlineShield_lightBkg.png';
 ---
 
 <section class="get-involved">
@@ -12,6 +15,21 @@ import photo from '../../assets/images/07-get-involved/people-walking-outside-fa
 			<p class="get-involved__text">Interested in becoming a sponsor or vendor at this exciting Los Angeles World Cup 26 Fan Zone at Downtown Burbank? Join us in bringing this high-energy experience to life and connect with thousands of attendees.</p>
 			<a href="/images/DownTown-Burbank-Vendor-Flyer-World-Cup-FanZone.png" class="get-involved__button" aria-label="Download Interest Form" target="_blank">Download Interest Form</a>
 		</div>
+	</div>
+
+	<div class="get-involved__sponsors">
+		<h3 class="get-involved__sponsors-heading">City of Burbank Soccer Watch Party Sponsors</h3>
+		<ul class="get-involved__sponsors-list">
+			<li class="get-involved__sponsor">
+				<img src={wbStudioTourLogo.src} alt="Warner Bros. Studio Tour Hollywood" loading="lazy" />
+			</li>
+			<li class="get-involved__sponsor">
+				<img src={cityOfBurbankLogo.src} alt="City of Burbank" loading="lazy" />
+			</li>
+			<li class="get-involved__sponsor">
+				<img src={visitBurbankLogo.src} class="vb" alt="Visit Burbank" loading="lazy" />
+			</li>
+		</ul>
 	</div>
 </section>
 
@@ -84,6 +102,52 @@ import photo from '../../assets/images/07-get-involved/people-walking-outside-fa
 		filter: brightness(1.15);
 	}
 
+	.get-involved__sponsors {
+		max-width: 925px;
+		margin: 3.5rem auto 0;
+		text-align: center;
+	}
+
+	.get-involved__sponsors-heading {
+		font-size: clamp(1.125rem, 2vw, 1.5rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		color: var(--color-dark);
+		margin-top: 1rem;
+	}
+
+	.get-involved__sponsors-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: 3rem;
+	}
+
+	.get-involved__sponsor {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 0 1 auto;
+	}
+
+	.get-involved__sponsor img {
+		display: block;
+		/* max-height: 70px; */
+		width: auto;
+		max-width: 220px;
+		object-fit: contain;
+	}
+	.get-involved__sponsor img.vb {
+		max-height: 60px;
+		filter: brightness(0)
+
+	}
+
 	@media (max-width: 768px) {
 
 		.get-involved{
@@ -111,6 +175,23 @@ import photo from '../../assets/images/07-get-involved/people-walking-outside-fa
 		.get-involved__button {
 			font-size: 13px;
 			padding: 0.75rem 1.75rem;
+		}
+
+		.get-involved__sponsors {
+			margin-top: 2.5rem;
+		}
+
+		.get-involved__sponsors-heading {
+			margin-bottom: 1.5rem;
+		}
+
+		.get-involved__sponsors-list {
+			gap: 2rem 2.5rem;
+		}
+
+		.get-involved__sponsor img {
+			max-height: 56px;
+			max-width: 160px;
 		}
 	}
 </style>
