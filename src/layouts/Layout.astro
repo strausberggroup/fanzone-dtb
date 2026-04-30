@@ -6,7 +6,7 @@ interface Props {
 	description?: string;
 }
 
-const { title, description = 'Join Downtown Burbank\'s official FIFA World Cup 2026 Fan Zone — free live match screenings, food, music, cultural programming, and interactive experiences for fans of all ages.' } = Astro.props;
+const { title, description = 'Join Downtown Burbank\'s official FIFA World Cup 2026™ Fan Zone — free live match screenings, food, music, cultural programming, and interactive experiences for fans of all ages.' } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const ogImage = new URL('/images/fanzone-social.jpg', Astro.site);
 ---
