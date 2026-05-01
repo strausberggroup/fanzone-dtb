@@ -31,6 +31,14 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 					Elevated culinary and wine pairings
 				</li>
 			</ul>
+			<a
+				href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=vip-cta&utm_campaign=worldcup26"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="vip__button"
+			>
+				Get VIP Tickets
+			</a>
 		</div>
 	</div>
 </section>
@@ -97,6 +105,25 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 		height: auto;
 	}
 
+	.vip__button {
+		display: inline-block;
+		margin-top: 1.5rem;
+		padding: 0.875rem 2rem;
+		background-color: var(--color-coral);
+		color: #fff;
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 0.8125rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		transition: filter 0.3s;
+	}
+
+	.vip__button:hover {
+		filter: brightness(1.1);
+	}
+
 	@media (max-width: 768px) {
 		.vip {
 			padding: 3rem 2rem 1rem;
@@ -118,6 +145,9 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 		}
 		.vip__check {
 			width: 20px;
+		}
+		.vip__button {
+			font-size: 13px;
 		}
 	}
 

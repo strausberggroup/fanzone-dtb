@@ -18,7 +18,15 @@
 		</div>
 
 		<div class="about__newsletter">
-			<a href="#footer_form" class="about__button">Sign Up for updates</a>
+			<a
+				href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=about-cta&utm_campaign=worldcup26"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="about__button"
+			>
+				Get Tickets
+			</a>
+			<a href="#footer_form" class="about__button about__button--secondary">Sign Up for updates</a>
 		</div>
 	</div>
 </section>
@@ -77,6 +85,11 @@
 		max-width: 780px;
 		margin: 0 auto;
 		padding-top: 1rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 1rem;
+		flex-wrap: wrap;
 	}
 
 	.about__button {
@@ -98,6 +111,19 @@
 
 	.about__button:hover {
 		filter: brightness(1.1);
+	}
+
+	.about__button--secondary {
+		background-color: transparent;
+		color: var(--color-coral);
+		border: 2px solid var(--color-coral);
+		padding: calc(1rem - 2px) calc(2.5rem - 2px);
+	}
+
+	.about__button--secondary:hover {
+		background-color: var(--color-coral);
+		color: #fff;
+		filter: none;
 	}
 	@media (max-width: 768px) {
 		.about {

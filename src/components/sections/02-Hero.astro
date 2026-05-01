@@ -10,6 +10,14 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		<div class="hero__left">
 			<img src={logoImg.src} alt="Los Angeles World Cup 26 Fan Zone at Downtown Burbank" class="hero__logo" width="620" />
 			<p class="hero__dates">July 18 | 12pm - 8pm<br />July 19 | 10am - 6pm</p>
+			<a
+				href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=hero-cta&utm_campaign=worldcup26"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="hero__cta"
+			>
+				Get Tickets
+			</a>
 		</div>
 		<div class="hero__right">
 			<img src={heroPhoto.src} alt="Downtown Burbank street fair crowd on Olive Avenue" class="hero__photo" width="570" />
@@ -258,6 +266,26 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		padding-left: 0.25em;
 	}
 
+	.hero__cta {
+		display: inline-block;
+		margin-top: 1.5rem;
+		padding: 1rem 2.5rem;
+		background-color: white;
+		color: var(--color-coral);
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 1.125rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		transition: transform 0.2s, filter 0.2s;
+	}
+
+	.hero__cta:hover {
+		transform: translateY(-2px);
+		filter: brightness(1.05);
+	}
+
 	.hero__right {
 		flex-shrink: 0;
 		width: 570px;
@@ -293,6 +321,11 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		.hero__dates {
 			font-size: 28px;
 			padding-left: 0;
+		}
+
+		.hero__cta {
+			font-size: 1rem;
+			padding: 0.875rem 2rem;
 		}
 	}
 </style>
