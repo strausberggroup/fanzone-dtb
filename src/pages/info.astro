@@ -1,0 +1,1461 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/sections/01-Header.astro';
+import Footer from '../components/sections/14-Footer.astro';
+import checkInPhoto from '../assets/images/13-be-part-of-action/group-stroll.jpg';
+import culinaryPhoto from '../assets/images/10-dine-drink/friends-laughing-dinner.jpg';
+
+const ticketUrl = 'https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=info-cta&utm_campaign=worldcup26';
+
+const accessRows = [
+	{
+		ticket: 'Culinary Experience',
+		color: 'coral',
+		cells: ['✓', '✓', '—', '—', '—'],
+	},
+	{
+		ticket: 'Passport Lounge',
+		color: 'blue',
+		cells: ['✓', '—', '✓ (all 3)', '—', '—'],
+	},
+	{
+		ticket: 'Concert Experience + GA Watch Party',
+		color: 'purple',
+		cells: ['✓', '—', '—', '✓', '—'],
+	},
+	{
+		ticket: 'GA Watch Party',
+		color: 'pink',
+		cells: ['✓', '—', '—', '—', '✓'],
+	},
+];
+
+const accessCols = [
+	'International Street Fair',
+	'Culinary Terrace',
+	'Passport Lounges',
+	'Concert Watch Party',
+	'GA Watch Party',
+];
+
+const checkIns = [
+	{
+		color: 'coral',
+		name: 'Culinary Experience with Celebrity Chef Geoffrey Zakarian',
+		address: '201 E. Magnolia Blvd.',
+		note: 'Enter on the escalator at the intersection of Magnolia Blvd. and San Fernando Blvd.',
+	},
+	{
+		color: 'blue',
+		name: 'Passport Lounges',
+		address: 'Three locations — check in at any of them:',
+		list: [
+			'#1 (Orange Grove North) — 209 E. Orange Grove Ave.',
+			'#2 (Orange Grove South) — 198 E. Orange Grove Ave.',
+			'#3 (San Fernando) — 100 S. San Fernando Blvd.',
+		],
+	},
+	{
+		color: 'purple',
+		name: 'Concert Experience + GA Watch Party',
+		address: '211 E. Olive Ave.',
+	},
+	{
+		color: 'pink',
+		name: 'General Admission Watch Party',
+		address: '175 E. Olive Ave.',
+	},
+];
+
+const faqs = [
+	{
+		q: 'What are the hours?',
+		a: `<p>Saturday, July 18: 12 PM – 8 PM<br />Sunday, July 19: 10 AM – 6 PM</p>`,
+	},
+	{
+		q: 'Does my ticket include the concert?',
+		a: `
+			<p>Only the <strong>Concert Experience + GA Watch Party</strong> ticket includes access to the live concert on Olive Ave. north of San Fernando Blvd. (entrance near 211 E. Olive Ave.). Concert capacity is limited — book early if this matters to you.</p>
+			<ul>
+				<li><strong>GA Watch Party</strong> — concert is live-streamed to the big screen in your area on Olive Ave. south of San Fernando Blvd.</li>
+				<li><strong>Passport Lounge</strong> and <strong>Culinary Experience</strong> — no concert access (live or streaming) without a separate ticket.</li>
+			</ul>
+		`,
+	},
+	{
+		q: 'Which ticket should I choose?',
+		a: `
+			<ul>
+				<li><strong>Culinary Experience with Celebrity Chef Geoffrey Zakarian</strong> — best for a premium, limited-capacity experience with food, drinks, lounge seating, and live match viewing.</li>
+				<li><strong>Passport Lounge</strong> — ideal if you want to explore multiple themed lounges and move around.</li>
+				<li><strong>Concert Experience + GA Watch Party</strong> — the full experience: match plus live concert.</li>
+				<li><strong>GA Watch Party</strong> — the most affordable way to join the main fan atmosphere.</li>
+			</ul>
+			<p>If you want the concert, make sure you select the <strong>Concert Experience + GA Watch Party</strong> ticket.</p>
+		`,
+	},
+	{
+		q: "What's included in the Culinary Experience?",
+		a: `
+			<p>Culinary Experience guests enjoy a fully elevated experience:</p>
+			<ul>
+				<li>Unlimited food + drink pairings (Sat. July 18: 12 PM – 3 PM | Sun. July 19: 10 AM – 1 PM)</li>
+				<li>Live cooking demo by Celebrity Chef Geoffrey Zakarian</li>
+				<li>Private terrace with seating, shade, and premium match viewing with full sound</li>
+				<li>Both alcoholic and non-alcoholic beverages are included</li>
+				<li>Vegan/vegetarian options are not guaranteed — additional food is available for purchase outside the Culinary Experience Terrace</li>
+				<li>After 3 PM Saturday and 1 PM Sunday, a full bar remains open with drinks for purchase</li>
+			</ul>
+			<p>This is the only ticket that includes food and beverage.</p>
+		`,
+	},
+	{
+		q: 'Will there be seating?',
+		a: `
+			<ul>
+				<li><strong>Culinary Experience &amp; Passport Lounges</strong> — lounge-style communal seating, first come, first served.</li>
+				<li><strong>GA Watch Party</strong> — communal seating available, but not guaranteed.</li>
+			</ul>
+			<p>Arriving early is the best way to secure a preferred spot.</p>
+		`,
+	},
+	{
+		q: 'When should I arrive?',
+		a: `
+			<ul>
+				<li>Arrive early for the best viewing locations, especially for GA tickets.</li>
+				<li>Culinary Experience guests should arrive closer to 12 PM on Saturday and 10 AM on Sunday to enjoy the full experience.</li>
+			</ul>
+			<p>Late arrival is allowed, but premium spots may be taken.</p>
+		`,
+	},
+	{
+		q: 'Can I leave and come back?',
+		a: `<p>Yes — in &amp; outs are allowed with your wristband. Just make sure you don't remove or lose your wristband, or re-entry will not be permitted.</p>`,
+	},
+	{
+		q: 'Can I upgrade my ticket?',
+		a: `<p>Limited upgrades may be available at the entrance to each area, while supplies last. For the best experience, we recommend purchasing the ticket you want in advance.</p>`,
+	},
+	{
+		q: 'Where should I park?',
+		a: `<p>There is no designated event parking, but there are multiple nearby garages and lots in Downtown Burbank. We recommend arriving early to allow time for parking and walking to your check-in location. See the <a href="https://dtnbur.com/parking/" target="_blank" rel="noopener noreferrer">Downtown Burbank parking map</a> for details.</p>`,
+	},
+	{
+		q: 'Will food and drinks be available?',
+		a: `
+			<ul>
+				<li><strong>Culinary Experience</strong> — included (Saturday: 12 PM – 3 PM | Sunday: 10 AM – 1 PM).</li>
+				<li><strong>All other tickets</strong> — food and beverages available for purchase. See the event map for food locations.</li>
+			</ul>
+			<p>No outside alcohol is permitted.</p>
+		`,
+	},
+	{
+		q: 'Is the event all ages?',
+		a: `
+			<p>Yes, but:</p>
+			<ul>
+				<li>You must be 21+ with valid ID to enter the Culinary Experience Terrace.</li>
+				<li>You must be 21+ with valid ID to purchase alcohol.</li>
+			</ul>
+		`,
+	},
+	{
+		q: 'What happens if it rains?',
+		a: `<p>The event is rain or shine and all sales are final.</p>`,
+	},
+	{
+		q: 'What do I need to enter?',
+		a: `
+			<ul>
+				<li>A valid, scannable ticket — no screenshots.</li>
+				<li>Check in at your assigned location to receive your wristband.</li>
+				<li><strong>Culinary Experience only</strong> — 21+ with valid ID.</li>
+			</ul>
+		`,
+	},
+	{
+		q: 'Can I access other areas of the event?',
+		a: `
+			<p>All ticket holders can enjoy the International Street Fair and Activations on San Fernando Blvd. between Magnolia Blvd. and Olive Ave. Access to the Culinary Experience, Passport Lounges, and Watch Party areas depends on your ticket type.</p>
+			<p>Passport Lounge ticket holders can move freely between all three Passport Lounges. General Admission Watch Party ticket holders (with and without the Concert Experience) have designated Watch Party areas — you cannot enter the other GA Watch Party area without purchasing a separate ticket.</p>
+		`,
+	},
+	{
+		q: 'Is my ticket valid for both Saturday and Sunday?',
+		a: `<p>Your ticket is valid for one day only. To attend both days, you need to purchase separate tickets. If you can't attend on the day you purchased, the ticket cannot be used on another day.</p>`,
+	},
+	{
+		q: 'Will there be security checkpoints?',
+		a: `<p>The Los Angeles World Cup 26 Fan Zone at Downtown Burbank will have a large security and police presence. All guests entering the area are subject to bag checks and metal detector screening.</p>`,
+	},
+	{
+		q: "What's the overall experience like?",
+		a: `
+			<p>Expect a high-energy, festival-style World Cup celebration with:</p>
+			<ul>
+				<li>Massive LED screens and full sound</li>
+				<li>Thousands of fans</li>
+				<li>Food, drinks, activations, and an International Street Fair throughout Downtown Burbank</li>
+			</ul>
+			<p>This is designed to be a historic, memorable, city-wide event.</p>
+		`,
+	},
+];
+---
+
+<Layout title="Know Before You Go | Fan Zone at Downtown Burbank" description="Hours, parking, check-in, ticket access, game schedule, FAQs and rules for the Los Angeles World Cup 26 Fan Zone at Downtown Burbank, July 18–19.">
+	<Header />
+
+	<div class="info-buffer"></div>
+
+	<section class="info-hero">
+		<div class="info-hero__inner">
+			<p class="info-hero__eyebrow">Los Angeles World Cup 26 Fan Zone at Downtown Burbank</p>
+			<h1 class="info-hero__title">Know Before You Go</h1>
+			<p class="info-hero__dates">Saturday, July 18 · 12 PM – 8 PM<br />Sunday, July 19 · 10 AM – 6 PM</p>
+		</div>
+	</section>
+
+	<main class="info-main">
+
+		<!-- Hours & Location: solid coral block -->
+		<section id="info" class="hours">
+			<div class="hours__inner">
+				<div class="hours__cell">
+					<p class="hours__label">Saturday, July 18</p>
+					<p class="hours__value">12 PM – 8 PM</p>
+					<p class="hours__note">Bronze Final</p>
+				</div>
+				<div class="hours__cell">
+					<p class="hours__label">Sunday, July 19</p>
+					<p class="hours__value">10 AM – 6 PM</p>
+					<p class="hours__note">World Cup Final</p>
+				</div>
+				<div class="hours__cell">
+					<p class="hours__label">Where</p>
+					<p class="hours__value">Downtown Burbank</p>
+					<p class="hours__note">San Fernando Blvd. between Magnolia Blvd. and Angeleno Ave.</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Parking -->
+		<section id="parking" class="info-section">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading">Parking</h2>
+				<p>There is no designated parking area for this event. See the City of Burbank's parking map for all nearby lots and structures. The red "Paid Street Parking" sections on the map will not be available during the event.</p>
+				<p>We recommend arriving early to allow time for parking and walking to your check-in location.</p>
+				<p class="info-section__cta-row">
+					<a href="https://dtnbur.com/parking/" target="_blank" rel="noopener noreferrer" class="info-button info-button--outline">Parking Map &amp; Directions<span class="sr-only"> (opens in new window)</span></a>
+				</p>
+			</div>
+		</section>
+
+		<!-- Check-In: photo banner + 2x2 saturated cards -->
+		<section id="check-in" class="info-section">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading">Check-In</h2>
+				<p>Each ticket level has a different outdoor check-in location. Your tickets and order confirmation will tell you which location to use. <strong>You must check in at your assigned location</strong> — you cannot check in at the other locations within the Fan Zone. Passport Lounge ticket holders can check in at any of the three Passport Lounge locations.</p>
+
+				<div class="check-in__photo">
+					<img src={checkInPhoto.src} alt="Fans walking through Downtown Burbank" width="1150" />
+				</div>
+
+				<div class="check-in__grid">
+					{checkIns.map(c => (
+						<div class={`check-in__card check-in__card--${c.color}`}>
+							<h3 class="check-in__name">{c.name}</h3>
+							<p class="check-in__address">{c.address}</p>
+							{c.list && (
+								<ul class="check-in__list">
+									{c.list.map(item => <li>{item}</li>)}
+								</ul>
+							)}
+							{c.note && <p class="check-in__note">{c.note}</p>}
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Ticket Access -->
+		<section id="access" class="info-section">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading">Area Access by Ticket Type</h2>
+				<p>All ticket types have access to the <strong>International Street Fair and Activations</strong> on San Fernando Blvd. between Magnolia Blvd. and Olive Ave. Access to the other areas depends on your ticket.</p>
+
+				<div class="access-table-wrap" role="region" aria-label="Ticket access matrix" tabindex="0">
+					<table class="access-table">
+						<thead>
+							<tr>
+								<th scope="col">Ticket</th>
+								{accessCols.map(c => <th scope="col">{c}</th>)}
+							</tr>
+						</thead>
+						<tbody>
+							{accessRows.map(r => (
+								<tr>
+									<th scope="row">{r.ticket}</th>
+									{r.cells.map((cell, i) => {
+										const isNo = cell === '—';
+										return (
+											<td data-label={accessCols[i]}>
+												{isNo ? (
+													<span class="access-mark access-mark--no" aria-label="Not included">—</span>
+												) : (
+													<span class="access-mark-row">
+														<span class="access-mark access-mark--yes" aria-label="Included">✓</span>
+														{cell !== '✓' && <span class="access-mark__extra">{cell.replace('✓ ', '')}</span>}
+													</span>
+												)}
+											</td>
+										);
+									})}
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+
+				<div class="access-cards">
+					{accessRows.map(r => (
+						<div class={`access-card access-card--${r.color}`}>
+							<h3 class="access-card__ticket">{r.ticket}</h3>
+							<ul class="access-card__list">
+								{r.cells.map((cell, i) => (
+									<li class={cell === '—' ? 'access-card__no' : 'access-card__yes'}>
+										<span class="access-card__mark" aria-hidden="true">{cell}</span>
+										<span>{accessCols[i]}</span>
+									</li>
+								))}
+							</ul>
+						</div>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Map: full-bleed, no caption -->
+		<section class="info-map" aria-label="Fan Zone layout map">
+			<div class="info-map__inner">
+				<img src="/images/dtb-map.webp" alt="Fan Zone layout map for the Los Angeles World Cup 26 Fan Zone at Downtown Burbank. The International Street Fair runs along San Fernando Blvd. between Magnolia Blvd. and Olive Ave. The Culinary Experience Terrace sits at Burbank Town Center on Magnolia Blvd. Three Passport Lounges sit on Orange Grove Ave. and San Fernando Blvd. The Concert Experience + GA Watch Party occupies Olive Ave. north of San Fernando Blvd., and the General Admission Watch Party occupies Olive Ave. south of San Fernando Blvd." width="1440" />
+			</div>
+		</section>
+
+		<!-- Games: two big saturated cards -->
+		<section id="games" class="info-section">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading">Guide to the Games</h2>
+				<div class="games__grid">
+					<article class="game-card game-card--blue">
+						<p class="game-card__day">Saturday, July 18</p>
+						<h3 class="game-card__title">Bronze Final</h3>
+						<p class="game-card__teams">Teams TBD by tournament play</p>
+						<dl class="game-card__schedule">
+							<div><dt>Event Hours</dt><dd>12 PM – 8 PM</dd></div>
+							<div><dt>Pregame</dt><dd>1:00 PM PST</dd></div>
+							<div><dt>Kick Off</dt><dd>2:00 PM PST</dd></div>
+						</dl>
+					</article>
+					<article class="game-card game-card--coral">
+						<p class="game-card__day">Sunday, July 19</p>
+						<h3 class="game-card__title">World Cup Final</h3>
+						<p class="game-card__teams">Teams TBD by tournament play</p>
+						<dl class="game-card__schedule">
+							<div><dt>Event Hours</dt><dd>10 AM – 6 PM</dd></div>
+							<div><dt>Pregame</dt><dd>10:00 AM PST</dd></div>
+							<div><dt>Kick Off</dt><dd>12:00 PM PST</dd></div>
+							<div><dt>Half-Time Show</dt><dd>15–20 minutes</dd></div>
+						</dl>
+					</article>
+				</div>
+			</div>
+		</section>
+
+		<!-- Programming: photo + saturated blocks side-by-side -->
+		<section id="programming" class="info-section">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading">Culinary Experience &amp; Post-Match Concert</h2>
+
+				<div class="programming__layout">
+					<div class="programming__photo">
+						<img src={culinaryPhoto.src} alt="Friends sharing a meal" width="500" />
+					</div>
+					<div class="programming__blocks">
+						<article class="programming-block programming-block--purple">
+							<h3 class="programming-block__title">Culinary Experience with Celebrity Chef Geoffrey Zakarian</h3>
+							<p class="programming-block__hours"><strong>Saturday:</strong> 12 PM – 3 PM &nbsp;·&nbsp; <strong>Sunday:</strong> 10 AM – 1 PM</p>
+							<p>Live cooking demonstration and unlimited food and drink pairings curated by the chef on our Culinary Experience Terrace overlooking Downtown Burbank, with lounge seating, cocktail tables, and shade. Includes a large LED screen with full sound for the ultimate match viewing experience. After 3 PM on Saturday and 1 PM on Sunday, the Culinary Experience Terrace remains open with a full bar for you to enjoy the remainder of the match.</p>
+						</article>
+
+						<article class="programming-block programming-block--coral">
+							<h3 class="programming-block__title">Post-Match Concert</h3>
+							<p>After the final whistle, a live concert by a nationally touring artist (to be announced) takes the stage in the Watch Party area on Olive Ave. north of San Fernando Blvd. (enter at 211 E. Olive Ave.). You must have the <strong>Concert Experience + GA Watch Party</strong> ticket to enter this area — tickets are limited.</p>
+							<p>The concert will also be live-streamed to the big screen in the other Watch Party area on Olive Ave. south of San Fernando Blvd. (enter at 175 E. Olive Ave.).</p>
+						</article>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- FAQs -->
+		<section id="faqs" class="info-section info-section--tan">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading info-section__heading--blue">FAQs</h2>
+				<p>Common questions about access, food, hours, and the concert.</p>
+				<div class="faqs">
+					{faqs.map(f => (
+						<details class="faq">
+							<summary class="faq__q">
+								<span>{f.q}</span>
+								<span class="faq__arrow" aria-hidden="true">→</span>
+							</summary>
+							<div class="faq__a" set:html={f.a}></div>
+						</details>
+					))}
+				</div>
+			</div>
+		</section>
+
+		<!-- Rules -->
+		<section id="rules" class="info-section">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading info-section__heading--purple">Rules</h2>
+				<p>Event rules and prohibited items — please read before you arrive.</p>
+
+				<div class="rules">
+					<p>There are absolutely <strong>no refunds</strong> for any reason and this event is rain or shine.</p>
+					<p>In &amp; outs are permitted as long as you have a Fan Zone-issued wristband, which you receive when you check in. If your wristband is lost or removed, you will not be able to re-enter the Passport Lounges or Watch Party areas without purchasing another ticket.</p>
+					<p>No alcohol is allowed outside of the Culinary Experience Terrace, the Passport Lounges, or the General Admission Watch Party areas.</p>
+					<p>You must have a valid, government-issued ID to purchase alcohol or to enter the Culinary Experience Terrace.</p>
+					<p>You must provide valid, scannable tickets to enter the Culinary Experience Terrace, the Passport Lounges, or the General Admission Watch Party areas. Screenshots are not considered valid.</p>
+				</div>
+
+				<div class="prohibited">
+					<div class="prohibited__col prohibited__col--pink">
+						<h3 class="prohibited__heading">Prohibited Activities</h3>
+						<ul>
+							<li>Moshing</li>
+							<li>Crowd surfing</li>
+							<li>Stage diving</li>
+							<li>Nudity or exposed body parts (prohibited under California County Code §32.1002)</li>
+						</ul>
+					</div>
+					<div class="prohibited__col prohibited__col--blue">
+						<h3 class="prohibited__heading">Prohibited Items</h3>
+						<ul>
+							<li>Weapons or firearms, including pocket knives (including off-duty law enforcement)</li>
+							<li>Cans, bottles, glass containers, or coolers</li>
+							<li>CamelBaks or hydration bladders</li>
+							<li>Illegal drugs or drug paraphernalia</li>
+							<li>Professional photo or video recording equipment</li>
+							<li>Skateboards, bicycles, or motorized vehicles</li>
+							<li>Footballs, baseballs, frisbees, or playing catch</li>
+							<li>Gang-related colors or insignia</li>
+							<li>Drones</li>
+							<li>Fireworks or explosives</li>
+							<li>Laser pointers or selfie sticks</li>
+							<li>Stickers, flyers, or unauthorized solicitations</li>
+							<li>Pets — prohibited in the Culinary Experience Terrace, Passport Lounges, and Watch Party areas. Service animals permitted under ADA regulations.</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Bottom CTA: coral with animated dot canvas (mirrors Hero) -->
+		<section class="info-cta">
+			<canvas id="info-cta-dots" class="info-cta__canvas"></canvas>
+			<div class="info-cta__inner">
+				<h2 class="info-cta__heading">Ready to Join Us?</h2>
+				<p class="info-cta__text">Pick your ticket and secure your spot at the Los Angeles World Cup 26 Fan Zone at Downtown Burbank.</p>
+				<a href={ticketUrl} target="_blank" rel="noopener noreferrer" class="info-cta__btn">Get Tickets</a>
+			</div>
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<script>
+	function initCtaDots() {
+		const canvas = document.getElementById('info-cta-dots') as HTMLCanvasElement;
+		if (!canvas) return;
+		const ctx = canvas.getContext('2d');
+		if (!ctx) return;
+
+		const BG = '#FF5252';
+		const DOT_COLOR = '#f63d59';
+		const RING_COLOR = '#fb9765';
+		const DOT_RADIUS = 10;
+		const RING_THICKNESS = 6;
+		const SPACING = 60;
+
+		let cols = 0;
+		let rows = 0;
+		let animId: number;
+
+		function resize() {
+			const section = canvas.parentElement!;
+			const dpr = window.devicePixelRatio || 1;
+			const w = section.offsetWidth;
+			const h = section.offsetHeight;
+			canvas.width = w * dpr;
+			canvas.height = h * dpr;
+			canvas.style.width = w + 'px';
+			canvas.style.height = h + 'px';
+			ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+			cols = Math.ceil(w / SPACING) + 1;
+			rows = Math.ceil(h / SPACING) + 1;
+		}
+
+		interface Pulse {
+			cx: number;
+			cy: number;
+			birth: number;
+			duration: number;
+			reach: number;
+		}
+
+		const pulses: Pulse[] = [];
+		const PULSE_INTERVAL = 3000;
+		const PULSE_DURATION = 4500;
+		const PULSE_REACH = 350;
+		let lastPulseTime = -PULSE_INTERVAL;
+
+		function spawnPulse(time: number) {
+			pulses.push({
+				cx: 0.1 + Math.random() * 0.8,
+				cy: 0.1 + Math.random() * 0.8,
+				birth: time,
+				duration: PULSE_DURATION + Math.random() * 1500,
+				reach: PULSE_REACH + Math.random() * 100,
+			});
+			while (pulses.length > 4) {
+				pulses.shift();
+			}
+		}
+
+		function draw(time: number) {
+			const w = canvas.clientWidth;
+			const h = canvas.clientHeight;
+
+			ctx!.fillStyle = BG;
+			ctx!.fillRect(0, 0, w, h);
+
+			if (time - lastPulseTime > PULSE_INTERVAL) {
+				spawnPulse(time);
+				lastPulseTime = time;
+			}
+
+			const offsetX = ((w % SPACING) / 2);
+			const offsetY = ((h % SPACING) / 2);
+
+			for (let r = 0; r < rows; r++) {
+				for (let c = 0; c < cols; c++) {
+					const x = offsetX + c * SPACING;
+					const y = offsetY + r * SPACING;
+
+					let bestAlpha = 0;
+					let bestScale = 1;
+
+					for (const p of pulses) {
+						const age = time - p.birth;
+						if (age < 0 || age > p.duration) continue;
+
+						const pcx = p.cx * w;
+						const pcy = p.cy * h;
+						const dist = Math.sqrt((x - pcx) ** 2 + (y - pcy) ** 2);
+
+						if (dist > p.reach) continue;
+
+						const proximity = 1 - dist / p.reach;
+						const progress = age / p.duration;
+						const breathe = Math.sin(progress * Math.PI);
+
+						const alpha = proximity * breathe;
+						if (alpha > bestAlpha) {
+							bestAlpha = alpha;
+							bestScale = 1 + 0.6 * alpha;
+						}
+					}
+
+					if (bestAlpha > 0.05) {
+						const dotR = DOT_RADIUS * bestScale;
+						const ringR = dotR + RING_THICKNESS * bestAlpha;
+
+						ctx!.beginPath();
+						ctx!.arc(x, y, dotR + (ringR - dotR) / 2, 0, Math.PI * 2);
+						ctx!.strokeStyle = RING_COLOR;
+						ctx!.globalAlpha = bestAlpha;
+						ctx!.lineWidth = ringR - dotR;
+						ctx!.stroke();
+						ctx!.globalAlpha = 1;
+
+						ctx!.beginPath();
+						ctx!.arc(x, y, dotR, 0, Math.PI * 2);
+						ctx!.fillStyle = DOT_COLOR;
+						ctx!.fill();
+					} else {
+						ctx!.beginPath();
+						ctx!.arc(x, y, DOT_RADIUS, 0, Math.PI * 2);
+						ctx!.fillStyle = DOT_COLOR;
+						ctx!.fill();
+					}
+				}
+			}
+
+			lastDrawTime = time;
+			animId = requestAnimationFrame(draw);
+		}
+
+		let lastDrawTime = 0;
+
+		const section = canvas.parentElement!;
+		const ro = new ResizeObserver(() => {
+			resize();
+			draw(lastDrawTime);
+		});
+		ro.observe(section);
+
+		resize();
+
+		const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		if (prefersReducedMotion) {
+			draw(0);
+			cancelAnimationFrame(animId!);
+		} else {
+			let isVisible = false;
+			const io = new IntersectionObserver(([entry]) => {
+				isVisible = entry.isIntersecting;
+				if (isVisible) {
+					animId = requestAnimationFrame(draw);
+				} else {
+					cancelAnimationFrame(animId);
+				}
+			}, { threshold: 0 });
+			io.observe(section);
+		}
+	}
+
+	document.addEventListener('astro:page-load', initCtaDots);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initCtaDots);
+	} else {
+		initCtaDots();
+	}
+</script>
+
+<style>
+	.info-buffer {
+		height: 90px;
+		background-color: var(--color-coral);
+	}
+
+	@media (max-width: 960px) {
+		.info-buffer { height: 75px; }
+	}
+
+	/* ---------- Hero ---------- */
+	.info-hero {
+		background-color: var(--color-coral);
+		color: #fff;
+		padding: 3rem 2rem 5rem;
+		text-align: center;
+	}
+
+	.info-hero__inner {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.info-hero__eyebrow {
+		font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		margin-bottom: 0.85rem;
+		opacity: 0.92;
+	}
+
+	.info-hero__title {
+		font-size: clamp(2.25rem, 6.5vw, 72px);
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 1;
+		margin-bottom: 1.25rem;
+	}
+
+	.info-hero__dates {
+		font-size: clamp(1.05rem, 2vw, 22px);
+		font-weight: 700;
+		line-height: 1.5;
+	}
+
+	/* offset anchor jumps for sticky global header */
+	.info-section,
+	.hours,
+	.info-map,
+	.info-cta {
+		scroll-margin-top: 100px;
+	}
+
+	@media (max-width: 768px) {
+		.info-section,
+		.hours,
+		.info-map,
+		.info-cta { scroll-margin-top: 90px; }
+	}
+
+	/* ---------- Hours block (solid coral, festival-poster) ---------- */
+	.info-main {
+		background: var(--color-cream);
+	}
+
+	.hours {
+		background: var(--color-coral);
+		color: #fff;
+		padding: 3.5rem 2rem;
+	}
+
+	.hours__inner {
+		max-width: 1150px;
+		margin: 0 auto;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1.4fr;
+		gap: 0;
+	}
+
+	.hours__cell {
+		padding: 0 2rem;
+		border-left: 2px solid rgba(255, 255, 255, 0.5);
+	}
+
+	.hours__cell:first-child {
+		padding-left: 0;
+		border-left: none;
+	}
+
+	.hours__cell:last-child {
+		padding-right: 0;
+	}
+
+	.hours__label {
+		font-size: 0.85rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		opacity: 0.9;
+		margin-bottom: 0.5rem;
+	}
+
+	.hours__value {
+		font-size: clamp(1.4rem, 2.5vw, 1.75rem);
+		font-weight: 700;
+		line-height: 1.1;
+		margin-bottom: 0.4rem;
+	}
+
+	.hours__note {
+		font-size: 0.95rem;
+		font-weight: 700;
+		opacity: 0.9;
+		line-height: 1.4;
+	}
+
+	@media (max-width: 768px) {
+		.hours { padding: 2.5rem 1.5rem; }
+		.hours__inner {
+			grid-template-columns: 1fr;
+			gap: 1.25rem;
+		}
+		.hours__cell {
+			padding: 1.25rem 0 0;
+			border-left: none;
+			border-top: 2px solid rgba(255, 255, 255, 0.5);
+		}
+		.hours__cell:first-child {
+			padding-top: 0;
+			border-top: none;
+		}
+	}
+
+	/* ---------- Info sections (cream by default) ---------- */
+	.info-section {
+		background: var(--color-cream);
+		padding: 4.5rem 2rem;
+	}
+
+	.info-section--tan {
+		background: var(--color-tan);
+	}
+
+	.info-section__inner {
+		max-width: 1150px;
+		margin: 0 auto;
+	}
+
+	.info-section__heading {
+		font-size: clamp(1.75rem, 4vw, 40px);
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--color-coral);
+		margin-bottom: 1rem;
+		line-height: 1.05;
+	}
+
+	.info-section__heading--blue { color: var(--color-blue); }
+	.info-section__heading--purple { color: var(--color-purple); }
+
+	.info-section p {
+		font-size: 17px;
+		line-height: 1.7;
+		color: var(--color-dark);
+		margin-bottom: 1rem;
+		max-width: 70ch;
+	}
+
+	.info-section a:not(.info-button):not(.info-cta__btn) {
+		color: var(--color-coral);
+		text-decoration: underline;
+	}
+
+	.info-section__cta-row {
+		margin-top: 1.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.info-section { padding: 3rem 1.5rem; }
+	}
+
+	/* ---------- Buttons ---------- */
+	.info-button {
+		display: inline-block;
+		padding: 0.875rem 2rem;
+		background-color: var(--color-coral);
+		color: #fff !important;
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 0.875rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		text-decoration: none !important;
+		transition: filter 0.3s;
+	}
+
+	.info-button:hover { filter: brightness(1.1); }
+
+	.info-button--outline {
+		background: transparent;
+		color: var(--color-coral) !important;
+		border: 2px solid var(--color-coral);
+		padding: calc(0.875rem - 2px) calc(2rem - 2px);
+	}
+
+	.info-button--outline:hover {
+		background: var(--color-coral);
+		color: #fff !important;
+		filter: none;
+	}
+
+	/* ---------- Check-In ---------- */
+	.check-in__photo {
+		margin: 1.75rem 0 1.5rem;
+		border-radius: 16px;
+		overflow: hidden;
+		aspect-ratio: 21/9;
+	}
+
+	.check-in__photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.check-in__grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 1.25rem;
+	}
+
+	.check-in__card {
+		border-radius: 16px;
+		padding: 1.75rem 1.75rem 1.5rem;
+		color: #fff;
+	}
+
+	.check-in__card--coral { background: var(--color-coral); }
+	.check-in__card--blue { background: var(--color-blue); }
+	.check-in__card--purple { background: var(--color-purple); }
+	.check-in__card--pink { background: var(--color-pink); }
+
+	.check-in__name {
+		font-size: 1.15rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin-bottom: 0.6rem;
+		line-height: 1.2;
+	}
+
+	.check-in__address {
+		font-size: 1.05rem !important;
+		font-weight: 700;
+		color: #fff !important;
+		margin-bottom: 0.5rem !important;
+		max-width: none !important;
+	}
+
+	.check-in__list {
+		list-style: none;
+		padding: 0;
+		margin: 0.5rem 0 0;
+	}
+
+	.check-in__list li {
+		font-size: 0.98rem;
+		line-height: 1.5;
+		padding: 0.2rem 0;
+		opacity: 0.95;
+	}
+
+	.check-in__note {
+		font-size: 0.95rem !important;
+		line-height: 1.5 !important;
+		margin-top: 0.65rem !important;
+		margin-bottom: 0 !important;
+		color: #fff !important;
+		opacity: 0.9;
+		max-width: none !important;
+	}
+
+	@media (max-width: 768px) {
+		.check-in__grid { grid-template-columns: 1fr; }
+		.check-in__photo { aspect-ratio: 4/3; }
+	}
+
+	/* ---------- Access Table ---------- */
+	.access-table-wrap {
+		margin: 1.75rem 0;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+		border-radius: 16px;
+		background: #fff;
+		box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+	}
+
+	.access-table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: 1rem;
+		min-width: 720px;
+	}
+
+	.access-table th,
+	.access-table td {
+		padding: 1rem 1.1rem;
+		text-align: center;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+	}
+
+	.access-table thead th {
+		background: var(--color-coral);
+		color: #fff;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		font-size: 0.85rem;
+	}
+
+	.access-table tbody th {
+		text-align: left;
+		font-weight: 700;
+		color: var(--color-dark);
+	}
+
+	.access-table tbody tr:last-child th,
+	.access-table tbody tr:last-child td {
+		border-bottom: none;
+	}
+
+	.access-mark {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		font-weight: 700;
+		font-size: 1rem;
+		line-height: 1;
+		flex-shrink: 0;
+	}
+
+	.access-mark--yes {
+		background: var(--color-green);
+		color: #fff;
+	}
+
+	.access-mark--no {
+		background: rgba(0, 0, 0, 0.06);
+		color: #aaa;
+		font-weight: 400;
+	}
+
+	.access-mark-row {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	.access-mark__extra {
+		font-size: 0.95rem;
+		font-weight: 700;
+		color: var(--color-dark);
+	}
+
+	/* Mobile cards: solid colored, white text */
+	.access-cards { display: none; }
+
+	.access-card {
+		border-radius: 16px;
+		padding: 1.5rem 1.75rem;
+		margin-bottom: 1rem;
+		color: #fff;
+	}
+
+	.access-card--coral { background: var(--color-coral); }
+	.access-card--blue { background: var(--color-blue); }
+	.access-card--purple { background: var(--color-purple); }
+	.access-card--pink { background: var(--color-pink); }
+
+	.access-card__ticket {
+		font-size: 1.1rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin-bottom: 0.85rem;
+	}
+
+	.access-card__list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.access-card__list li {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		font-size: 0.98rem;
+		font-weight: 700;
+		padding: 0.4rem 0;
+	}
+
+	.access-card__mark {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 1.5rem;
+		font-weight: 700;
+	}
+
+	.access-card__no {
+		opacity: 0.55;
+		font-weight: 400;
+	}
+
+	@media (max-width: 720px) {
+		.access-table-wrap { display: none; }
+		.access-cards { display: block; margin-top: 1.75rem; }
+	}
+
+	/* ---------- Map (full-bleed) ---------- */
+	.info-map {
+		background: #f5f5f5;
+		padding: 4rem 2rem;
+	}
+
+	.info-map__inner {
+		max-width: 1250px;
+		margin: 0 auto;
+	}
+
+	.info-map__inner img {
+		width: 100%;
+		height: auto;
+	}
+
+	@media (max-width: 768px) {
+		.info-map { padding: 2.5rem 1.5rem; }
+	}
+
+	/* ---------- Games (two big saturated cards) ---------- */
+	.games__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.25rem;
+		margin-top: 1.75rem;
+	}
+
+	.game-card {
+		border-radius: 16px;
+		padding: 2.25rem 2rem;
+		color: #fff;
+	}
+
+	.game-card--blue { background: var(--color-blue); }
+	.game-card--coral { background: var(--color-coral); }
+
+	.game-card__day {
+		font-size: 0.9rem !important;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		opacity: 0.92;
+		margin-bottom: 0.4rem !important;
+		color: #fff !important;
+		max-width: none !important;
+	}
+
+	.game-card__title {
+		font-size: clamp(1.5rem, 3vw, 2rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		margin-bottom: 0.55rem;
+		line-height: 1.05;
+	}
+
+	.game-card__teams {
+		font-size: 0.95rem !important;
+		font-style: italic;
+		margin-bottom: 1.5rem !important;
+		opacity: 0.9;
+		color: #fff !important;
+		max-width: none !important;
+	}
+
+	.game-card__schedule {
+		display: grid;
+		gap: 0;
+		margin: 0;
+	}
+
+	.game-card__schedule > div {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.7rem 0;
+		border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+	}
+
+	.game-card__schedule > div:last-child {
+		border-bottom: none;
+	}
+
+	.game-card__schedule dt {
+		font-weight: 700;
+		font-size: 0.95rem;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		opacity: 0.9;
+	}
+
+	.game-card__schedule dd {
+		font-weight: 700;
+		font-size: 1rem;
+	}
+
+	@media (max-width: 768px) {
+		.games__grid { grid-template-columns: 1fr; }
+		.game-card { padding: 1.75rem 1.5rem; }
+	}
+
+	/* ---------- Programming (photo + saturated blocks) ---------- */
+	.programming__layout {
+		display: grid;
+		grid-template-columns: 5fr 7fr;
+		gap: clamp(2rem, 4vw, 3rem);
+		align-items: start;
+		margin-top: 1.75rem;
+	}
+
+	.programming__photo {
+		border-radius: 16px;
+		overflow: hidden;
+		aspect-ratio: 4/5;
+		position: sticky;
+		top: 100px;
+	}
+
+	.programming__photo img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.programming__blocks {
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+
+	.programming-block {
+		border-radius: 16px;
+		padding: 2rem 2rem 1.75rem;
+		color: #fff;
+	}
+
+	.programming-block--purple { background: var(--color-purple); }
+	.programming-block--coral { background: var(--color-coral); }
+
+	.programming-block__title {
+		font-size: clamp(1.2rem, 1.8vw, 1.4rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		margin-bottom: 0.5rem;
+		line-height: 1.2;
+	}
+
+	.programming-block__hours {
+		font-size: 1rem !important;
+		margin-bottom: 0.85rem !important;
+		opacity: 0.95;
+		color: #fff !important;
+		max-width: none !important;
+	}
+
+	.programming-block p {
+		font-size: 1rem !important;
+		line-height: 1.65 !important;
+		color: #fff !important;
+		margin-bottom: 0.75rem !important;
+		opacity: 0.95;
+		max-width: none !important;
+	}
+
+	.programming-block p:last-child {
+		margin-bottom: 0 !important;
+	}
+
+	@media (max-width: 768px) {
+		.programming__layout {
+			grid-template-columns: 1fr;
+		}
+		.programming__photo {
+			aspect-ratio: 16/10;
+			position: static;
+		}
+	}
+
+	/* ---------- FAQs ---------- */
+	.faqs {
+		margin-top: 1.75rem;
+	}
+
+	.faq {
+		background: #fff;
+		border-radius: 12px;
+		margin-bottom: 0.6rem;
+		overflow: hidden;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+	}
+
+	.faq__q {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		gap: 1rem;
+		padding: 1.15rem 1.4rem;
+		font-weight: 700;
+		font-size: 1.05rem;
+		color: var(--color-dark);
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.faq__q::-webkit-details-marker { display: none; }
+
+	.faq__q:hover { background: rgba(92, 142, 202, 0.06); }
+
+	.faq__q:focus-visible {
+		outline: 2px solid var(--color-blue);
+		outline-offset: -2px;
+	}
+
+	.faq__arrow {
+		flex-shrink: 0;
+		font-size: 1.25rem;
+		font-weight: 700;
+		color: var(--color-blue);
+		transition: transform 0.25s ease;
+		display: inline-block;
+		line-height: 1;
+	}
+
+	.faq[open] .faq__arrow {
+		transform: rotate(90deg);
+	}
+
+	.faq__a {
+		padding: 0 1.4rem 1.35rem;
+		color: var(--color-dark);
+		font-size: 1rem;
+		line-height: 1.65;
+	}
+
+	.faq__a :global(p) {
+		margin-bottom: 0.75rem;
+	}
+
+	.faq__a :global(p:last-child) {
+		margin-bottom: 0;
+	}
+
+	.faq__a :global(ul) {
+		padding-left: 1.25rem;
+		margin: 0.5rem 0 0.75rem;
+	}
+
+	.faq__a :global(li) {
+		margin-bottom: 0.45rem;
+	}
+
+	.faq__a :global(a) {
+		color: var(--color-blue);
+		text-decoration: underline;
+	}
+
+	/* ---------- Rules ---------- */
+	.rules {
+		background: #fff;
+		border-radius: 16px;
+		padding: 1.75rem 2rem;
+		margin-top: 1.5rem;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+	}
+
+	.rules p {
+		max-width: none;
+		font-size: 1rem;
+	}
+
+	.rules p:last-child {
+		margin-bottom: 0;
+	}
+
+	.prohibited {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.25rem;
+		margin-top: 1.25rem;
+	}
+
+	.prohibited__col {
+		border-radius: 16px;
+		padding: 1.75rem 2rem;
+		color: #fff;
+	}
+
+	.prohibited__col--pink { background: var(--color-pink); }
+	.prohibited__col--blue { background: var(--color-blue); }
+
+	.prohibited__heading {
+		font-size: 1.1rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-bottom: 1rem;
+	}
+
+	.prohibited ul {
+		padding-left: 1.25rem;
+		margin: 0;
+	}
+
+	.prohibited li {
+		font-size: 0.98rem;
+		line-height: 1.6;
+		margin-bottom: 0.45rem;
+	}
+
+	.prohibited li:last-child {
+		margin-bottom: 0;
+	}
+
+	@media (max-width: 768px) {
+		.prohibited { grid-template-columns: 1fr; }
+		.rules { padding: 1.5rem; }
+		.prohibited__col { padding: 1.5rem; }
+	}
+
+	/* ---------- Bottom CTA (mirrors Hero: coral + animated dot canvas) ---------- */
+	.info-cta {
+		background-color: var(--color-coral);
+		padding: 5rem 2rem 5.5rem;
+		text-align: center;
+		color: #fff;
+		position: relative;
+		overflow: hidden;
+	}
+
+	.info-cta__canvas {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+	}
+
+	.info-cta__inner {
+		max-width: 720px;
+		margin: 0 auto;
+		position: relative;
+		z-index: 1;
+	}
+
+	.info-cta__heading {
+		font-size: clamp(2rem, 5vw, 52px);
+		font-weight: 700;
+		text-transform: uppercase;
+		line-height: 1;
+		margin-bottom: 1rem;
+	}
+
+	.info-cta__text {
+		font-size: clamp(1rem, 1.4vw, 1.1rem) !important;
+		line-height: 1.6 !important;
+		margin: 0 auto 1.75rem !important;
+		max-width: 540px;
+		color: #fff !important;
+	}
+
+	.info-cta__btn {
+		display: inline-block;
+		padding: 1rem 2.5rem;
+		background-color: #fff;
+		color: var(--color-coral) !important;
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 1.05rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		text-decoration: none !important;
+		transition: transform 0.2s, filter 0.2s;
+	}
+
+	.info-cta__btn:hover {
+		transform: translateY(-2px);
+		filter: brightness(1.05);
+	}
+
+	@media (max-width: 768px) {
+		.info-cta { padding: 3.5rem 1.5rem 4rem; }
+	}
+</style>

@@ -50,8 +50,9 @@ const ogImage = new URL('/images/fanzone-social.jpg', Astro.site);
 		<slot />
 		<CookieBanner />
 		<script>
-			// Strip hash from URL so shared links don't jump to anchors
-			if (window.location.hash) {
+			// On the homepage, strip hash from URL so shared links don't jump to anchors.
+			// On other pages (like /info), anchor navigation is intentional — leave it alone.
+			if (window.location.hash && window.location.pathname === '/') {
 				history.replaceState(null, '', window.location.pathname + window.location.search);
 			}
 		</script>
