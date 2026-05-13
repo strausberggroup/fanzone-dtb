@@ -5,6 +5,7 @@ import Footer from '../components/sections/14-Footer.astro';
 import FloatingTicketsCta from '../components/FloatingTicketsCta.astro';
 import checkInPhoto from '../assets/images/13-be-part-of-action/group-stroll.jpg';
 import culinaryPhoto from '../assets/images/10-dine-drink/friends-laughing-dinner.jpg';
+import chefPhoto from '../assets/images/10-dine-drink/chef-zakarian.jpg';
 
 const ticketUrl = 'https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=info-cta&utm_campaign=worldcup26';
 
@@ -414,20 +415,21 @@ const faqs = [
 
 				<div class="programming__layout">
 					<div class="programming__photo">
+						<img src={chefPhoto.src} alt="Celebrity Chef Geoffrey Zakarian" width="500" />
+					</div>
+					<article class="programming-block programming-block--purple">
+						<h3 class="programming-block__title">Culinary Experience with Celebrity Chef Geoffrey Zakarian</h3>
+						<p>Live cooking demonstration and unlimited food and drink pairings curated by the chef on our Culinary Experience Terrace overlooking Downtown Burbank, with lounge seating, cocktail tables, and shade. Tasting hours are Saturday: 12 PM – 3 PM and Sunday: 10 AM – 1 PM. Experience includes a large LED screen with full sound for the ultimate match viewing experience. After 3 PM on Saturday and 1 PM on Sunday, the Culinary Experience Terrace remains open with a full bar for you to enjoy the remainder of the match.</p>
+					</article>
+
+					<div class="programming__photo">
 						<img src={culinaryPhoto.src} alt="Friends sharing a meal" width="500" />
 					</div>
-					<div class="programming__blocks">
-						<article class="programming-block programming-block--purple">
-							<h3 class="programming-block__title">Culinary Experience with Celebrity Chef Geoffrey Zakarian</h3>
-							<p>Live cooking demonstration and unlimited food and drink pairings curated by the chef on our Culinary Experience Terrace overlooking Downtown Burbank, with lounge seating, cocktail tables, and shade. Tasting hours are Saturday: 12 PM – 3 PM and Sunday: 10 AM – 1 PM. Experience includes a large LED screen with full sound for the ultimate match viewing experience. After 3 PM on Saturday and 1 PM on Sunday, the Culinary Experience Terrace remains open with a full bar for you to enjoy the remainder of the match.</p>
-						</article>
-
-						<article class="programming-block programming-block--coral">
-							<h3 class="programming-block__title">Post-Match Concert</h3>
-							<p>After the final whistle, a live concert by a nationally touring artist (to be announced) takes the stage in the Watch Party area on Olive Ave. north of San Fernando Blvd. (enter at 211 E. Olive Ave.). You must have the <strong>Concert Experience + GA Watch Party</strong> ticket to enter this area — tickets are limited.</p>
-							<p>The concert will also be live-streamed to the big screen in the other Watch Party area on Olive Ave. south of San Fernando Blvd. (enter at 175 E. Olive Ave.).</p>
-						</article>
-					</div>
+					<article class="programming-block programming-block--coral">
+						<h3 class="programming-block__title">Post-Match Concert</h3>
+						<p>After the final whistle, a live concert by a nationally touring artist (to be announced) takes the stage in the Watch Party area on Olive Ave. north of San Fernando Blvd. (enter at 211 E. Olive Ave.). You must have the <strong>Concert Experience + GA Watch Party</strong> ticket to enter this area — tickets are limited.</p>
+						<p>The concert will also be live-streamed to the big screen in the other Watch Party area on Olive Ave. south of San Fernando Blvd. (enter at 175 E. Olive Ave.).</p>
+					</article>
 				</div>
 			</div>
 		</section>
@@ -1244,8 +1246,9 @@ const faqs = [
 	/* ---------- Programming (photo + saturated blocks) ---------- */
 	.programming__layout {
 		display: grid;
-		grid-template-columns: 5fr 7fr;
-		gap: clamp(2rem, 4vw, 3rem);
+		grid-template-columns: 3fr 9fr;
+		column-gap: 2rem;
+		row-gap: 2rem;
 		align-items: start;
 		margin-top: 1.75rem;
 	}
@@ -1253,21 +1256,14 @@ const faqs = [
 	.programming__photo {
 		border-radius: 16px;
 		overflow: hidden;
-		aspect-ratio: 4/5;
-		position: sticky;
-		top: 100px;
+		aspect-ratio: 1/1;
 	}
 
 	.programming__photo img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-	}
-
-	.programming__blocks {
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
+		object-position: center 30%;
 	}
 
 	.programming-block {
@@ -1318,10 +1314,6 @@ const faqs = [
 	@media (max-width: 768px) {
 		.programming__layout {
 			grid-template-columns: 1fr;
-		}
-		.programming__photo {
-			aspect-ratio: 16/10;
-			position: static;
 		}
 	}
 
