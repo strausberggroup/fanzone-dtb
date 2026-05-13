@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/sections/01-Header.astro';
 import Footer from '../components/sections/14-Footer.astro';
+import FloatingTicketsCta from '../components/FloatingTicketsCta.astro';
 import checkInPhoto from '../assets/images/13-be-part-of-action/group-stroll.jpg';
 import culinaryPhoto from '../assets/images/10-dine-drink/friends-laughing-dinner.jpg';
 
@@ -142,6 +143,10 @@ const faqs = [
 		a: `<p>There is no designated event parking, but there are multiple nearby garages and lots in Downtown Burbank. We recommend arriving early to allow time for parking and walking to your check-in location. See the <a href="https://dtnbur.com/parking/" target="_blank" rel="noopener noreferrer">Downtown Burbank parking map</a> for details.</p>`,
 	},
 	{
+		q: 'Can I take Metro?',
+		a: `<p>Yes — take the Metrolink AV or VC Line from Union Station and exit Burbank Station.</p>`,
+	},
+	{
 		q: 'Will food and drinks be available?',
 		a: `
 			<ul>
@@ -215,6 +220,7 @@ const faqs = [
 			<p class="info-hero__eyebrow">Los Angeles World Cup 26 Fan Zone at Downtown Burbank</p>
 			<h1 class="info-hero__title">Know Before You Go</h1>
 			<p class="info-hero__dates">Saturday, July 18 · 12 PM – 8 PM<br />Sunday, July 19 · 10 AM – 6 PM</p>
+			<a href={ticketUrl} target="_blank" rel="noopener noreferrer" class="info-hero__btn">Get Tickets</a>
 		</div>
 	</section>
 
@@ -250,6 +256,33 @@ const faqs = [
 				<p class="info-section__cta-row">
 					<a href="https://dtnbur.com/parking/" target="_blank" rel="noopener noreferrer" class="info-button info-button--outline">Parking Map &amp; Directions<span class="sr-only"> (opens in new window)</span></a>
 				</p>
+			</div>
+		</section>
+
+		<!-- Go Metro -->
+		<section id="metro" class="info-section info-section--tight">
+			<div class="info-section__inner">
+				<h2 class="info-section__heading">Go Metro</h2>
+				<p>Take the Metrolink AV or VC Line from Union Station and exit Burbank Station.</p>
+
+				<h3 class="metro__subheading">Metrolink &amp; Train</h3>
+				<p>The Downtown Burbank Station provides convenient regional rail service throughout Southern California via the Antelope Valley and Ventura County Lines.</p>
+				<p>Direct connections include:</p>
+				<ul class="metro__list">
+					<li>Union Station (with transfers to Amtrak and Metro Rail)</li>
+					<li>Glendale</li>
+					<li>Santa Clarita</li>
+					<li>Ventura County</li>
+				</ul>
+				<p>The Metrolink station is within walking distance of Downtown Burbank shops, dining, and entertainment.</p>
+
+				<h3 class="metro__subheading">Bus Service</h3>
+				<p>Downtown Burbank is served by BurbankBus and LA Metro, offering convenient local and regional routes.</p>
+				<ul class="metro__list">
+					<li>BurbankBus connects neighborhoods throughout the City of Burbank.</li>
+					<li>LA Metro connects to North Hollywood, Universal Studios, Union Station, and greater Los Angeles County.</li>
+				</ul>
+				<p>Plan your route at <a href="https://www.metro.net" target="_blank" rel="noopener noreferrer">metro.net</a> or call <a href="tel:+13234636782">(323) GO-METRO</a>.</p>
 			</div>
 		</section>
 
@@ -386,8 +419,7 @@ const faqs = [
 					<div class="programming__blocks">
 						<article class="programming-block programming-block--purple">
 							<h3 class="programming-block__title">Culinary Experience with Celebrity Chef Geoffrey Zakarian</h3>
-							<p class="programming-block__hours"><strong>Saturday:</strong> 12 PM – 3 PM &nbsp;·&nbsp; <strong>Sunday:</strong> 10 AM – 1 PM</p>
-							<p>Live cooking demonstration and unlimited food and drink pairings curated by the chef on our Culinary Experience Terrace overlooking Downtown Burbank, with lounge seating, cocktail tables, and shade. Includes a large LED screen with full sound for the ultimate match viewing experience. After 3 PM on Saturday and 1 PM on Sunday, the Culinary Experience Terrace remains open with a full bar for you to enjoy the remainder of the match.</p>
+							<p>Live cooking demonstration and unlimited food and drink pairings curated by the chef on our Culinary Experience Terrace overlooking Downtown Burbank, with lounge seating, cocktail tables, and shade. Tasting hours are Saturday: 12 PM – 3 PM and Sunday: 10 AM – 1 PM. Experience includes a large LED screen with full sound for the ultimate match viewing experience. After 3 PM on Saturday and 1 PM on Sunday, the Culinary Experience Terrace remains open with a full bar for you to enjoy the remainder of the match.</p>
 						</article>
 
 						<article class="programming-block programming-block--coral">
@@ -475,6 +507,8 @@ const faqs = [
 			</div>
 		</section>
 	</main>
+
+	<FloatingTicketsCta href={ticketUrl} showAfter=".info-hero" hideOn=".info-cta" />
 
 	<Footer />
 </Layout>
@@ -662,7 +696,7 @@ const faqs = [
 	.info-hero {
 		background-color: var(--color-coral);
 		color: #fff;
-		padding: 3rem 2rem 5rem;
+		padding: 3rem 2rem 0rem;
 		text-align: center;
 	}
 
@@ -692,6 +726,27 @@ const faqs = [
 		font-size: clamp(1.05rem, 2vw, 22px);
 		font-weight: 700;
 		line-height: 1.5;
+	}
+
+	.info-hero__btn {
+		display: inline-block;
+		margin-top: 1.75rem;
+		padding: 1rem 2.5rem;
+		background-color: #fff;
+		color: var(--color-coral);
+		border-radius: 8px;
+		font-family: var(--font-family);
+		font-size: 1.05rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		transition: transform 0.2s, filter 0.2s;
+	}
+
+	.info-hero__btn:hover {
+		transform: translateY(-2px);
+		filter: brightness(1.05);
 	}
 
 	/* offset anchor jumps for sticky global header */
@@ -807,7 +862,7 @@ const faqs = [
 	}
 
 	.info-section__heading--blue { color: var(--color-blue); }
-	.info-section__heading--purple { color: var(--color-purple); }
+	.info-section__heading--purple { color: var(--color-pink); }
 
 	.info-section p {
 		font-size: 17px;
@@ -889,7 +944,13 @@ const faqs = [
 
 	.check-in__card--coral { background: var(--color-coral); }
 	.check-in__card--blue { background: var(--color-blue); }
-	.check-in__card--purple { background: var(--color-purple); }
+	.check-in__card--purple {
+		background: #fff;
+		color: #333;
+		border: 2px solid var(--color-purple);
+	}
+	.check-in__card--purple .check-in__address { color: #333 !important; }
+	.check-in__card--purple .check-in__note { color: var(--color-blue) !important; }
 	.check-in__card--pink { background: var(--color-pink); }
 
 	.check-in__name {
@@ -996,7 +1057,7 @@ const faqs = [
 
 	.access-mark--yes {
 		background: var(--color-green);
-		color: #fff;
+		color: var(--color-dark);
 	}
 
 	.access-mark--no {
@@ -1030,7 +1091,11 @@ const faqs = [
 
 	.access-card--coral { background: var(--color-coral); }
 	.access-card--blue { background: var(--color-blue); }
-	.access-card--purple { background: var(--color-purple); }
+	.access-card--purple {
+		background: #fff;
+		color: var(--color-blue);
+		border: 2px solid var(--color-purple);
+	}
 	.access-card--pink { background: var(--color-pink); }
 
 	.access-card__ticket {
@@ -1210,7 +1275,12 @@ const faqs = [
 		color: #fff;
 	}
 
-	.programming-block--purple { background: var(--color-purple); }
+	.programming-block--purple {
+		background: var(--color-pink);
+		color: #fff;
+
+	}
+	.programming-block--purple p { color: var(--color-blue) !important; }
 	.programming-block--coral { background: var(--color-coral); }
 
 	.programming-block__title {
@@ -1457,5 +1527,40 @@ const faqs = [
 
 	@media (max-width: 768px) {
 		.info-cta { padding: 3.5rem 1.5rem 4rem; }
+	}
+
+	/* ---------- Go Metro section ---------- */
+	.info-section--tight {
+		padding-top: 1.5rem;
+		padding-bottom: 1.5rem;
+	}
+
+	@media (max-width: 768px) {
+		.info-section--tight {
+			padding-top: 1rem;
+			padding-bottom: 1rem;
+		}
+	}
+
+	.metro__subheading {
+		font-size: 1.25rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		margin-top: 2rem;
+		margin-bottom: 0.75rem;
+	}
+
+	.metro__list {
+		padding-left: 1.25rem;
+		margin: 0 0 1rem;
+		max-width: 70ch;
+	}
+
+	.metro__list li {
+		font-size: 17px;
+		line-height: 1.7;
+		color: var(--color-dark);
+		margin-bottom: 0.25rem;
 	}
 </style>

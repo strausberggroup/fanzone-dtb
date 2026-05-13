@@ -4,7 +4,7 @@ type Chapter = {
 	href: string;
 	title: string;
 	desc: string;
-	color: 'coral' | 'blue' | 'purple';
+	color: 'coral' | 'blue' | 'pink';
 	bullets: Bullet[];
 	cta: string;
 };
@@ -39,7 +39,7 @@ const chapters: Chapter[] = [
 		href: '/info#rules',
 		title: 'Rules',
 		desc: 'Event rules and prohibited items — please read before you arrive.',
-		color: 'purple',
+		color: 'pink',
 		bullets: [
 			{ label: 'Refund &amp; weather policy' },
 			{ label: 'Wristbands &amp; re-entry' },
@@ -146,7 +146,10 @@ const chapters: Chapter[] = [
 
 	.plan-visit__card--coral { background: var(--color-coral); }
 	.plan-visit__card--blue { background: var(--color-blue); }
-	.plan-visit__card--purple { background: var(--color-purple); }
+	.plan-visit__card--pink {
+		background:var(--color-pink);
+		color: #fff;
+	}
 
 	.plan-visit__title {
 		font-size: clamp(1.5rem, 2.4vw, 1.85rem);

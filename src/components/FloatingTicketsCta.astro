@@ -1,0 +1,142 @@
+---
+export interface Props {
+	href: string;
+	label?: string;
+	showAfter?: string;
+	hideOn?: string;
+}
+
+const { href, label = 'Get Tickets', showAfter = '.hero', hideOn } = Astro.props;
+---
+
+
+	<a
+		href={href}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="floating-cta"
+		aria-hidden="true"
+		tabindex="-1"
+		data-show-after={showAfter}
+		data-hide-on={hideOn}
+	>
+		{label}
+	</a>
+
+<script>
+	function initFloatingCtas() {
+		const ctas = document.querySelectorAll<HTMLAnchorElement>('.floating-cta');
+		ctas.forEach(btn => {
+			const showAfterSel = btn.dataset.showAfter;
+			const hideOnSel = btn.dataset.hideOn;
+			const showAfterEl = showAfterSel ? document.querySelector(showAfterSel) : null;
+			const hideOnEl = hideOnSel ? document.querySelector(hideOnSel) : null;
+			if (!showAfterEl) return;
+
+			let triggerVisible = true;
+			let hideVisible = false;
+
+			function apply() {
+				const shouldShow = !triggerVisible && !hideVisible;
+				btn.classList.toggle('is-visible', shouldShow);
+				btn.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+				btn.setAttribute('tabindex', shouldShow ? '0' : '-1');
+			}
+
+			new IntersectionObserver(([entry]) => {
+				triggerVisible = entry.isIntersecting;
+				apply();
+			}, { threshold: 0 }).observe(showAfterEl);
+
+			if (hideOnEl) {
+				new IntersectionObserver(([entry]) => {
+					hideVisible = entry.isIntersecting;
+					apply();
+				}, { threshold: 0 }).observe(hideOnEl);
+			}
+		});
+	}
+
+	document.addEventListener('astro:page-load', initFloatingCtas);
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', initFloatingCtas);
+	} else {
+		initFloatingCtas();
+	}
+</script>
+
+<style>
+	.floating-cta {
+		position: fixed;
+		bottom: 2.5rem;
+		right: 3rem;
+		z-index: 50;
+		display: inline-flex;
+		align-items: center;
+		padding: 0.95rem 1.75rem;
+		background-color: var(--color-coral);
+		color: #fff;
+		border-radius: 999px;
+		font-family: var(--font-family);
+		font-size: 0.95rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		text-decoration: none;
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+		opacity: 0;
+		transform: translateY(16px);
+		pointer-events: none;
+		transition: opacity 0.25s ease, transform 0.25s ease, filter 0.2s;
+		z-index: 100;
+	}
+
+	/* .floating-cta::after {
+		content: '';
+		position: absolute;
+		inset: -3px;
+		border-radius: inherit;
+		background: conic-gradient(
+			from 0deg,
+			var(--color-coral),
+			var(--color-pink),
+			var(--color-purple),
+			var(--color-blue),
+			var(--color-cyan),
+			var(--color-green),
+			var(--color-coral)
+		);
+		filter: blur(5px);
+		opacity: 0.75;
+		z-index: -1;
+	} */
+
+	.floating-cta.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+
+	.floating-cta:hover {
+		filter: brightness(1.08);
+	}
+
+	@media (max-width: 768px) {
+		.floating-cta {
+			bottom: 1rem;
+			right: 1rem;
+			padding: 0.85rem 1.4rem;
+			font-size: 0.9rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.floating-cta {
+			transition: opacity 0.2s ease;
+			transform: none;
+		}
+		/* .floating-cta::before {
+			animation: none;
+		} */
+	}
+</style>
