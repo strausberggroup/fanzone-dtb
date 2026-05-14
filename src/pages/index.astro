@@ -14,8 +14,12 @@ import StayHere from '../components/sections/11-StayHere.astro';
 import WhatIsFanZone from '../components/sections/12-WhatIsFanZone.astro';
 import BePartOfAction from '../components/sections/13-BePartOfAction.astro';
 import OurMoment from '../components/sections/13b-OurMoment.astro';
+import PlanYourVisit from '../components/sections/13c-PlanYourVisit.astro';
 import ThingsToDoBurbank from '../components/sections/15-ThingsToDoBurbank.astro';
 import Footer from '../components/sections/14-Footer.astro';
+import FloatingTicketsCta from '../components/FloatingTicketsCta.astro';
+
+const ticketUrl = 'https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=floating-cta&utm_campaign=worldcup26';
 ---
 
 <Layout title="FanZone | Downtown Burbank">
@@ -34,5 +38,7 @@ import Footer from '../components/sections/14-Footer.astro';
 	<BePartOfAction />
 	<ThingsToDoBurbank />
 	<OurMoment />
+	<PlanYourVisit />
+	<FloatingTicketsCta href={ticketUrl} showAfter=".hero" hideOn=".footer" />
 	<Footer />
 </Layout>

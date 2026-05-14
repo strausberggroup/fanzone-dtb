@@ -1,11 +1,13 @@
 ---
 import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
+import chefPhoto from '../../assets/images/10-dine-drink/chef-zakarian.jpg';
 ---
 
 <section class="vip">
 	<div class="vip__inner">
 		<div class="vip__image">
-			<img src={photo.src} alt="Bottles of wine on ice at a VIP event" width="500" />
+			<img src={chefPhoto.src} alt="Celebrity Chef Geoffrey Zakarian" width="500" class="vip__image-photo vip__image-photo--chef" />
+			<img src={photo.src} alt="Bottles of wine on ice at a VIP event" width="500" class="vip__image-photo" />
 		</div>
 		<div class="vip__content">
 			<h2 class="vip__heading">Elevate Your Match Day Experience</h2>
@@ -75,14 +77,22 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 	.vip__image {
 		flex-shrink: 0;
 		width: 100%;
-		max-width: 450px;
+		max-width: 350px;
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
 	}
 
-	.vip__image img {
+	.vip__image-photo {
 		width: 100%;
 		height: auto;
 		border-radius: 16px;
+		aspect-ratio: 1/1;
+		object-fit: cover;
+	}
 
+	.vip__image-photo--chef {
+		object-position: center 30%;
 	}
 
 	.vip__heading {
@@ -176,9 +186,8 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 			width: 100%;
 			max-width: unset;
 		}
-		.vip__image img {
+		.vip__image-photo {
 			aspect-ratio: 3/2;
-			object-fit: cover;
 		}
 		.vip__intro,
 		.vip__experience-description {
