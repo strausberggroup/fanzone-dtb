@@ -1,0 +1,171 @@
+---
+---
+
+<section class="every-fan">
+	<div class="every-fan__inner">
+		<h2 class="every-fan__heading">Something for Every Kind of Fan</h2>
+		<p class="every-fan__lead">Whether you're here for the match, the music, or the atmosphere, the Los Angeles World Cup 26&trade; Fan Zone at Downtown Burbank was designed as a full-scale entertainment experience for everyone.</p>
+
+		<div class="every-fan__cards">
+			<article class="every-fan__card every-fan__card--coral">
+				<h3 class="every-fan__card-heading">Soccer Fans</h3>
+				<p class="every-fan__card-text">Catch every moment on massive LED screens surrounded by the energy of fellow supporters, live match reactions, and an electric stadium-like atmosphere.</p>
+			</article>
+
+			<article class="every-fan__card every-fan__card--purple">
+				<h3 class="every-fan__card-heading">Food Lovers</h3>
+				<p class="every-fan__card-text">Indulge in the Culinary Experience Package, explore the free international street fair, and discover a wide variety of local restaurants, bars, cocktails, and curated food experiences throughout Downtown Burbank.</p>
+			</article>
+
+			<article class="every-fan__card every-fan__card--pink">
+				<h3 class="every-fan__card-heading">Music &amp; Nightlife</h3>
+				<p class="every-fan__card-text">Enjoy live music, DJs, performances, and post-match celebrations that keep the excitement going long after the final whistle.</p>
+			</article>
+		</div>
+
+		<p class="every-fan__closing">From global soccer culture and international flavors to live entertainment and community celebration, the event will transform Downtown Burbank into one of Southern California's most dynamic destinations throughout the tournament.</p>
+
+		<a
+			href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=every-fan-cta&utm_campaign=worldcup26"
+			target="_blank"
+			rel="noopener noreferrer"
+			class="every-fan__btn"
+		>
+			Get Tickets
+		</a>
+	</div>
+</section>
+
+<style>
+	.every-fan {
+		background-color: var(--color-tan);
+		padding: 5rem 2rem;
+	}
+
+	.every-fan__inner {
+		max-width: 1125px;
+		margin: 0 auto;
+		text-align: center;
+	}
+
+	.every-fan__heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.75rem, 3.5vw, 40px);
+		font-weight: 700;
+		text-transform: uppercase;
+		color: var(--color-dark);
+		line-height: 1.1;
+		margin: 0 0 1.25rem;
+		text-wrap: balance;
+	}
+
+	.every-fan__lead {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 17px);
+		font-weight: 400;
+		line-height: 1.7;
+		color: var(--color-dark);
+		max-width: 820px;
+		margin: 0 auto 3rem;
+		text-wrap: pretty;
+	}
+
+	.every-fan__cards {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5rem;
+		margin-bottom: 3rem;
+		text-align: left;
+	}
+
+	.every-fan__card {
+		border-radius: 16px;
+		padding: 2rem 1.75rem;
+		color: white;
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+	}
+
+	.every-fan__card--coral {
+		background-color: var(--color-coral);
+	}
+
+	.every-fan__card--purple {
+		background-color: #9B59B6;
+	}
+
+	.every-fan__card--pink {
+		background-color: #EE2A7B;
+	}
+
+	.every-fan__card-heading {
+		font-family: var(--font-family);
+		font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		margin: 0;
+	}
+
+	.every-fan__card-text {
+		font-family: var(--font-family);
+		font-size: clamp(14px, 1vw, 15px);
+		font-weight: 400;
+		line-height: 1.55;
+		margin: 0;
+		text-wrap: pretty;
+	}
+
+	.every-fan__closing {
+		font-family: var(--font-family);
+		font-size: clamp(0.95rem, 1.3vw, 17px);
+		font-weight: 400;
+		line-height: 1.7;
+		color: var(--color-dark);
+		max-width: 880px;
+		margin: 0 auto 2.5rem;
+		text-wrap: pretty;
+	}
+
+	.every-fan__btn {
+		display: inline-block;
+		padding: 0.875rem 2.25rem;
+		background-color: var(--color-coral);
+		color: #fff;
+		font-family: var(--font-family);
+		font-size: clamp(0.8125rem, 1.1vw, 0.9rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.1em;
+		text-decoration: none;
+		border-radius: 8px;
+		transition: filter 0.2s;
+	}
+
+	.every-fan__btn:hover,
+	.every-fan__btn:focus-visible {
+		filter: brightness(1.1);
+	}
+
+	@media (max-width: 900px) {
+		.every-fan__cards {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.every-fan {
+			padding: 3rem 1.5rem;
+		}
+
+		.every-fan__lead,
+		.every-fan__closing {
+			font-size: 14px;
+		}
+
+		.every-fan__card {
+			padding: 1.75rem 1.5rem;
+		}
+	}
+</style>
