@@ -3,7 +3,7 @@ import photo from '../../assets/images/06-vip-ticket/bottles-of-wine.jpg';
 import chefPhoto from '../../assets/images/10-dine-drink/chef-zakarian.jpg';
 import loudLuxuryPhoto from '../../assets/images/06-vip-ticket/loud-luxury.jpg';
 
-const check = `<svg class="vip__check" aria-hidden="true" width="36" height="33" viewBox="0 0 36 33" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M35.7713 0.7257C35.4102 0.1264 34.7143-0.1342 34.0446 0.0677 27.2035 2.1655 19.0559 12.8433 11.2432 23.8078 7.9277 18.2637 4.4152 16.4135 0.7846 18.3092 0.3316 18.5504 0.0427 18.9868 0.0034 19.495-0.0295 20.0097 0.1937 20.4918 0.6139 20.7979 3.2466 22.7067 5.9778 26.088 9.2276 31.4431 9.8185 32.4203 10.8493 33.0002 11.9982 33.0002H12.0507C13.2325 32.9806 14.283 32.3617 14.8607 31.3389 18.3797 25.0847 21.8331 19.6056 25.2602 14.8368 28.6938 10.068 32.1078 6.0093 35.5481 2.589 36.0536 2.0874 36.1455 1.3381 35.7713 0.7257Z" fill="currentColor"/></svg>`;
+const check = `<svg class="vip__check" aria-hidden="true" width="16" height="15" viewBox="0 0 36 33" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M35.7713 0.7257C35.4102 0.1264 34.7143-0.1342 34.0446 0.0677 27.2035 2.1655 19.0559 12.8433 11.2432 23.8078 7.9277 18.2637 4.4152 16.4135 0.7846 18.3092 0.3316 18.5504 0.0427 18.9868 0.0034 19.495-0.0295 20.0097 0.1937 20.4918 0.6139 20.7979 3.2466 22.7067 5.9778 26.088 9.2276 31.4431 9.8185 32.4203 10.8493 33.0002 11.9982 33.0002H12.0507C13.2325 32.9806 14.283 32.3617 14.8607 31.3389 18.3797 25.0847 21.8331 19.6056 25.2602 14.8368 28.6938 10.068 32.1078 6.0093 35.5481 2.589 36.0536 2.0874 36.1455 1.3381 35.7713 0.7257Z" fill="currentColor"/></svg>`;
 ---
 
 <section class="vip">
@@ -25,9 +25,12 @@ const check = `<svg class="vip__check" aria-hidden="true" width="36" height="33"
 					<h3 class="vip__card-title">Culinary Experience with Celebrity Chef Geoffrey Zakarian</h3>
 					<p class="vip__card-desc">Watch the match from an exclusive private terrace while enjoying a curated culinary experience by Celebrity Chef Geoffrey Zakarian.</p>
 					<ul class="vip__perks">
-						<li><Fragment set:html={check} />Unlimited food and drink pairings from 12 PM – 3 PM</li>
+						<li><Fragment set:html={check} />Unlimited food and drink pairings from 12 PM – 3 PM (The terrace will remain open with a bar after 3 PM)</li>
+						<li><Fragment set:html={check} />Access to a private terrace overlooking downtown Burbank</li>
+						<li><Fragment set:html={check} />Large LED screens with full sound for match viewing</li>
 						<li><Fragment set:html={check} />Lounge seating, cocktail tables, and shaded areas</li>
-						<li><Fragment set:html={check} />Live cooking demonstrations (pre-match)</li>
+						<li><Fragment set:html={check} />Live cooking demonstrations by Chef Zakarian (pre-match)</li>
+						<li><Fragment set:html={check} />Exclusive, limited-capacity experience with a relaxed, upscale ambiance</li>
 					</ul>
 				</div>
 			</article>
@@ -42,8 +45,12 @@ const check = `<svg class="vip__check" aria-hidden="true" width="36" height="33"
 					<h3 class="vip__card-title">Passport Lounge Watch Parties</h3>
 					<p class="vip__card-desc">Explore three unique themed lounges across Downtown Burbank, each offering its own vibe for watching the match.</p>
 					<ul class="vip__perks">
-						<li><Fragment set:html={check} />Freedom to move between lounges throughout the event</li>
-						<li><Fragment set:html={check} />Shaded seating and social spaces</li>
+						<li><Fragment set:html={check} />Access to three distinct themed lounges throughout downtown</li>
+						<li><Fragment set:html={check} />Freedom to move between lounges during the event</li>
+						<li><Fragment set:html={check} />Shaded lounge areas with comfortable seating</li>
+						<li><Fragment set:html={check} />Stylish lounge furniture and social spaces</li>
+						<li><Fragment set:html={check} />Large LED screens with full game sound in each location</li>
+						<li><Fragment set:html={check} />Immersive, multi-atmosphere World Cup viewing experience</li>
 					</ul>
 				</div>
 			</article>
@@ -56,16 +63,21 @@ const check = `<svg class="vip__check" aria-hidden="true" width="36" height="33"
 					<span class="vip__notch vip__notch--left" aria-hidden="true"></span>
 					<span class="vip__notch vip__notch--right" aria-hidden="true"></span>
 					<h3 class="vip__card-title">Concert Experience Featuring Loud Luxury</h3>
-					<ul class="vip__perks vip__perks--standalone">
-						<li><Fragment set:html={check} />Enjoy a post-match live concert</li>
-						<li><Fragment set:html={check} />Add on to your ticket purchase</li>
+					<p class="vip__card-desc">On July 18th, after the World Cup Finals viewing experience a high-energy live concert celebration featuring one of the biggest names in dance music: Loud Luxury.</p>
+					<ul class="vip__perks">
+						<li><Fragment set:html={check} />Entry to a designated Watch Party area, located at 211 E. Olive Ave. in Downtown Burbank</li>
+						<li><Fragment set:html={check} />Admission to a post-match live concert featuring Loud Luxury</li>
+						<li><Fragment set:html={check} />Massive LED screen with full sound for live match viewing</li>
+						<li><Fragment set:html={check} />Access to communal seating areas</li>
+						<li><Fragment set:html={check} />On-site food and beverage vendors (available for purchase)</li>
+						<li><Fragment set:html={check} />High-energy, large-scale fan atmosphere</li>
 					</ul>
 				</div>
 			</article>
 		</div>
 
 		<a
-			href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank?utm_source=fanzone-dtb&utm_medium=vip-cta&utm_campaign=worldcup26"
+			href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=vip-cta&utm_campaign=worldcup26"
 			target="_blank"
 			rel="noopener noreferrer"
 			class="vip__button"
@@ -246,7 +258,7 @@ const check = `<svg class="vip__check" aria-hidden="true" width="36" height="33"
 		line-height: 1.35;
 	}
 
-	.vip__check {
+	.vip__perks li :global(.vip__check) {
 		flex-shrink: 0;
 		display: block;
 		width: 16px;
@@ -315,7 +327,7 @@ const check = `<svg class="vip__check" aria-hidden="true" width="36" height="33"
 			font-size: 14px;
 		}
 
-		.vip__check {
+		.vip__perks li :global(.vip__check) {
 			width: 14px;
 			height: 13px;
 		}
