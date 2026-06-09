@@ -448,7 +448,7 @@ const check = `<svg class="vip__check" aria-hidden="true" width="16" height="15"
 	flips.forEach((el) => {
 		let timer: ReturnType<typeof setInterval>;
 		const start = () => {
-			timer = setInterval(() => el.classList.toggle('is-flipped'), 10000);
+			timer = setInterval(() => el.classList.toggle('is-flipped'), 5000);
 		};
 		const show = (toBack: boolean) => {
 			el.classList.toggle('is-flipped', toBack);
