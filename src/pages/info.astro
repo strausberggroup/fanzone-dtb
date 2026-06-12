@@ -4,7 +4,9 @@ import Header from '../components/sections/01-Header.astro';
 import Footer from '../components/sections/14-Footer.astro';
 import FloatingTicketsCta from '../components/FloatingTicketsCta.astro';
 import checkInPhoto from '../assets/images/13-be-part-of-action/group-stroll.jpg';
-import culinaryPhoto from '../assets/images/10-dine-drink/friends-laughing-dinner.jpg';
+import loudLuxuryPhoto from '../assets/images/06-vip-ticket/loud-luxury.jpg';
+import bebeRexhaPhoto from '../assets/images/06-vip-ticket/bebe-rexha.jpg';
+import bebeRexhaLogo from '../assets/images/06-vip-ticket/bebe-rexha-logo.webp';
 import chefPhoto from '../assets/images/10-dine-drink/chef-zakarian.jpg';
 
 const ticketUrl = 'https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=info-cta&utm_campaign=worldcup26';
@@ -148,6 +150,7 @@ const faqs = [
 		a: `
 			<p>Yes – there are multiple ways to reach the Fan Zone using bus, rail, or park and ride.</p>
 			<p><strong>BurbankBus (Special Weekend FREE Shuttle Service):</strong> Transfer from Metro B line at Universal City/Studio City station, or board at any BurbankBus Pink Route stop and take BurbankBus FREE directly to the Fan Zone, with service every 15 minutes.</p>
+			<a href="/images/burbankbus-pink-route-map.webp" target="_blank" rel="noopener noreferrer"><img src="/images/burbankbus-pink-route-map.webp" alt="BurbankBus Pink Route map showing the FREE shuttle stops from the Universal City/Studio City Metro station to the Downtown Burbank Fan Zone, July 2026" class="faq__map" width="600" loading="lazy" /></a>
 			<p><strong>Park and Ride:</strong> Option 1: Park at Universal City/Studio City station and take BurbankBus FREE directly to the Fan Zone, with service every 15 minutes. Option 2: Park at North Hollywood station and take Metro line 94 directly to the Fan Zone, with service every 20 minutes.</p>
 			<p><strong>Metro:</strong> Take lines 92, 94, 154, 155, 164, 165, 294, or 296 to any stop on First St. between Magnolia Blvd. and Angeleno Ave. to access the event.</p>
 			<p><strong>Metrolink:</strong> Take the Metrolink AV or VC Line and exit Burbank - Downtown. The Fan Zone is a short walk or free bus transfer from the station. Schedules are available <a href="https://metrolinktrains.com/schedules/" target="_blank" rel="noopener noreferrer">here</a>. Use the SoCal Day Pass for all-day access!</p>`,
@@ -165,11 +168,12 @@ const faqs = [
 	{
 		q: 'Is the event all ages?',
 		a: `
-			<p>Yes, but:</p>
+			<p>The event is for all ages, besides the following:</p>
 			<ul>
 				<li>You must be 21+ with valid ID to enter the Culinary Experience Terrace.</li>
 				<li>You must be 21+ with valid ID to purchase alcohol.</li>
 			</ul>
+			<p>Children 5 and under are free in the Watch Party areas and Passport Lounges.</p>
 		`,
 	},
 	{
@@ -285,9 +289,15 @@ const faqs = [
 				<h3 class="metro__subheading">Bus Service</h3>
 				<p>Downtown Burbank is served by BurbankBus and LA Metro, offering convenient local and regional routes.</p>
 				<ul class="metro__list">
-					<li>BurbankBus connects neighborhoods throughout the City of Burbank.</li>
+					<li>
+						BurbankBus connects neighborhoods throughout the City of Burbank.
+						<ul class="metro__sublist">
+							<li>FREE Shuttle Service is included when using BurbankBus.</li>
+						</ul>
+					</li>
 					<li>LA Metro connects to North Hollywood, Universal Studios, Union Station, and greater Los Angeles County.</li>
 				</ul>
+				<a href="/images/burbankbus-pink-route-map.webp" target="_blank" rel="noopener noreferrer"><img src="/images/burbankbus-pink-route-map.webp" alt="BurbankBus Pink Route map showing the FREE shuttle stops from the Universal City/Studio City Metro station to the Downtown Burbank Fan Zone, July 2026" class="metro__map" width="600" loading="lazy" /></a>
 				<p>Plan your route at <a href="https://www.metro.net" target="_blank" rel="noopener noreferrer">metro.net</a> or call <a href="tel:+13234636782">(323) GO-METRO</a>.</p>
 			</div>
 		</section>
@@ -416,7 +426,7 @@ const faqs = [
 		<!-- Programming: photo + saturated blocks side-by-side -->
 		<section id="programming" class="info-section">
 			<div class="info-section__inner">
-				<h2 class="info-section__heading">Culinary Experience &amp; Post-Match Concert</h2>
+				<h2 class="info-section__heading">Culinary Experience &amp; Post-Match Concerts</h2>
 
 				<div class="programming__layout">
 					<div class="programming__photo">
@@ -428,11 +438,23 @@ const faqs = [
 					</article>
 
 					<div class="programming__photo">
-						<img src={culinaryPhoto.src} alt="Friends sharing a meal" width="500" />
+						<div class="concert-flip" data-flip>
+							<div class="concert-flip__inner">
+								<div class="concert-flip__face concert-flip__face--front">
+									<img src={loudLuxuryPhoto.src} alt="Loud Luxury performing live" width="500" class="concert-flip__photo" />
+									<span class="concert-flip__tag">July 18 · Loud Luxury</span>
+								</div>
+								<div class="concert-flip__face concert-flip__face--back">
+									<img src={bebeRexhaPhoto.src} alt="Bebe Rexha press shot" width="500" class="concert-flip__photo" />
+									<img src={bebeRexhaLogo.src} alt="Bebe Rexha logo" class="concert-flip__logo" />
+									<span class="concert-flip__tag">July 19 · Bebe Rexha</span>
+								</div>
+							</div>
+						</div>
 					</div>
 					<article class="programming-block programming-block--coral">
-						<h3 class="programming-block__title">Post-Match Concert</h3>
-						<p>After the final whistle, a live concert by a nationally touring artist (to be announced) takes the stage in the Watch Party area on Olive Ave. north of San Fernando Blvd. (enter at 211 E. Olive Ave.). You must have the <strong>Concert Experience + GA Watch Party</strong> ticket to enter this area — tickets are limited.</p>
+						<h3 class="programming-block__title">Post-Match Concerts</h3>
+						<p>After the final whistle, a live concert takes the stage in the Watch Party area on Olive Ave. north of San Fernando Blvd. (enter at 211 E. Olive Ave.). Loud Luxury will be performing on July 18th and Bebe Rexha on July 19th. You must have the <strong>Concert Experience + GA Watch Party</strong> ticket to enter this area — tickets are limited.</p>
 						<p>The concert will also be live-streamed to the big screen in the other Watch Party area on Olive Ave. south of San Fernando Blvd. (enter at 175 E. Olive Ave.).</p>
 					</article>
 				</div>
@@ -687,6 +709,13 @@ const faqs = [
 	} else {
 		initCtaDots();
 	}
+</script>
+
+<script>
+	const concertFlips = document.querySelectorAll<HTMLElement>('.concert-flip[data-flip]');
+	concertFlips.forEach((el) => {
+		setInterval(() => el.classList.toggle('is-flipped'), 5000);
+	});
 </script>
 
 <style>
@@ -1271,6 +1300,73 @@ const faqs = [
 		object-position: center 30%;
 	}
 
+	/* Concert headliner flip — mirrors the homepage ticket flip */
+	.concert-flip {
+		width: 100%;
+		height: 100%;
+		perspective: 1400px;
+	}
+
+	.concert-flip__inner {
+		position: relative;
+		width: 100%;
+		height: 100%;
+		transform-style: preserve-3d;
+		transition: transform 0.85s cubic-bezier(0.45, 0, 0.15, 1);
+	}
+
+	.concert-flip.is-flipped .concert-flip__inner {
+		transform: rotateX(-180deg);
+	}
+
+	.concert-flip__face {
+		position: absolute;
+		inset: 0;
+		overflow: hidden;
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+	}
+
+	.concert-flip__face--back {
+		transform: rotateX(180deg);
+	}
+
+	.concert-flip__face--front .concert-flip__photo { object-position: center 15%; }
+	.concert-flip__face--back .concert-flip__photo { object-position: center 25%; }
+
+	.concert-flip__tag {
+		position: absolute;
+		left: 0.85rem;
+		bottom: 0.85rem;
+		padding: 0.35rem 0.7rem;
+		background-color: rgba(0, 0, 0, 0.62);
+		color: #fff;
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.05em;
+		border-radius: 5px;
+		backdrop-filter: blur(2px);
+	}
+
+	.programming__photo .concert-flip__logo {
+		position: absolute;
+		top: 0.85rem;
+		right: 0.85rem;
+		width: 30%;
+		max-width: 130px;
+		height: auto;
+		object-fit: contain;
+		filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.45));
+		pointer-events: none;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.concert-flip__inner {
+			transition: none;
+		}
+	}
+
 	.programming-block {
 		border-radius: 16px;
 		padding: 2rem 2rem 1.75rem;
@@ -1398,6 +1494,16 @@ const faqs = [
 	.faq__a :global(a) {
 		color: var(--color-blue);
 		text-decoration: underline;
+	}
+
+	.faq__a :global(.faq__map) {
+		display: block;
+		width: 100%;
+		max-width: 540px;
+		height: auto;
+		margin: 0.25rem 0 1rem;
+		border-radius: 12px;
+		border: 1px solid rgba(0, 0, 0, 0.08);
 	}
 
 	/* ---------- Rules ---------- */
@@ -1562,5 +1668,21 @@ const faqs = [
 		line-height: 1.7;
 		color: var(--color-dark);
 		margin-bottom: 0.25rem;
+	}
+
+	.metro__sublist {
+		list-style: circle;
+		padding-left: 1.25rem;
+		margin: 0.25rem 0 0;
+	}
+
+	.metro__map {
+		display: block;
+		width: 100%;
+		max-width: 540px;
+		height: auto;
+		margin: 0.5rem 0 1.25rem;
+		border-radius: 12px;
+		border: 1px solid rgba(0, 0, 0, 0.08);
 	}
 </style>
