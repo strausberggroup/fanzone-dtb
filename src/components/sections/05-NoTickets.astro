@@ -17,14 +17,24 @@ import photo from '../../assets/images/05-no-tickets/dtb-people-outside.jpg';
 			</ul>
 			<p class="no-tickets__bold">The event is a ticketed event, and all attendees must register online.</p>
 			
-			<a
-				href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=notickets-cta&utm_campaign=worldcup26"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="no-tickets__button"
-			>
-				Get Tickets
-			</a>
+			<div class="no-tickets__buttons">
+				<a
+					href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=notickets-cta&utm_campaign=worldcup26"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="no-tickets__button"
+				>
+					Get Tickets
+				</a>
+				<a
+					href="https://grs-reservationserviceesb.lazparking.com/checkout/index-event.html?l=207421,207422,207424,207423&wk=a6995ca660704d8793b49f02f54379c8"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="no-tickets__button no-tickets__button--secondary"
+				>
+					Parking Reservations
+				</a>
+			</div>
 		</div>
 		<div class="no-tickets__image">
 			<img src={photo.src} alt="Fans celebrating at a FIFA World Cup 2026™ Fan Zone" width="570" />
@@ -101,6 +111,13 @@ import photo from '../../assets/images/05-no-tickets/dtb-people-outside.jpg';
 		margin-bottom: 1.25em;
 	}
 
+	.no-tickets__buttons {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 1rem;
+	}
+
 	.no-tickets__button {
 		display: inline-block;
 		padding: 0.875rem 2rem;
@@ -117,6 +134,19 @@ import photo from '../../assets/images/05-no-tickets/dtb-people-outside.jpg';
 
 	.no-tickets__button:hover {
 		filter: brightness(1.1);
+	}
+
+	.no-tickets__button--secondary {
+		background-color: transparent;
+		color: var(--color-coral);
+		border: 2px solid var(--color-coral);
+		padding: calc(0.875rem - 2px) calc(2rem - 2px);
+	}
+
+	.no-tickets__button--secondary:hover {
+		background-color: var(--color-coral);
+		color: #fff;
+		filter: none;
 	}
 
 		.no-tickets__image {

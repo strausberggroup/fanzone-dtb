@@ -10,14 +10,24 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		<div class="hero__left">
 			<img src={logoImg.src} alt="Los Angeles World Cup 26 Fan Zone at Downtown Burbank" class="hero__logo" width="620" />
 			<p class="hero__dates">July 18 | 12pm - 8pm<br />July 19 | 10am - 6pm</p>
-			<a
-				href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=hero-cta&utm_campaign=worldcup26"
-				target="_blank"
-				rel="noopener noreferrer"
-				class="hero__cta"
-			>
-				Get Tickets
-			</a>
+			<div class="hero__ctas">
+				<a
+					href="https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=hero-cta&utm_campaign=worldcup26"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hero__cta"
+				>
+					Get Tickets
+				</a>
+				<a
+					href="https://grs-reservationserviceesb.lazparking.com/checkout/index-event.html?l=207421,207422,207424,207423&wk=a6995ca660704d8793b49f02f54379c8"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="hero__cta hero__cta--secondary"
+				>
+					Parking Reservations
+				</a>
+			</div>
 		</div>
 		<div class="hero__right">
 			<img src={heroPhoto.src} alt="Downtown Burbank street fair crowd on Olive Avenue" class="hero__photo" width="570" />
@@ -266,9 +276,16 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		padding-left: 0.25em;
 	}
 
+	.hero__ctas {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
 	.hero__cta {
 		display: inline-block;
-		margin-top: 1.5rem;
 		padding: 1rem 2.5rem;
 		background-color: white;
 		color: var(--color-coral);
@@ -284,6 +301,18 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 	.hero__cta:hover {
 		transform: translateY(-2px);
 		filter: brightness(1.05);
+	}
+
+	.hero__cta--secondary {
+		background-color: transparent;
+		color: #fff;
+		border: 2px solid #fff;
+		padding: calc(1rem - 2px) calc(2.5rem - 2px);
+	}
+
+	.hero__cta--secondary:hover {
+		background-color: #fff;
+		color: var(--color-coral);
 	}
 
 	.hero__right {
@@ -326,6 +355,10 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 		.hero__cta {
 			font-size: 1rem;
 			padding: 0.875rem 2rem;
+		}
+
+		.hero__cta--secondary {
+			padding: calc(0.875rem - 2px) calc(2rem - 2px);
 		}
 	}
 </style>
