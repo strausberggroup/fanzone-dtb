@@ -1,4 +1,5 @@
 ---
+const parkingUrl = 'https://grs-reservationserviceesb.lazparking.com/checkout/index-event.html?l=207421,207422,207424,207423&wk=a6995ca660704d8793b49f02f54379c8';
 ---
 
 <section class="getting-here">
@@ -7,12 +8,13 @@
 		<h2 class="getting-here__heading">Getting Here <br>is Easy</h2>
 
 		<div class="getting-here__cards getting-here__cards--top">
-			<div class="getting-here__card getting-here__card--purple">
+			<a href={parkingUrl} target="_blank" rel="noopener noreferrer" class="getting-here__card getting-here__card--purple getting-here__card--link">
 				<div class="getting-here__icon">
 					<img src="/images/08-getting-here/parking.svg" alt="" width="50" height="63" />
 				</div>
-				<p class="getting-here__label">Convenient public parking garages with FREE options</p>
-			</div>
+				<p class="getting-here__label">Reserve your convenient public parking today</p>
+				<span class="getting-here__card-cue">Reserve Parking <span aria-hidden="true">&rarr;</span><span class="sr-only"> (opens in new window)</span></span>
+			</a>
 
 			<div class="getting-here__card getting-here__card--blue">
 				<div class="getting-here__icon">
@@ -83,13 +85,13 @@
 			</div>
 		</div>
 
-		<a href="https://dtnbur.com/parking/" target="_blank" rel="noopener noreferrer" class="getting-here__btn">Parking & Directions<span class="sr-only"> (opens in new window)</span></a>
+		<a href="/info/" class="getting-here__btn">Know Before You Go</a>
 	</div>
 </section>
 
 <section class="fanzone-map">
 	<div class="fanzone-map__inner">
-		<img src="/images/dtb-map.webp" alt="Downtown Burbank Fan Zone map showing the Street Fair along San Fernando Blvd., Watch Party Areas with Stages, Passport Lounge Watch Parties, VIP Terrace Watch Party, Kick Off Cuisine, Activations, parking areas, and a shuttle stop" width="1440" />
+		<img src="/images/dtb-map.webp" alt="Downtown Burbank Fan Zone parking and event map. Lettered parking lots surround the event: VIP PrePaid Parking Only lots N (near Magnolia Blvd. and Third St.) and R (near Angeleno Ave.); Same Day and PrePaid Parking lots G (center) and M (near Angeleno Ave. and Third St.); Same Day Parking lots A and H near Orange Grove Ave.; and an Uber & Lyft rideshare zone near Angeleno Ave. The Street Fair runs along San Fernando Blvd., with the VIP Terrace Watch Party at the west end by Magnolia Blvd., Activations and Kick Off Cuisine nearby, Passport Lounge Watch Parties along San Fernando Blvd. and Orange Grove Ave., Watch Party Areas with Stages on the east side near Angeleno Ave., and a shuttle stop on N First St." width="1440" />
 	</div>
 </section>
 
@@ -166,6 +168,35 @@
 
 	.getting-here__card--purple {
 		background-color: #9B59B6;
+	}
+
+	.getting-here__card--link {
+		text-decoration: none;
+		color: inherit;
+		cursor: pointer;
+		transition: transform 0.2s, filter 0.2s;
+	}
+
+	.getting-here__card--link:hover,
+	.getting-here__card--link:focus-visible {
+		transform: translateY(-3px);
+		filter: brightness(1.06);
+		outline: none;
+	}
+
+	.getting-here__card--link:focus-visible {
+		box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.7);
+	}
+
+	.getting-here__card-cue {
+		margin-top: 0.9rem;
+		font-family: var(--font-family);
+		font-size: clamp(12px, 1.2vw, 0.9rem);
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		border-bottom: 2px solid currentColor;
+		padding-bottom: 2px;
 	}
 
 	.getting-here__card--coral {

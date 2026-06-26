@@ -11,6 +11,8 @@ import chefPhoto from '../assets/images/10-dine-drink/chef-zakarian.jpg';
 
 const ticketUrl = 'https://tickets.cbfproductions.com/e/los-angeles-world-cup-26-fan-zone-downtown-burbank/tickets?utm_source=fanzone-dtb&utm_medium=info-cta&utm_campaign=worldcup26';
 
+const parkingUrl = 'https://grs-reservationserviceesb.lazparking.com/checkout/index-event.html?l=207421,207422,207424,207423&wk=a6995ca660704d8793b49f02f54379c8';
+
 const accessRows = [
 	{
 		ticket: 'Culinary Experience',
@@ -143,7 +145,16 @@ const faqs = [
 	},
 	{
 		q: 'Where should I park?',
-		a: `<p>Paid parking will be available in City-operated lots adjacent to the event. More information about purchasing parking will be made available closer to the event. We recommend arriving early to allow time for parking and walking to your check-in location.</p>`,
+		a: `
+			<p>There is no designated parking area for this event. See the City of Burbank's parking map below for all nearby parking facilities.</p>
+			<p>Streamline your arrival and save money — <a href="${parkingUrl}" target="_blank" rel="noopener noreferrer">purchase parking online before arriving</a>. If you do not pre-purchase parking, you may do so onsite on a first-come, first-serve basis. A limited number of free parking options will also be available in the area.</p>
+			<p><strong>Prepaid Parking Rates:</strong></p>
+			<ul>
+				<li>General — $20</li>
+				<li>VIP — $30</li>
+			</ul>
+			<p><strong>Same Day (non-reserved) Parking Rates:</strong> $25</p>
+			<p>For ticketed fan-zone guests, we recommend arriving early to allow time for parking and walking to your check-in location.</p>`,
 	},
 	{
 		q: 'Can I take Metro or Public Transit?',
@@ -238,7 +249,10 @@ const faqs = [
 			<p class="info-hero__eyebrow">Los Angeles World Cup 26 Fan Zone at Downtown Burbank</p>
 			<h1 class="info-hero__title">Know Before You Go</h1>
 			<p class="info-hero__dates">Saturday, July 18 · 12 PM – 8 PM<br />Sunday, July 19 · 10 AM – 6 PM</p>
-			<a href={ticketUrl} target="_blank" rel="noopener noreferrer" class="info-hero__btn">Get Tickets</a>
+			<div class="info-hero__btns">
+				<a href={ticketUrl} target="_blank" rel="noopener noreferrer" class="info-hero__btn">Get Tickets</a>
+				<a href={parkingUrl} target="_blank" rel="noopener noreferrer" class="info-hero__btn info-hero__btn--secondary">Parking Reservations</a>
+			</div>
 		</div>
 	</section>
 
@@ -269,15 +283,37 @@ const faqs = [
 		<section id="parking" class="info-section">
 			<div class="info-section__inner">
 				<h2 class="info-section__heading">Parking</h2>
-				<p>There is no designated parking area for this event. See the City of Burbank's parking map for all nearby lots and structures. The red "Paid Street Parking" sections on the map will not be available during the event.</p>
-				<p>We recommend arriving early to allow time for parking and walking to your check-in location.</p>
+				<p>There is no designated parking area for this event. See the City of Burbank's parking map below for all nearby parking facilities.</p>
+				<p>Streamline your arrival and save money — <a href={parkingUrl} target="_blank" rel="noopener noreferrer">purchase parking online before arriving</a>. If you do not pre-purchase parking, you may do so onsite on a first-come, first-serve basis. A limited number of free parking options will also be available in the area.</p>
+
+				<div class="parking-rates">
+					<div class="parking-rates__group">
+						<p class="parking-rates__label">Prepaid Parking Rates</p>
+						<ul class="parking-rates__list">
+							<li><span>General</span><span class="parking-rates__price">$20</span></li>
+							<li><span>VIP</span><span class="parking-rates__price">$30</span></li>
+						</ul>
+					</div>
+					<div class="parking-rates__group">
+						<p class="parking-rates__label">Same Day (non-reserved) Parking</p>
+						<ul class="parking-rates__list">
+							<li><span>Per vehicle</span><span class="parking-rates__price">$25</span></li>
+						</ul>
+					</div>
+				</div>
+
+				<p>For ticketed fan-zone guests, we recommend arriving early to allow time for parking and walking to your check-in location.</p>
+
+				<div class="info-section__cta-row">
+					<a href={parkingUrl} target="_blank" rel="noopener noreferrer" class="info-button">Reserve Parking</a>
+				</div>
 			</div>
 		</section>
 
 		<!-- Map: full-bleed, no caption -->
 		<section class="info-map" aria-label="Fan Zone layout map">
 			<div class="info-map__inner">
-				<img src="/images/dtb-map.webp" alt="Fan Zone layout map for the Los Angeles World Cup 26 Fan Zone at Downtown Burbank. The Street Fair runs along San Fernando Blvd. The VIP Terrace Watch Party sits at the west end near Magnolia Blvd., with Activations and Kick Off Cuisine just east of it. Passport Lounge Watch Parties are located along San Fernando Blvd. and Orange Grove Ave. Watch Party Areas with Stages line the east side near Angeleno Ave., north and south of San Fernando Blvd. Parking areas — VIP PrePaid, Same Day, and Same Day and PrePaid — surround the zone, with a shuttle stop on N First St." width="1440" />
+				<img src="/images/dtb-map.webp" alt="City of Burbank parking and Fan Zone layout map for the Los Angeles World Cup 26 Fan Zone at Downtown Burbank. Lettered parking lots surround the event: VIP PrePaid Parking Only lots N (near Magnolia Blvd. and Third St.) and R (near Angeleno Ave.); Same Day and PrePaid Parking lots G (center) and M (near Angeleno Ave. and Third St.); Same Day Parking lots A and H near Orange Grove Ave.; and an Uber & Lyft rideshare zone near Angeleno Ave. The Street Fair runs along San Fernando Blvd., with the VIP Terrace Watch Party at the west end near Magnolia Blvd., Activations and Kick Off Cuisine just east of it, Passport Lounge Watch Parties along San Fernando Blvd. and Orange Grove Ave., Watch Party Areas with Stages on the east side near Angeleno Ave., and a shuttle stop on N First St." width="1440" />
 			</div>
 		</section>
 
@@ -743,7 +779,7 @@ const faqs = [
 	}
 
 	.info-hero__inner {
-		max-width: 900px;
+		max-width: 990px;
 		margin: 0 auto;
 	}
 
@@ -789,6 +825,30 @@ const faqs = [
 	.info-hero__btn:hover {
 		transform: translateY(-2px);
 		filter: brightness(1.05);
+	}
+
+	.info-hero__btns {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1.75rem;
+	}
+
+	.info-hero__btns .info-hero__btn {
+		margin-top: 0;
+	}
+
+	.info-hero__btn--secondary {
+		background-color: transparent;
+		color: #fff;
+		border: 2px solid #fff;
+		padding: calc(1rem - 2px) calc(2.5rem - 2px);
+	}
+
+	.info-hero__btn--secondary:hover {
+		background-color: #fff;
+		color: var(--color-coral);
 	}
 
 	/* offset anchor jumps for sticky global header */
@@ -921,6 +981,57 @@ const faqs = [
 
 	.info-section__cta-row {
 		margin-top: 1.5rem;
+	}
+
+	/* ---------- Parking rates ---------- */
+	.parking-rates {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1rem;
+		margin: 1.75rem 0;
+	}
+
+	.parking-rates__group {
+		flex: 1 1 240px;
+		background: #fff;
+		border-radius: 12px;
+		padding: 1.35rem 1.6rem;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+	}
+
+	.parking-rates .parking-rates__label {
+		font-size: 0.8rem !important;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--color-coral);
+		margin-bottom: 0.75rem !important;
+		max-width: none;
+	}
+
+	.parking-rates__list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.parking-rates__list li {
+		display: flex;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.45rem 0;
+		font-size: 1.05rem;
+		font-weight: 700;
+		color: var(--color-dark);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+	}
+
+	.parking-rates__list li:last-child {
+		border-bottom: none;
+	}
+
+	.parking-rates__price {
+		color: var(--color-coral);
 	}
 
 	@media (max-width: 768px) {
