@@ -4,28 +4,8 @@
 
 <section class="countdown">
 	<div class="countdown__inner">
-		<h2 class="countdown__heading">The Countdown to the Los Angeles World Cup 26 Fan Zone at Downtown Burbank Begins</h2>
+		<h2 class="countdown__heading">The Countdown to the <br>Los Angeles World Cup 26 Fan Zone <br>at Downtown Burbank Begins</h2>
 		<div class="countdown__cards" id="countdown">
-			<div class="countdown__card countdown__card--blue" data-unit="months" data-pad="2">
-				<div class="countdown__flip">
-					<div class="countdown__panel countdown__panel--top">
-						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
-					</div>
-					<div class="countdown__panel countdown__panel--bottom">
-						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
-					</div>
-					<div class="countdown__flap countdown__flap--top">
-						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
-					</div>
-					<div class="countdown__flap countdown__flap--bottom">
-						<div class="countdown__val-wrap"><span class="countdown__val">00</span></div>
-					</div>
-					<div class="countdown__hinge-left"></div>
-					<div class="countdown__hinge-right"></div>
-					<div class="countdown__seam"></div>
-				</div>
-				<span class="countdown__label">Months</span>
-			</div>
 			<div class="countdown__card countdown__card--gold" data-unit="days" data-pad="2">
 				<div class="countdown__flip">
 					<div class="countdown__panel countdown__panel--top">
@@ -380,6 +360,9 @@
 		.countdown {
 			padding: 3rem 2rem 3rem;
 		}
+		.countdown__heading br {
+			display: none;
+		}
 
 	}
 
@@ -411,5 +394,9 @@
 
 		.countdown__hinge-left  { left: -5px; }
 		.countdown__hinge-right { right: -5px; }
+
+
+
 	}
+	
 </style>
