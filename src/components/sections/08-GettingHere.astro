@@ -8,13 +8,24 @@ const parkingUrl = 'https://grs-reservationserviceesb.lazparking.com/checkout/in
 		<h2 class="getting-here__heading">Getting Here <br>is Easy</h2>
 
 		<div class="getting-here__cards getting-here__cards--top">
-			<a href={parkingUrl} target="_blank" rel="noopener noreferrer" class="getting-here__card getting-here__card--purple getting-here__card--link">
-				<div class="getting-here__icon">
-					<img src="/images/08-getting-here/parking.svg" alt="" width="50" height="63" />
+			<div class="getting-here__card getting-here__card--purple getting-here__card--reserve">
+				<a href={parkingUrl} target="_blank" rel="noopener noreferrer" class="getting-here__card--link getting-here__reserve-link">
+					<div class="getting-here__icon">
+						<img src="/images/08-getting-here/parking.svg" alt="" width="50" height="63" />
+					</div>
+					<p class="getting-here__label">Reserve your convenient public parking today</p>
+					<span class="getting-here__card-cue">Reserve Parking <span aria-hidden="true">&rarr;</span><span class="sr-only"> (opens in new window)</span></span>
+				</a>
+				<div class="getting-here__card-body" id="getting-here-body-reserve">
+					<div class="getting-here__card-body-inner">
+						<p class="getting-here__note">A limited number of free parking options will also be available in the area.</p>
+					</div>
 				</div>
-				<p class="getting-here__label">Reserve your convenient public parking today</p>
-				<span class="getting-here__card-cue">Reserve Parking <span aria-hidden="true">&rarr;</span><span class="sr-only"> (opens in new window)</span></span>
-			</a>
+				<button class="getting-here__expand" type="button" aria-expanded="false" aria-controls="getting-here-body-reserve">
+					<span class="getting-here__expand-label">Read more</span>
+					<svg class="getting-here__expand-icon" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 5l4 4 4-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+				</button>
+			</div>
 
 			<div class="getting-here__card getting-here__card--blue">
 				<div class="getting-here__icon">
@@ -58,7 +69,6 @@ const parkingUrl = 'https://grs-reservationserviceesb.lazparking.com/checkout/in
 					<div class="getting-here__card-body-inner">
 						<p class="getting-here__card-text"><strong>Option 1:</strong> Park at Universal City/Studio City station and take BurbankBus FREE directly to the Fan Zone, with service every 15 minutes.</p>
 						<p class="getting-here__card-text"><strong>Option 2:</strong> Park at North Hollywood station and take Metro line 94 directly to the Fan Zone, with service every 20 minutes.</p>
-						<p class="getting-here__card-text"> A limited number of free parking options will also be available in the area.</p>
 					</div>
 				</div>
 				<button class="getting-here__expand" type="button" aria-expanded="false" aria-controls="getting-here-body-parkride">
@@ -231,6 +241,26 @@ const parkingUrl = 'https://grs-reservationserviceesb.lazparking.com/checkout/in
 		font-weight: 700;
 		line-height: 1.4;
 		margin: 0;
+	}
+
+	.getting-here__reserve-link {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		margin-bottom: 1.5rem;
+	}
+
+}
+
+	.getting-here__note {
+		font-family: var(--font-family);
+		font-size: clamp(12px, 1.1vw, 0.85rem);
+		font-weight: 400;
+		line-height: 1.4;
+		margin: auto;
+		max-width: 40ch;
+		opacity: 0.9;
 	}
 
 	.getting-here__card-heading {
