@@ -35,6 +35,17 @@
 	font-display: swap;
 }
 
+@font-face {
+	font-family: 'Noto IKEA';
+	src: url('/fonts/NotoIKEA-Regular.woff2') format('woff2'),
+		url('/fonts/NotoIKEA-Regular.woff') format('woff');
+	/* Only the Regular master was supplied; claim the range so any
+	   requested weight uses the real glyphs instead of faux-bolding. */
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
 /* Design Tokens */
 :root {
 	/* --color-dark: #3C3C3C; */
