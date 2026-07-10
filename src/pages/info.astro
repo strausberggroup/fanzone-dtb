@@ -1,7 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Header from '../components/sections/01-Header.astro';
-import Footer from '../components/sections/14-Footer.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
 import FloatingTicketsCta from '../components/FloatingTicketsCta.astro';
 import checkInPhoto from '../assets/images/13-be-part-of-action/group-stroll.jpg';
 import loudLuxuryPhoto from '../assets/images/06-vip-ticket/loud-luxury.jpg';
@@ -252,8 +252,6 @@ const faqs = [
 
 <Layout title="Know Before You Go | Fan Zone at Downtown Burbank" description="Hours, parking, check-in, ticket access, game schedule, FAQs and rules for the Los Angeles World Cup 26 Fan Zone at Downtown Burbank, July 18–19.">
 	<Header />
-
-	<div class="info-buffer"></div>
 
 	<section class="info-hero">
 		<div class="info-hero__inner">
@@ -772,15 +770,6 @@ const faqs = [
 </script>
 
 <style>
-	.info-buffer {
-		height: 90px;
-		background-color: var(--color-coral);
-	}
-
-	@media (max-width: 960px) {
-		.info-buffer { height: 75px; }
-	}
-
 	/* ---------- Hero ---------- */
 	.info-hero {
 		background-color: var(--color-coral);

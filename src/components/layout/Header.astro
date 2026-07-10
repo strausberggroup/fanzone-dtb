@@ -1,0 +1,1039 @@
+---
+/**
+ * Ported from the main site (downtown-burbank-website
+ * src/components/layout/Header.astro) so the fanzone reads as part of
+ * dtnbur.com. Differences from the source:
+ *   - all nav links are absolute (this site lives on a separate origin)
+ *   - the LiveSearch overlay is omitted — its Pagefind index only exists on
+ *     dtnbur.com's build, so the search form submits to dtnbur.com/search,
+ *     which runs the query from the ?q= param on load
+ * When the main site's header changes, re-diff against the source file.
+ */
+const SITE = "https://dtnbur.com";
+
+const utilityLinks = [
+  { href: `${SITE}/broker`, label: "Broker & Leasing Info" },
+  { href: `${SITE}/directory`, label: "Full Directory" },
+  { href: `${SITE}/stay`, label: "Stay" },
+  { href: `${SITE}/plan-your-visit`, label: "Plan Your Visit" },
+];
+
+const primaryNav = [
+  { href: `${SITE}/shop`, label: "Shop" },
+  { href: `${SITE}/dine`, label: "Dine" },
+  { href: `${SITE}/explore`, label: "Explore" },
+  { href: `${SITE}/events`, label: "Events" },
+  { href: `${SITE}/blog`, label: "Blog" },
+];
+
+const socials = [
+  { label: "Instagram", href: "https://www.instagram.com/downtownburbank", icon: "instagram" },
+  { label: "Facebook", href: "https://www.facebook.com/downtownburbank", icon: "facebook" },
+  { label: "X", href: "https://twitter.com/downtownburbank", icon: "x" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/company/downtown-burbank-partnership", icon: "linkedin" },
+] as const;
+---
+
+<header class="site-header">
+  <div class="utility-bar">
+    <div class="container utility-inner">
+      <nav aria-label="Utility">
+        <ul>
+          {utilityLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="container main-inner" data-state="nav">
+    <a href={`${SITE}/`} class="logo" aria-label="Downtown Burbank — Home">
+      <img src="/dtb.svg" alt="Downtown Burbank" width="170" height="53" />
+    </a>
+
+    <nav aria-label="Primary" class="primary-nav" data-nav>
+      <ul>
+        {primaryNav.map((link) => (
+          <li><a href={link.href}>{link.label}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <form id="site-search" class="search-form" role="search" action={`${SITE}/search`} method="get" data-search inert>
+      <svg class="search-form-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="11" cy="11" r="7"></circle>
+        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+      </svg>
+      <input type="search" name="q" placeholder="Search Downtown Burbank…" aria-label="Search" autocomplete="off" data-search-input />
+      <button type="button" class="search-close" aria-label="Close search" data-search-close>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </form>
+
+    <div class="header-actions">
+      <button type="button" class="action-btn" aria-label="Open search" aria-controls="site-search" aria-expanded="false" data-search-open>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+      </button>
+      <button type="button" class="weather" data-weather aria-label="Current weather in Burbank">
+        <span class="weather-icon" data-weather-icon aria-hidden="true"></span>
+        <span class="weather-temp" data-weather-temp></span>
+      </button>
+      <button type="button" class="action-btn action-btn--menu" aria-label="Open menu" aria-controls="site-drawer" aria-expanded="false" data-drawer-open>
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="3" y1="7" x2="21" y2="7"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="17" x2="21" y2="17"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div id="site-drawer" class="drawer" data-drawer aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site menu">
+    <div class="drawer-backdrop" data-drawer-close></div>
+    <div class="drawer-panel">
+      <div class="drawer-head">
+        <a href={`${SITE}/`} class="drawer-logo" aria-label="Downtown Burbank — Home">
+          <img src="/dtb.svg" alt="Downtown Burbank" width="140" height="44" />
+        </a>
+        <button type="button" class="drawer-close" aria-label="Close menu" data-drawer-close>
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+
+      <form class="drawer-search" role="search" action={`${SITE}/search`} method="get">
+        <svg class="drawer-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="search" name="q" placeholder="Search Downtown Burbank…" aria-label="Search" autocomplete="off" />
+      </form>
+
+      <nav class="drawer-primary" aria-label="Primary">
+        <ul>
+          {primaryNav.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <hr class="drawer-divider" />
+
+      <nav class="drawer-utility" aria-label="Utility">
+        <ul>
+          {utilityLinks.map((link) => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+      <div class="drawer-socials">
+        <span class="drawer-socials-label">Follow Us</span>
+        <ul>
+          {socials.map((s) => (
+            <li>
+              <a href={s.href} aria-label={s.label} target="_blank" rel="noopener noreferrer">
+                {s.icon === "instagram" && (
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                  </svg>
+                )}
+                {s.icon === "facebook" && (
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+                    <path d="M13.5 22v-8h2.7l.4-3.3h-3.1V8.6c0-.95.27-1.6 1.65-1.6H16.7V4.1C16.1 4 15.1 4 14.1 4c-2.1 0-3.55 1.3-3.55 3.7v2H8v3.3h2.55V22h2.95z"/>
+                  </svg>
+                )}
+                {s.icon === "x" && (
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                )}
+                {s.icon === "linkedin" && (
+                  <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+                    <path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.3c0-1.27-.03-2.9-1.77-2.9-1.77 0-2.04 1.38-2.04 2.8V21H9z"/>
+                  </svg>
+                )}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const header = document.querySelector(".site-header");
+  if (header) {
+    const shell = header.querySelector<HTMLElement>(".main-inner");
+    const input = header.querySelector<HTMLInputElement>("[data-search-input]");
+    const openBtn = header.querySelector<HTMLButtonElement>("[data-search-open]");
+    const closeBtn = header.querySelector<HTMLButtonElement>("[data-search-close]");
+    const nav = header.querySelector<HTMLElement>("[data-nav]");
+    const searchForm = header.querySelector<HTMLElement>("[data-search]");
+
+    const setState = (state: "nav" | "search") => {
+      if (!shell) return;
+      shell.dataset.state = state;
+      const searchOpen = state === "search";
+      if (searchForm) searchForm.inert = !searchOpen;
+      if (nav) nav.inert = searchOpen;
+      if (openBtn) {
+        openBtn.inert = searchOpen;
+        openBtn.setAttribute("aria-expanded", String(searchOpen));
+      }
+    };
+
+    requestAnimationFrame(() => {
+      if (shell) shell.dataset.ready = "";
+    });
+
+    openBtn?.addEventListener("click", () => {
+      setState("search");
+      window.setTimeout(() => input?.focus(), 120);
+    });
+
+    const closeSearch = (returnFocus = true) => {
+      setState("nav");
+      if (input) {
+        input.value = "";
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+      }
+      if (returnFocus) openBtn?.focus();
+    };
+
+    closeBtn?.addEventListener("click", () => closeSearch());
+    input?.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeSearch();
+    });
+
+    document.addEventListener("pointerdown", (e) => {
+      if (shell?.dataset.state !== "search") return;
+      const target = e.target as Node | null;
+      if (!target) return;
+      if (searchForm?.contains(target)) return;
+      if (openBtn?.contains(target)) return;
+      if (input && input.value !== "") {
+        input.value = "";
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.focus();
+        return;
+      }
+      closeSearch(false);
+    });
+
+    const drawer = header.querySelector<HTMLElement>("[data-drawer]");
+    const drawerOpenBtn = header.querySelector<HTMLButtonElement>("[data-drawer-open]");
+    const drawerCloseEls = header.querySelectorAll<HTMLElement>("[data-drawer-close]");
+    const drawerLinks = drawer?.querySelectorAll<HTMLAnchorElement>("a") ?? [];
+    const drawerFocusTarget = drawer?.querySelector<HTMLElement>(".drawer-close");
+
+    const openDrawer = () => {
+      if (!drawer) return;
+      drawer.dataset.open = "";
+      drawer.setAttribute("aria-hidden", "false");
+      drawerOpenBtn?.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+      window.setTimeout(() => drawerFocusTarget?.focus(), 200);
+    };
+
+    const closeDrawer = () => {
+      if (!drawer) return;
+      delete drawer.dataset.open;
+      drawer.setAttribute("aria-hidden", "true");
+      drawerOpenBtn?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+      drawerOpenBtn?.focus();
+    };
+
+    drawerOpenBtn?.addEventListener("click", openDrawer);
+    drawerCloseEls.forEach((el) => el.addEventListener("click", closeDrawer));
+    drawerLinks.forEach((a) => a.addEventListener("click", () => closeDrawer()));
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && drawer?.dataset.open !== undefined) closeDrawer();
+    });
+
+    const headerEl = header as HTMLElement;
+    const utilityBar = header.querySelector<HTMLElement>(".utility-bar");
+    const utilityInner = header.querySelector<HTMLElement>(".utility-inner");
+
+    const measureUtility = () => {
+      if (!utilityBar || !utilityInner) return;
+      const h = utilityInner.offsetHeight;
+      if (h > 0) utilityBar.style.setProperty("--utility-h", `${h}px`);
+    };
+    measureUtility();
+    window.addEventListener("resize", measureUtility);
+
+    // Mirror the header's live height onto :root. It collapses the utility bar
+    // on scroll, so the value isn't fixed.
+    const syncHeaderHeight = () =>
+      document.documentElement.style.setProperty(
+        "--dtb-header-h",
+        `${headerEl.offsetHeight}px`,
+      );
+    syncHeaderHeight();
+    new ResizeObserver(syncHeaderHeight).observe(headerEl);
+    window.addEventListener("resize", syncHeaderHeight, { passive: true });
+
+    const HIDE_DELTA = 12;
+    const SHOW_DELTA = 48;
+    const FALLBACK_HERO_END = 80;
+
+    let heroEnd = FALLBACK_HERO_END;
+    const measureHeroEnd = () => {
+      const heroEl = document.querySelector<HTMLElement>("[data-hero]");
+      heroEnd = heroEl ? heroEl.offsetHeight * 0.7 : FALLBACK_HERO_END;
+    };
+    measureHeroEnd();
+    window.addEventListener("resize", measureHeroEnd);
+
+    let hidden = window.scrollY > heroEnd;
+    let anchorY = window.scrollY;
+    let scrollScheduled = false;
+
+    const applyState = () => {
+      if (hidden) headerEl.dataset.scrolled = "";
+      else delete headerEl.dataset.scrolled;
+    };
+
+    const syncScrolled = () => {
+      scrollScheduled = false;
+      const y = window.scrollY;
+
+      if (y <= heroEnd) {
+        hidden = false;
+        anchorY = y;
+      } else if (hidden) {
+        if (anchorY - y >= SHOW_DELTA) {
+          hidden = false;
+          anchorY = y;
+        } else if (y > anchorY) {
+          anchorY = y;
+        }
+      } else {
+        if (y - anchorY >= HIDE_DELTA) {
+          hidden = true;
+          anchorY = y;
+        } else if (y < anchorY) {
+          anchorY = y;
+        }
+      }
+
+      applyState();
+    };
+    const onScroll = () => {
+      if (scrollScheduled) return;
+      scrollScheduled = true;
+      requestAnimationFrame(syncScrolled);
+    };
+
+    const snapState = () => {
+      measureHeroEnd();
+      anchorY = window.scrollY;
+      hidden = window.scrollY > heroEnd;
+      applyState();
+    };
+
+    const enableTransitions = () => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          headerEl.dataset.ready = "";
+        });
+      });
+    };
+
+    snapState();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    if (document.readyState === "complete") {
+      snapState();
+      enableTransitions();
+    } else {
+      window.addEventListener(
+        "load",
+        () => {
+          snapState();
+          enableTransitions();
+        },
+        { once: true }
+      );
+    }
+
+    window.addEventListener("pageshow", (e) => {
+      if (!e.persisted) return;
+      delete headerEl.dataset.ready;
+      snapState();
+      enableTransitions();
+    });
+
+    const weatherEl = header.querySelector<HTMLButtonElement>("[data-weather]");
+    const weatherIconEl = header.querySelector<HTMLElement>("[data-weather-icon]");
+    const weatherTempEl = header.querySelector<HTMLElement>("[data-weather-temp]");
+
+    if (weatherEl && weatherIconEl && weatherTempEl) {
+      const UNIT_KEY = "dtb_weather_unit";
+      let unit: "F" | "C" = "F";
+      try {
+        const stored = localStorage.getItem(UNIT_KEY);
+        if (stored === "C" || stored === "F") unit = stored;
+      } catch {}
+
+      let lastTempF: number | null = null;
+      let lastCode: number | null = null;
+      let lastIsDay: boolean | null = null;
+      const ICONS: Record<string, string> = {
+        sun: '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>',
+        moon: '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>',
+        cloud: '<path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/>',
+        drizzle: '<line x1="8" y1="19" x2="8" y2="21"/><line x1="8" y1="13" x2="8" y2="15"/><line x1="16" y1="19" x2="16" y2="21"/><line x1="16" y1="13" x2="16" y2="15"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="12" y1="15" x2="12" y2="17"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>',
+        rain: '<line x1="16" y1="13" x2="16" y2="21"/><line x1="8" y1="13" x2="8" y2="21"/><line x1="12" y1="15" x2="12" y2="23"/><path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25"/>',
+        snow: '<path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"/><line x1="8" y1="16" x2="8.01" y2="16"/><line x1="8" y1="20" x2="8.01" y2="20"/><line x1="12" y1="18" x2="12.01" y2="18"/><line x1="12" y1="22" x2="12.01" y2="22"/><line x1="16" y1="16" x2="16.01" y2="16"/><line x1="16" y1="20" x2="16.01" y2="20"/>',
+        thunder: '<path d="M19 16.9A5 5 0 0 0 18 7h-1.26a8 8 0 1 0-11.62 9"/><polyline points="13 11 9 17 15 17 11 23"/>',
+        fog: '<line x1="3" y1="8" x2="21" y2="8"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="16" x2="21" y2="16"/>',
+      };
+
+      const pickIcon = (code: number, isDay: boolean): string => {
+        if (code === 0) return isDay ? "sun" : "moon";
+        if (code <= 3) return "cloud";
+        if (code === 45 || code === 48) return "fog";
+        if (code <= 57) return "drizzle";
+        if ((code >= 61 && code <= 67) || (code >= 80 && code <= 82)) return "rain";
+        if ((code >= 71 && code <= 77) || code === 85 || code === 86) return "snow";
+        if (code >= 95) return "thunder";
+        return "cloud";
+      };
+
+      const render = (tempF: number, code: number, isDay: boolean) => {
+        lastTempF = tempF;
+        lastCode = code;
+        lastIsDay = isDay;
+        const key = pickIcon(code, isDay);
+        weatherIconEl.innerHTML = `<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICONS[key]}</svg>`;
+        const display = unit === "F" ? tempF : (tempF - 32) * (5 / 9);
+        weatherTempEl.innerHTML = `${Math.round(display)}°<span class="weather-unit">${unit}</span>`;
+        weatherEl.setAttribute(
+          "aria-label",
+          `Burbank weather, ${Math.round(display)} degrees ${unit === "F" ? "Fahrenheit" : "Celsius"}. Click to switch to ${unit === "F" ? "Celsius" : "Fahrenheit"}.`
+        );
+        weatherEl.dataset.ready = "";
+      };
+
+      weatherEl.addEventListener("click", () => {
+        unit = unit === "F" ? "C" : "F";
+        try {
+          localStorage.setItem(UNIT_KEY, unit);
+        } catch {}
+        if (lastTempF !== null && lastCode !== null && lastIsDay !== null) {
+          render(lastTempF, lastCode, lastIsDay);
+        }
+      });
+
+      const press = () => {
+        weatherEl.dataset.pressed = "";
+      };
+      const release = () => {
+        delete weatherEl.dataset.pressed;
+      };
+
+      weatherEl.addEventListener("pointerdown", press);
+      weatherEl.addEventListener("pointerup", release);
+      weatherEl.addEventListener("pointerleave", release);
+      weatherEl.addEventListener("pointercancel", release);
+      weatherEl.addEventListener("blur", release);
+      weatherEl.addEventListener("keydown", (e) => {
+        if (e.key === " " || e.key === "Enter") press();
+      });
+      weatherEl.addEventListener("keyup", (e) => {
+        if (e.key === " " || e.key === "Enter") release();
+      });
+
+      const CACHE_KEY = "dtb_weather_v1";
+      const REFRESH_TTL = 10 * 60 * 1000;
+
+      let cacheTs = 0;
+      try {
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (raw) {
+          const cached = JSON.parse(raw) as { ts: number; temp: number; code: number; isDay: boolean };
+          cacheTs = cached.ts ?? 0;
+          weatherEl.dataset.instant = "";
+          render(cached.temp, cached.code, cached.isDay);
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              delete weatherEl.dataset.instant;
+            });
+          });
+        }
+      } catch {}
+
+      if (Date.now() - cacheTs >= REFRESH_TTL) {
+        fetch(
+          "https://api.open-meteo.com/v1/forecast?latitude=34.18&longitude=-118.31&current=temperature_2m,weather_code,is_day&temperature_unit=fahrenheit&timezone=America%2FLos_Angeles"
+        )
+          .then((r) => (r.ok ? r.json() : null))
+          .then((data) => {
+            if (!data?.current) return;
+            const temp = data.current.temperature_2m as number;
+            const code = data.current.weather_code as number;
+            const isDay = data.current.is_day === 1;
+            try {
+              localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: Date.now(), temp, code, isDay }));
+            } catch {}
+            render(temp, code, isDay);
+          })
+          .catch(() => {});
+      }
+    }
+  }
+</script>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 95;
+    /* The page body keeps the fanzone's own type (Gotham); the shell carries
+       the main site's. */
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: 1.5;
+    color: var(--color-ink);
+    background: var(--color-pink-page);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    transition: box-shadow 0.25s ease;
+  }
+
+  /* The fanzone's global.css has no button reset like the main site's, so the
+     shell's bare icon buttons carry their own. */
+  button {
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+
+  .site-header[data-scrolled] {
+    box-shadow: 0 6px 16px -10px rgba(0, 0, 0, 0.18);
+  }
+
+  .utility-bar {
+    background: var(--color-pink-dusty);
+    font-size: var(--fs-caption);
+    overflow: hidden;
+    height: var(--utility-h, auto);
+    transition: height 0.3s ease, opacity 0.2s ease;
+  }
+
+  .site-header:not([data-ready]) .utility-bar {
+    transition: none;
+  }
+
+  .site-header[data-scrolled] .utility-bar {
+    height: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: height 0.18s ease, opacity 0.12s ease;
+  }
+
+  .site-header:not([data-ready])[data-scrolled] .utility-bar {
+    transition: none;
+  }
+
+  .utility-inner {
+    display: flex;
+    justify-content: center;
+    padding-block: 0.6rem;
+  }
+
+  .utility-bar ul {
+    display: flex;
+    gap: 2.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .utility-bar a:hover {
+    text-decoration: underline;
+  }
+
+  .main-inner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 2rem;
+    padding-block: 1rem 1.1rem;
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+  }
+
+  .logo img {
+    width: auto;
+    height: 42px;
+  }
+
+  .primary-nav,
+  .search-form {
+    grid-column: 2;
+    grid-row: 1;
+    transition:
+      opacity 0.2s ease,
+      transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+
+  .main-inner:not([data-ready]) .primary-nav,
+  .main-inner:not([data-ready]) .search-form,
+  .main-inner:not([data-ready]) [data-search-open] {
+    transition: none;
+  }
+
+  .primary-nav {
+    display: flex;
+    justify-content: center;
+  }
+
+  [data-state="search"] .primary-nav {
+    opacity: 0;
+    transform: translateY(-3px);
+    pointer-events: none;
+  }
+
+  [data-state="nav"] .search-form {
+    opacity: 0;
+    transform: translateY(3px);
+    pointer-events: none;
+  }
+
+  .primary-nav ul {
+    display: flex;
+    justify-content: center;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: var(--fs-lead);
+    font-weight: 500;
+    width:fit-content;
+    margin-left: -2.5rem;
+  }
+
+  .primary-nav a {
+    position: relative;
+    padding-block: 0.25rem;
+  }
+
+  .primary-nav a:hover::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+  }
+
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.5rem 1rem;
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-pill);
+    background: transparent;
+    min-width: 0;
+    max-width: 575px;
+    width: 100%;
+    justify-self: center;
+    position: relative;
+  }
+
+  .search-form-icon {
+    flex-shrink: 0;
+  }
+
+  .search-form input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: var(--fs-body-md);
+    color: inherit;
+    padding-block: 0.25rem;
+  }
+
+  .search-form input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .search-form input::-webkit-search-cancel-button,
+  .search-form input::-webkit-search-decoration,
+  .drawer-search input::-webkit-search-cancel-button,
+  .drawer-search input::-webkit-search-decoration {
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .search-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    flex-shrink: 0;
+    transition: background 0.2s ease;
+  }
+
+  .search-close:hover {
+    background: rgba(0, 0, 0, 0.08);
+  }
+
+  .header-actions {
+    display: inline-flex;
+    gap: 0.75rem;
+    justify-self: end;
+  }
+
+  [data-search-open] {
+    transition: background 0.2s ease, transform 0.2s ease, opacity 0.15s ease;
+  }
+
+  [data-state="search"] [data-search-open] {
+    opacity: 0;
+    transform: scale(0.95);
+    pointer-events: none;
+  }
+
+  .action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    transition: background 0.2s ease;
+  }
+
+  .action-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .action-btn--menu {
+    display: none;
+  }
+
+  .weather {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    height: 44px;
+    padding-inline: 0.5rem;
+    font: inherit;
+    font-size: var(--fs-ui);
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-ink);
+    background: transparent;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0;
+    transform-origin: center;
+    transition:
+      opacity 0.25s ease,
+      background 0.2s ease,
+      transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .weather:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .weather[data-ready] {
+    opacity: 1;
+  }
+
+  .weather[data-instant] {
+    transition: none;
+  }
+
+  .weather[data-pressed] {
+    transform: scale(0.82);
+    transition:
+      opacity 0.25s ease,
+      background 0.2s ease,
+      transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  .weather-icon {
+    display: inline-flex;
+    line-height: 0;
+    width: 26px;
+    height: 26px;
+  }
+
+  .weather-temp {
+    display: inline-block;
+    line-height: 1;
+    min-width: 2.6em;
+    text-align: left;
+  }
+
+  .weather-unit {
+    font-size: 0.7em;
+    margin-left: 0.05em;
+    opacity: 0.75;
+  }
+
+  .drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    visibility: hidden;
+    transition: visibility 0s linear 0.3s;
+  }
+
+  .drawer[data-open] {
+    pointer-events: auto;
+    visibility: visible;
+    transition: visibility 0s linear 0s;
+  }
+
+  .drawer-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .drawer[data-open] .drawer-backdrop {
+    opacity: 1;
+  }
+
+  .drawer-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(420px, 88vw);
+    background: var(--color-pink-page);
+    color: var(--color-ink);
+    padding: 1.25rem 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    transform: translateX(100%);
+    transition: transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: -20px 0 40px -20px rgba(0, 0, 0, 0.25);
+  }
+
+  .drawer[data-open] .drawer-panel {
+    transform: translateX(0);
+  }
+
+  .drawer-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .drawer-logo {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+  }
+
+  .drawer-logo img {
+    width: auto;
+    height: 36px;
+  }
+
+  .drawer-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    transition: background 0.2s ease;
+  }
+
+  .drawer-close:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  .drawer-search {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.55rem 1rem;
+    border: 2px solid var(--color-ink);
+    border-radius: var(--radius-pill);
+    background: transparent;
+  }
+
+  .drawer-search-icon {
+    flex-shrink: 0;
+  }
+
+  .drawer-search input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    font: inherit;
+    font-size: var(--fs-ui);
+    color: inherit;
+    padding-block: 0.2rem;
+  }
+
+  .drawer-search input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .drawer-primary ul,
+  .drawer-utility ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .drawer-primary ul {
+    gap: 0.1rem;
+  }
+
+  .drawer-primary a {
+    display: block;
+    padding-block: 0.35rem;
+    font-size: var(--fs-h4);
+    font-weight: 500;
+    line-height: 1.15;
+  }
+
+  .drawer-divider {
+    border: 0;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.12);
+    margin: 0;
+  }
+
+  .drawer-utility ul {
+    gap: 0.75rem;
+  }
+
+  .drawer-utility a {
+    display: block;
+    padding-block: 0.1rem;
+    font-size: var(--fs-ui);
+    color: var(--color-ink-soft);
+  }
+
+  .drawer-primary a:hover,
+  .drawer-utility a:hover {
+    text-decoration: underline;
+  }
+
+  .drawer-socials {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding-top: 1rem;
+  }
+
+  .drawer-socials-label {
+    font-size: var(--fs-caption);
+    font-weight: 500;
+    color: var(--color-ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .drawer-socials ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .drawer-socials a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    color: var(--color-ink);
+    transition: background 0.2s ease;
+  }
+
+  .drawer-socials a:hover {
+    background: rgba(0, 0, 0, 0.06);
+  }
+
+  @media (max-width: 840px) {
+    .utility-bar {
+      display: none;
+    }
+    .primary-nav {
+      display: none;
+    }
+    .search-form,
+    [data-search-open] {
+      display: none;
+    }
+    .action-btn--menu {
+      display: inline-flex;
+    }
+    .main-inner {
+      gap: 0.5rem;
+    }
+    .logo img {
+      height: 36px;
+    }
+    .action-btn {
+      width: 40px;
+      height: 40px;
+    }
+    .weather {
+      height: 40px;
+      font-size: var(--fs-caption);
+      gap: 0.3rem;
+      padding-inline: 0.25rem;
+    }
+  }
+
+  @media (min-width: 841px) {
+    .drawer {
+      display: none;
+    }
+  }
+</style>

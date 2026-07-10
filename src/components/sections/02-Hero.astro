@@ -2,9 +2,7 @@
 import logoImg from '../../assets/images/02-hero/la-wc26-fanzone-dtb.png';
 import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 ---
-<div class="buffer">
-</div>
-<section class="hero">
+<section class="hero" data-hero>
 	<canvas id="hero-dots" class="hero__canvas"></canvas>
 	<div class="hero__inner">
 		<div class="hero__left">
@@ -222,10 +220,6 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 </script>
 
 <style>
-	.buffer {
-		height: 90px;
-		background-color: var(--color-coral);
-	}
 	.hero {
 		background-color: #FF5252;
 		padding: 3rem 2rem;
@@ -329,9 +323,6 @@ import heroPhoto from '../../assets/images/02-hero/hero.jpg';
 	/* Responsive */
 	@media (max-width: 960px) {
 
-		.buffer {
-			height: 75px;
-		}
 		.hero__inner {
 			flex-direction: column;
 			text-align: center;

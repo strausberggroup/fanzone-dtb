@@ -43,8 +43,12 @@ const ogImage = new URL('/images/fanzone-social.jpg', Astro.site);
 		<meta name="twitter:description" content={description} />
 		<meta name="twitter:image" content={ogImage} />
 
-		<!-- Theme color -->
-		<meta name="theme-color" content="#1a1a2e" />
+		<!-- Theme color (matches the site header band) -->
+		<meta name="theme-color" content="#ffeae9" />
+
+		<!-- Pacaembu via Adobe Fonts — used by the shared dtnbur.com header/footer shell -->
+		<link rel="preconnect" href="https://use.typekit.net" crossorigin />
+		<link rel="stylesheet" href="https://use.typekit.net/hsb3ygd.css" />
 	</head>
 	<body>
 		<slot />

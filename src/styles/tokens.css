@@ -1,0 +1,68 @@
+:root {
+  /* Core */
+  --color-bg: #ffffff;
+  --color-ink: #000000;
+  --color-ink-soft: #333333;
+  --color-muted: #6b6b6b;
+  --color-rule: #ececec;
+
+  /* Brand pastels (from Figma) */
+  --color-pink-dusty: #f4dcda;   /* utility bar, accents */
+  --color-pink-pale:  #ffeae9;
+  --color-periwinkle: #e9eaff;
+  --color-mint:       #f9ffe9;
+  --color-magenta-light: #FFE8F9;
+  --color-pale-lime: #edffe9;
+  /* Section backgrounds */
+  --color-bg-cream: var(--color-pink-dusty);
+  --color-pink-page: var(--color-pink-pale);  /* main header band */
+
+  /* Card tints (What's On) */
+  --tint-periwinkle: var(--color-periwinkle);
+  --tint-pink:       var(--color-pink-pale);
+  --tint-mint:       var(--color-mint);
+  --tint-magenta:    var(--color-magenta-light);
+
+  /* Button */
+  --btn-bg: rgba(255, 255, 255, 0.92);
+  --btn-ink: #000000;
+  --btn-border: rgba(255, 255, 255, 0.9);
+
+  /* Typography — Pacaembu via Adobe Fonts (see Base.astro for the <link>). */
+  --font-display: "pacaembu", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-body: "pacaembu", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Font sizes — fluid clamps between 375px (mobile) and 1440px (design desktop).
+     Desktop values match the homepage design; mobile values are sensible floors.
+       --fs-display       : H1 everywhere, and H2 on the homepage   (56 → 142)
+       --fs-h2            : H2 on internal pages                    (40 →  97)
+       --fs-section-title : large section heading                   (40 →  75)
+       --fs-archive-title : archive / listing page titles           (36 →  60)
+       --fs-h3            : card hero titles (What's On)            (32 →  45)
+       --fs-h4      : column / card labels                    (26 →  32)
+       --fs-lead    : intro paragraph, primary nav            (18 →  26)
+       --fs-body-lg : section descriptions                    (17 →  22)
+       --fs-body-md : emphasis body in dark overlays, search  (16 →  20)
+       --fs-body    : default body copy                       (16 →  18)
+       --fs-ui      : buttons, footer links, small text       (15 →  17)
+       --fs-caption : utility bar, tags, micro labels         (12 →  14) */
+  /* --fs-display: clamp(3.5rem,    1.6rem  + 8.07vw, 8.875rem); */
+  --fs-display: clamp(3.5rem,    1.6rem  + 8.07vw, 8.5rem);
+  --fs-h2:            clamp(2.5rem,    1.25rem + 5.35vw, 6.0625rem);
+  --fs-section-title: clamp(2.5rem,    1.73rem + 3.29vw, 4.6875rem);
+  --fs-archive-title: clamp(2.25rem,   1.72rem + 2.25vw, 3.75rem);
+  --fs-h3:            clamp(2rem,      1.71rem + 1.22vw, 2.8125rem);
+  --fs-h4:      clamp(1.625rem,  1.49rem + 0.56vw, 2rem);
+  --fs-lead:    clamp(1.125rem,  0.95rem + 0.75vw, 1.625rem);
+  --fs-body-lg: clamp(1.0625rem, 0.95rem + 0.47vw, 1.375rem);
+  --fs-body-md: clamp(1rem,      0.91rem + 0.38vw, 1.25rem);
+  --fs-body:    clamp(1rem,      0.95rem + 0.19vw, 1.125rem);
+  --fs-ui:      clamp(0.9375rem, 0.89rem + 0.19vw, 1.0625rem);
+  --fs-caption: clamp(0.75rem,   0.71rem + 0.19vw, 0.875rem);
+
+  /* Layout */
+  --container: 1200px;
+  --gutter: clamp(1rem, 2vw, 2rem);
+  --radius-card: 20px;
+  --radius-pill: 999px;
+}

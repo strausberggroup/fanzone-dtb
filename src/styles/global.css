@@ -1,3 +1,7 @@
+/* Design tokens shared with the main dtnbur.com site — the header/footer
+   shell (src/components/layout/) depends on these. */
+@import './tokens.css';
+
 /* Fonts */
 @font-face {
 	font-family: 'Gotham';
@@ -84,16 +88,6 @@ body {
 	/* padding-top: 80px; */
 }
 
-/* Nav open state (mobile slide-out menu) */
-html.nav-open {
-	overflow: hidden !important;
-	height: 100% !important;
-}
-
-html.nav-open body {
-	overflow: hidden !important;
-}
-
 img {
 	max-width: 100%;
 	height: auto;
@@ -103,6 +97,13 @@ img {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+/* Layout container used by the ported header/footer (matches the main
+   site's global.css) */
+.container {
+	width: min(var(--container), 100% - var(--gutter) * 2);
+	margin-inline: auto;
 }
 
 /* Screen-reader only utility */
